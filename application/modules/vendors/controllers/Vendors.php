@@ -58,8 +58,6 @@ class Vendors extends Common_Controller {
             'where_not_in' => array('group.id' => array(1, 2, 4)),
             'order' => array('user.id' => 'desc')
         );
-
-
         $this->data['list'] = $this->common_model->customGet($option);
         $this->data['title'] = "Vendors";
         $this->load->admin_render('list', $this->data, 'inner_script');
@@ -77,6 +75,12 @@ class Vendors extends Common_Controller {
             'select' => '*'
         );
         $this->data['countries'] = $this->common_model->customGet($option);
+        $option = array('table' => 'states',
+                    'select' => '*');
+                $this->data['states'] = $this->common_model->customGet($option);
+                $option = array('table' => 'item_category',
+                    'select' => '*');
+                $this->data['categorys'] = $this->common_model->customGet($option);
         $this->load->admin_render('add', $this->data, 'inner_script');
     }
 
@@ -468,6 +472,12 @@ class Vendors extends Common_Controller {
         $tables = $this->config->item('tables', 'ion_auth');
         $identity_column = $this->config->item('identity', 'ion_auth');
         $this->data['identity_column'] = $identity_column;
+        $option = array('table' => 'states',
+                    'select' => '*');
+                $this->data['states'] = $this->common_model->customGet($option);
+                $option = array('table' => 'item_category',
+                    'select' => '*');
+                $this->data['categorys'] = $this->common_model->customGet($option);
         // validate form input
         $this->form_validation->set_rules('first_name', lang('first_name'), 'required|trim|xss_clean');
         //$this->form_validation->set_rules('last_name', lang('last_name'), 'required|trim|xss_clean');

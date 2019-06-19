@@ -104,7 +104,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12" >
+<!--                    <div class="col-md-12" >
                         <div class="form-group">
                             <label class="col-md-3 control-label"><?php echo lang('user_gender');?></label>
                             <div class="col-md-9">
@@ -112,16 +112,16 @@
                                 <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" value="FEMALE">FEMALE</label>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
 
-                     <div class="col-md-12" >
+<!--                     <div class="col-md-12" >
                        <div class="form-group">
                             <label class="col-md-3 control-label"><?php echo lang('date_of_birth');?></label>
                             <div class="col-md-9">
                                 <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="<?php echo lang('date_of_birth');?>" readonly=""/>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- <div class="col-md-12" >
                        <div class="form-group">
                          <label class="col-md-3 control-label">Zipcode Access</label>
@@ -136,6 +136,30 @@
                            
                         </div>
                     </div> -->
+                                <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Software Category</label>
+                                    <div class="col-md-9">
+                                          <select id="category_id" name="category_id" class="form-control select2" size="1">
+                                              <option value="" disabled selected>Please select</option>
+                                                <?php foreach($categorys as $category){?>
+                                                            
+                                                <option value="<?php echo $category->id;?>"><?php echo $category->category_name;?></option>
+                                                        
+                                                <?php }?>
+                                            </select>
+<!--                                        <input type="text" class="form-control" name="state" placeholder="State" value="<?php //echo $results->state; ?>"/>-->
+                                    </div>
+                                </div>
+                            </div>
+                      <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Company Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="company_name" value="" />
+                                    </div>
+                                </div>
+                            </div>
                     <div class="col-md-12" >
                         <div class="form-group">
                             <label class="col-md-3 control-label">Company Website</label>
@@ -163,13 +187,21 @@
                         </div>
                     </div>
                     <div class="col-md-12" >
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">State</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" name="state" placeholder="State"/>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">State</label>
+                                    <div class="col-md-9">
+                                          <select id="country" name="state" class="form-control select2" size="1">
+                                                <option value="" disabled selected>Please select</option>
+                                                <?php foreach($states as $state){?>
+                                                            
+                                                <option value="<?php echo $state->id;?>"><?php echo $state->name;?></option>
+                                                        
+                                                <?php }?>
+                                            </select>
+<!--                                        <input type="text" class="form-control" name="state" placeholder="State" value="<?php //echo $results->state; ?>"/>-->
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
                     <div class="col-md-12" >
                         <div class="form-group">
                             <label class="col-md-3 control-label">City</label>
