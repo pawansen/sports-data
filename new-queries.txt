@@ -1,0 +1,5 @@
+0=pending 1= produced 2= packed 3=dispatched 4 =delivered 5=Cancelled
+
+
+ALTER TABLE `BTM_orders` CHANGE `transact_status` `transact_status` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '0=pending 1= produced 2= packed 3=dispatched 4 =delivered 5=Cancelled ';
+ALTER TABLE `BTM_orders` ADD `produced_date` DATE NULL AFTER `payment_status`, ADD `packed_date` DATE NULL AFTER `produced_date`, ADD `dispatched_date` DATE NULL AFTER `packed_date`, ADD `delivered_date` DATE NULL AFTER `dispatched_date`;

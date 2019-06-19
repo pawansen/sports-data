@@ -1,0 +1,494 @@
+
+
+/*------------------media query 300 to 520 ----------*/
+
+@media only screen and (max-width: 520px) and (min-width: 300px)  {
+
+h1 {font-size: 36px; line-height: 42px; }
+h2 {font-size: 28px;  }
+h3 {font-size: 22px;  }
+h4 {font-size: 18px;  }
+h5 {font-size: 16px;   line-height: 21px; }
+h6 {font-size: 13px;  }
+p { font-size: 14px; }
+
+#bannerCntr { padding-top: 118px;}
+.banner_btn {
+    padding: 8px 20px!important;
+    font-size: 14px!important;
+    margin-top: 19px!important;
+    margin-bottom: 37px!important;
+   
+}
+.heading_title.pb-60 {
+    padding-bottom: 40px;
+}
+.Service_box {
+    margin-bottom: 22px;
+}
+button.btn.get_sterted {
+    padding: 8px 20px!important;
+    font-size: 14px!important;
+    
+}
+.work_box {
+    margin-bottom: 14px;
+}
+.container>.navbar-header {
+     margin-right: 15px; 
+     margin-left: 15px; 
+}
+
+.row.mobile_row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.main_login_form {
+    padding: 56px 30px;
+}
+.main_forgot_form {
+    padding: 56px 30px;
+}
+.tab-content.main_rigister_tab {
+   
+    padding: 38px 25px;
+    padding-top: 32px;
+    
+}
+.main_register_form .nav-tabs>li a {
+    font-size: 12px;
+    
+}
+.main_register_form ul.nav.nav-tabs {
+    padding: 8px;
+   
+    margin-left: 0%!important;
+    margin-right: 0%!important;
+    margin-top: 2px!important;
+    position: relative!important;
+   
+}
+.content_desboard {
+    padding: 34px 25px!important;
+     height: auto!important; 
+    margin-top: 26px!important;
+}
+/*.content_desboard {
+    background-color: #FFFFFF;
+    box-shadow: 0 5px 27px rgba(0,0,0,0.05);
+    padding: 34px 16px;
+    height: auto;
+    margin-top: 20px;
+}*/
+.file_feild_upload input[type=file] {
+
+    width: 100%!important;
+}
+.image_upload {
+    margin-bottom: 24px;
+}
+.Profile_col_6_space .col-md-6.right_col6 {
+    padding-left: 15px;
+}
+.Profile_col_6_space .col-md-6.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.right_col6 {
+    padding-left: 15px;
+}
+
+.enquiries_form .right_col6 {
+    padding-left: 15px;
+}
+.enquiries_form .left_col6 {
+   padding-right: 15px;
+}
+.business_section {
+    padding-top: 110px;
+    
+}
+
+.client_box1 .col-md-3 {
+    padding-right: 6px;
+    padding-left: 10px;
+    width: 25%;
+    float: left;
+}
+.client_box1 .col-md-9 {
+    padding-right: 8px;
+    padding-left: 11px;
+    width: 75%;
+    float: left;
+}
+.client_box1 .col-md-3 img {
+    margin: 0 auto;
+}
+.col-md-3.client_box {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.client_box1 {
+    margin-bottom: 20px;
+}
+.client_box_all {
+    margin-bottom: 0px;
+}
+
+
+
+.col-md-2.border_right {
+    width: 25%;
+    float: left;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+}
+.locattion_details_right_bar .col-md-3 {
+    width: 25%;
+    float: left;
+        padding-right: 3px;
+    padding-left: 3px;
+}
+.locattion_details_right_bar .col-md-9 {
+    width: 75%;
+    float: left;
+}
+.right_sidbar {
+    padding: 2px 9px 13px 15px;
+}
+.text_right_sidbar h5 {
+    margin-top: 19px;
+  
+}
+hr.hr_line {
+    margin-top: 0;
+}
+.locattion_details_right_bar img {
+   
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+    margin: 0 auto;
+}
+.col-md-10.title_details {
+    width: 75%;
+    float: left;
+        margin-top: 21px;
+    /* margin-top: 4px; */
+}
+.content_vendore_details {
+    margin-bottom: 20px;
+}
+
+}
+
+
+/*--------------media query 300 to 520 ENd ENd -------------*/
+
+
+/*----------------media query 521 to 767 --------------*/
+
+@media only screen and (max-width: 767px) and (min-width: 521px)  {
+
+	#bannerCntr { padding-top: 118px;}
+.banner_btn {
+    padding: 8px 20px!important;
+    font-size: 14px!important;
+    margin-top: 19px!important;
+    margin-bottom: 37px!important;
+   
+}
+.heading_title.pb-60 {
+    padding-bottom: 40px;
+}
+.Service_box {
+    margin-bottom: 22px;
+}
+button.btn.get_sterted {
+    padding: 8px 20px!important;
+    font-size: 14px!important;
+    
+}
+.work_box {
+    margin-bottom: 14px;
+}
+.container>.navbar-header {
+     margin-right: 15px; 
+     margin-left: 15px; 
+}
+
+.tab-content.main_rigister_tab {
+   
+    padding: 38px 25px;
+    padding-top: 32px;
+    
+}
+.main_register_form .nav-tabs>li a {
+    font-size: 12px;
+    
+}
+.main_register_form ul.nav.nav-tabs {
+    padding: 8px;
+   
+    margin-left: 0%!important;
+    margin-right: 0%!important;
+    margin-top: 2px!important;
+    position: relative!important;
+
+}
+.mobile_row {
+    margin-right: 15px;
+    margin-left: 15px;
+}
+.content_desboard {
+    padding: 34px 25px!important;
+     height: auto!important; 
+    margin-top: 26px!important;
+}
+.image_upload {
+    margin-bottom: 24px;
+}
+.Profile_col_6_space .col-md-6.right_col6 {
+    padding-left: 15px;
+}
+.Profile_col_6_space .col-md-6.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.right_col6 {
+    padding-left: 15px;
+}
+.enquiries_form .right_col6 {
+    padding-left: 15px;
+}
+.enquiries_form .left_col6 {
+   padding-right: 15px;
+}
+
+
+.client_box1 .col-md-3 {
+    padding-right: 6px;
+    padding-left: 10px;
+    width: 25%;
+    float: left;
+}
+.client_box1 .col-md-9 {
+    padding-right: 8px;
+    padding-left: 11px;
+    width: 75%;
+    float: left;
+}
+.client_box1 .col-md-3 img {
+    margin: 0 auto;
+}
+.col-md-3.client_box {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.client_box1 {
+    margin-bottom: 20px;
+}
+.client_box_all {
+    margin-bottom: 0px;
+}
+
+.col-md-2.border_right {
+    width: 25%;
+    float: left;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+}
+.locattion_details_right_bar .col-md-3 {
+    width: 25%;
+    float: left;
+        padding-right: 15px;
+    padding-left: 15px;
+}
+.locattion_details_right_bar .col-md-9 {
+    width: 75%;
+    float: left;
+}
+.right_sidbar {
+    padding: 2px 9px 13px 15px;
+}
+.text_right_sidbar h5 {
+    margin-top: 19px;
+  
+}
+hr.hr_line {
+    margin-top: 0;
+}
+.locattion_details_right_bar img {
+   
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+    margin: 0 auto;
+}
+.col-md-10.title_details {
+    width: 75%;
+    float: left;
+        margin-top: 21px;
+    /* margin-top: 4px; */
+}
+.content_vendore_details {
+    margin-bottom: 20px;
+}
+
+
+}
+
+
+/*------------------media query 767  to 521 ENd ENd ---------------*/
+
+
+/*----------------media query 768 to 992 --------------*/
+
+@media only screen and (max-width: 992px) and (min-width: 768px)  {
+
+	.Service_box, .work_box {
+    margin-bottom: 20px;
+}
+.content_desboard {
+    padding: 34px 25px!important;
+     height: auto!important; 
+    margin-top: 26px!important;
+}
+.image_upload {
+    margin-bottom: 24px;
+}
+.Profile_col_6_space .col-md-6.right_col6 {
+    padding-left: 15px;
+}
+.Profile_col_6_space .col-md-6.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.left_col6 {
+    padding-right: 15px;
+}
+.business_profile .col-md-4.right_col6 {
+    padding-left: 15px;
+}
+.enquiries_form .right_col6 {
+    padding-left: 15px;
+}
+.enquiries_form .left_col6 {
+   padding-right: 15px;
+}
+.image_upload {
+    height: auto!important;
+     width: auto!important; 
+    
+}
+.col-md-3.client_box {
+    padding-right: 7px;
+    padding-left: 7px;
+    width: 50%;
+    float: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.client_box_all {
+    margin-bottom: 0px;
+}
+
+.client_box1 .col-md-3 {
+    padding-right: 6px;
+    padding-left: 10px;
+    width: 25%;
+    float: left;
+}
+.client_box1 .col-md-9 {
+    padding-right: 8px;
+    padding-left: 11px;
+    width: 75%;
+    float: left;
+}
+.client_box1 .col-md-3 img {
+    margin: 0 auto;
+}
+.col-md-3.client_box {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+.client_box1 {
+    margin-bottom: 5px;
+}
+
+.col-md-2.border_right {
+    width: 25%;
+    float: left;
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+}
+.locattion_details_right_bar .col-md-3 {
+    width: 25%;
+    float: left;
+        padding-right: 15px;
+    padding-left: 15px;
+}
+.locattion_details_right_bar .col-md-9 {
+    width: 75%;
+    float: left;
+}
+.right_sidbar {
+    padding: 2px 9px 13px 15px;
+}
+.text_right_sidbar h5 {
+    margin-top: 22px;
+  
+}
+hr.hr_line {
+    margin-top: 0;
+}
+.locattion_details_right_bar img {
+   
+    padding-top: 11px;
+    padding-bottom: 11px;
+    padding-right: 9px;
+    padding-left: 9px;
+    margin: 0 auto;
+}
+.col-md-10.title_details {
+    width: 75%;
+    float: left;
+        margin-top: 30px;
+    /* margin-top: 4px; */
+}
+.content_vendore_details {
+    margin-bottom: 20px;
+}
+
+
+}
+
+/*------------------media query 992  to 768 ENd ENd ---------------*/
+
+@media only screen and (max-width: 1250px) and (min-width: 993px)  {
+
+
+.image_upload {
+    height: auto!important;
+     width: auto!important; 
+    
+}
+.locattion_details_right_bar .col-md-3 {
+    /* padding: 8px 7px; */
+    padding-right: 5px;
+    padding-left: 6px;
+}
+
+
+}

@@ -1,0 +1,73 @@
+
+
+div#s2id_matches {
+    width: 100%;
+}
+#custommodel {
+  display: block !important;
+  background: rgba(0,0,0,0.5);
+  opacity: 1;
+ /* z-index: 999999999 !important;*/
+  /* top: 12px; */
+  padding-top: 100px;
+  overflow-y: auto;
+}
+/*.wrapper-content {
+  position: relative;
+  z-index: 99999;
+}*/
+#custommodel .modal-dialog {
+  margin-top: 100px;
+}
+#custommodel.modal.fade.open_custom {
+  display: none !important;
+}
+#custommodel .modal-dialog .modal-dialog {
+  width: 100%;
+  max-width: 350px;
+}
+.pace-done.addbody {
+  overflow: hidden;
+}
+#custommodel .modal-dialog .modal.link-dialog.in {
+  background-color: rgba(0,0,0,0.4);
+}
+
+/*******shakil****/
+td a.btn {
+	margin-right: 3px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+.page-heading .col-lg-4 .ibox-title {
+	padding-right: 0;
+	border: 0;
+	padding-bottom: 0;
+	/* padding-top: 14px; */
+}
+.multi_select .select2-container--default .select2-selection--single,.select2-container--default .select2-selection--single {
+	background-color: #fff;
+	border: 1px solid #e5e6e7;
+	border-radius: 0;
+	/* padding: 6px 12px; */
+	height: 34px;
+}
+.multi_select .select2.select2-container.select2-container--default,.select2.select2-container.select2-container--default {
+	width: 100% !important;
+	border-radius: 0 !important;
+}
+.on-default.edit-row {
+	margin: 4px 0;
+	display: inline-block;
+}
+table tr td hr {
+	/* display: none; */
+	margin: 2px 0;
+	border: 0;
+}
+.skin-1 .wrapper-content {
+	padding: 15px;
+}
+.skin-1 .wrapper-content .ibox.float-e-margins .row + .form-group.clearfix {
+	display: none;
+}
