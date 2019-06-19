@@ -100,369 +100,7 @@ class Vendors extends Common_Controller {
         $this->data['list'] = $this->common_model->customGet($option);
         $this->load->admin_render('payment_list', $this->data, 'inner_script');
     }
-
-    function paymentVerify($order_id, $user_id, $payment, $sales_user_id) {
-        if (!empty($order_id) && !empty($user_id) && !empty($payment) && !empty($sales_user_id)) {
-            walletDepositAmount($user_id, $payment);
-            $optionsCash = array(
-                'table' => 'payment',
-                'data' => array(
-                    'payment_type' => "CASH",
-                    'status' => "SUCCESS",
-                ),
-                'where' => array('id' => $order_id)
-            );
-            $this->common_model->customUpdate($optionsCash);
-            /** send push notification * */
-            $option = array(
-                'table' => 'users_device_history',
-                'select' => 'device_token',
-                'where' => array(
-                    'user_id' => $user_id,
-                ),
-                'single' => true
-            );
-            $deviceHistory = $this->common_model->customGet($option);
-            if (!empty($deviceHistory)) {
-                $data_array = array(
-                    'title' => "Payment verified",
-                    'body' => "Successfully payment has been verified",
-                    'type' => "Push",
-                    'badges' => 1,
-                );
-                send_android_notification($data_array, $deviceHistory->device_token, 1);
-                $options = array(
-                    'table' => 'notifications',
-                    'data' => array(
-                        'user_id' => $user_id,
-                        'type_id' => 0,
-                        'sender_id' => 1,
-                        'noti_type' => 'Payment verified',
-                        'message' => "Successfully payment has been verified",
-                        'read_status' => 'NO',
-                        'sent_time' => date('Y-m-d H:i:s'),
-                        'user_type' => 'USER'
-                    )
-                );
-                $this->common_model->customInsert($options);
-            }
-            $this->session->set_flashdata('success', "Successfully verified");
-            redirect('vendors/paymentList/' . $sales_user_id);
-        } else {
-            $this->session->set_flashdata('error', "Records not found");
-            redirect('vendors/paymentList/' . $sales_user_id);
-        }
-    }
-
-    function send_referrals_model() {
-
-        $this->data['title'] = "Send Referral";
-        $this->data['team_code'] = "dfsf fdfd";
-        $this->load->view('send_referrals', $this->data);
-    }
-
-    public function venderReferral() {
-        $this->data['parent'] = "Vendor Referrals";
-        $this->data['title'] = "Invite Referrals";
-        $this->data['uid'] = $user_id = $this->session->userdata('user_id');
-        $option = array(
-            'table' => 'users',
-            'select' => 'team_code',
-            'where' => array('id' => $user_id),
-            'single' => true
-        );
-        $users = $this->common_model->customGet($option);
-        if (!empty($users)) {
-
-            $userInviteCode = $users->team_code;
-            $this->data['base_url'] = base_url() . '#/signup?referral=' . $userInviteCode;
-        }
-        $this->load->admin_render('vendorReferral_list', $this->data, 'inner_script');
-    }
-
-    public function get_referrals_list() {
-        $columns = array('id',
-            'userByInvited',
-            'userInvited',
-            'invitedDate',
-            'registerdStatus',
-            'addCashStatus',
-            'verifiedStatus',
-            'appDownload'
-        );
-        $user_id = $this->input->post('user_id');
-        $limit = $this->input->post('length');
-        $start = $this->input->post('start');
-        $order = $columns[$this->input->post('order')[0]['column']];
-        $dir = $this->input->post('order')[0]['dir'];
-        $where = '';
-        if (!empty($user_id)) {
-            $where .= " WHERE UR.user_id = $user_id ";
-        }
-        if (!empty($this->input->post('search')['value'])) {
-            $search = $this->input->post('search')['value'];
-            //$where.= ' and (date(match_date) like "%' . $search . '%" or localteam like "%' . $search . '%" or visitorteam like "%' . $search . '%" or match_type like "%' . $search . '%" or status like "%' . $search . '%")';
-        }
-
-        $data = array();
-        $totalData = 0;
-        $totalFiltered = 0;
-        $query = "SELECT UR.id  FROM referrals_request_history as UR INNER JOIN users as user ON user.id=UR.user_id"
-                . " $where";
-        $userreferrals = $this->common_model->customQueryCount($query);
-        //dump($userreferrals);
-        if (!empty($userreferrals) && $userreferrals > 0) {
-            $totalData = $userreferrals;
-            $totalFiltered = $totalData;
-            $wr = '';
-            if (!empty($user_id)) {
-                $wr .= " WHERE UR.user_id = $user_id ";
-            }
-            $querySql = "SELECT UR.user_id,UR.id,UR.create_date,UR.email,UR.mobile,"
-                    . " CONCAT(user.first_name,'</br>(',user.email,' / ',user.phone,')') as userByInvited"
-                    . " FROM referrals_request_history as UR INNER JOIN users as user ON user.id=UR.user_id $wr"
-                    . " LIMIT $limit OFFSET $start";
-            $userReferralsList = $this->common_model->customQuery($querySql);
-            //dump($userReferralsList);
-            if (!empty($userReferralsList)) {
-                foreach ($userReferralsList as $users) {
-                    $start++;
-                    $nestedData['id'] = $start;
-                    $nestedData['userByInvited'] = isset($users->userByInvited) ? $users->userByInvited : '';
-                    $email = $temp['user_email'] = (!empty($users->email)) ? $users->email : "";
-                    $mobile = $temp['user_mobile'] = (!empty($users->mobile)) ? $users->mobile : "";
-                    $nestedData['userInvited'] = (!empty($users->email)) ? $users->email : $users->mobile;
-                    $nestedData['registerdStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                    $nestedData['verifiedStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                    $nestedData['addCashStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                    $nestedData['appDownload'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                    $nestedData['invitedDate'] = isset($users->create_date) ? date('d-m-Y H:i', strtotime($users->create_date)) : '';
-                    if (!empty($email)) {
-                        $query = "SELECT users.id,users.email_verify,users.verify_mobile,user_pan_card.verification_status FROM users "
-                                . " LEFT JOIN user_pan_card ON user_pan_card.user_id= users.id WHERE email= '" . $users->email . "'";
-                        $isRegisterd = $this->common_model->customQuery($query, true);
-                        if (!empty($isRegisterd)) {
-
-                            $option = array(
-                                'table' => 'user_referrals',
-                                'select' => 'is_app_download',
-                                'where' => array('user_id' => $users->user_id, 'invite_user_id' => $isRegisterd->id),
-                                'single' => true
-                            );
-                            $user_referrals = $this->common_model->customGet($option);
-
-                            if (!empty($user_referrals)) {
-                                $nestedData['appDownload'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-
-
-                            $nestedData['registerdStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            if ($isRegisterd->email_verify == 1 && $isRegisterd->verify_mobile == 1 && $isRegisterd->verification_status == 2) {
-                                $nestedData['verifiedStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-                            $querySql = "SELECT id"
-                                    . " FROM transactions_history"
-                                    . " WHERE user_id=$isRegisterd->id AND transaction_type = 'CASH' "
-                                    . " AND pay_type = 'DEPOSIT' ";
-                            $addCash = $this->common_model->customQuery($querySql, true);
-                            if (!empty($addCash)) {
-                                $nestedData['addCashStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-                        }
-                    }
-                    if (!empty($mobile)) {
-                        $query = "SELECT users.id,users.email_verify,users.verify_mobile,user_pan_card.verification_status FROM users "
-                                . " LEFT JOIN user_pan_card ON user_pan_card.user_id= users.id WHERE phone= '" . $users->mobile . "'";
-                        $isRegisterd = $this->common_model->customQuery($query, true);
-                        if (!empty($isRegisterd)) {
-
-                            $option = array(
-                                'table' => 'user_referrals',
-                                'select' => 'is_app_download',
-                                'where' => array('user_id' => $users->user_id, 'invite_user_id' => $isRegisterd->id),
-                                'single' => true
-                            );
-                            $user_referrals = $this->common_model->customGet($option);
-
-                            if (!empty($user_referrals)) {
-                                $nestedData['appDownload'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-                            $nestedData['registerdStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            if ($isRegisterd->email_verify == 1 && $isRegisterd->verify_mobile == 1) {
-                                $nestedData['verifiedStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-                            $querySql = "SELECT id"
-                                    . " FROM transactions_history"
-                                    . " WHERE user_id=$isRegisterd->id AND transaction_type = 'CASH' "
-                                    . " AND pay_type = 'DEPOSIT' ";
-                            $addCash = $this->common_model->customQuery($querySql, true);
-                            if (!empty($addCash)) {
-                                $nestedData['addCashStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                            }
-                        }
-                    }
-                    $data[] = $nestedData;
-                }
-            }
-        }
-        $json_data = array(
-            "draw" => intval($this->input->post('draw')),
-            "recordsTotal" => intval($totalData),
-            "recordsFiltered" => intval($totalFiltered),
-            "data" => $data
-        );
-        echo json_encode($json_data);
-    }
-
-    public function referrals_send_user() {
-        $email = $this->input->post('email');
-        $phone = $this->input->post('phone');
-        if (empty($email) && empty($phone)) {
-            $response = array('status' => 0, 'message' => "Email or Mobile field is required and (at least) one of these needs to be filled");
-            echo json_encode($response);
-            exit;
-        }
-
-        $email = $this->input->post('email');
-        $phone = $this->input->post('phone');
-        $user_id = $this->session->userdata('user_id');
-
-        if (!empty($phone)) {
-            $option = array(
-                'table' => 'users',
-                'select' => 'users.id',
-                'where' => array('phone' => $phone)
-            );
-            $is_mobile_already = $this->common_model->customGet($option);
-
-            if (!empty($is_mobile_already)) {
-                $response = array('status' => 0, 'message' => "This mobile no. is already registered with us.");
-                echo json_encode($response);
-                exit;
-            }
-        }
-
-        if (!empty($email)) {
-            /* to check mobile no is already registered or not */
-            $option = array(
-                'table' => 'users',
-                'select' => 'users.id',
-                'where' => array('email' => $email)
-            );
-            $is_email_already = $this->common_model->customGet($option);
-
-            if (!empty($is_email_already)) {
-                //print_r($is_mobile_already);die;
-
-                $response = array('status' => 0, 'message' => "This email is already registered with us.");
-                echo json_encode($response);
-                exit;
-            }
-        }
-
-
-        $option = array(
-            'table' => 'users',
-            'select' => 'team_code',
-            'where' => array('id' => $user_id),
-            'single' => true
-        );
-        $users = $this->common_model->customGet($option);
-        if (!empty($users)) {
-
-            $userInviteCode = $users->team_code;
-            $base_url = base_url() . '#/signup?referral=' . $userInviteCode;
-            $siteTitle = getConfig('site_name');
-
-            if (!empty($email) || empty($phone)) {
-                $data = array(
-                    'email' => $email,
-                    'user_id' => $user_id,
-                    'create_date' => date('Y-m-d H:i:s')
-                );
-            } else if (empty($email) || !empty($phone)) {
-                $data = array(
-                    'mobile' => $phone,
-                    'user_id' => $user_id,
-                    'create_date' => date('Y-m-d H:i:s')
-                );
-            } else {
-                $data = array(
-                    'email' => $email,
-                    'mobile' => $phone,
-                    'user_id' => $user_id,
-                    'create_date' => date('Y-m-d H:i:s')
-                );
-            }
-            if (!empty($email)) {
-
-                $option = array(
-                    'table' => 'referrals_request_history',
-                    'select' => '*',
-                    'where' => array('user_id' => $user_id, 'email' => $email)
-                );
-                $is_invited_email = $this->common_model->customGet($option);
-            }
-            if (empty($is_invited_email)) {
-                if (!empty($phone)) {
-                    $option = array(
-                        'table' => 'referrals_request_history',
-                        'select' => '*',
-                        'where' => array('user_id' => $user_id, 'mobile' => $phone)
-                    );
-                    $is_invited_mobile = $this->common_model->customGet($option);
-                }
-                if (empty($is_invited_mobile)) {
-                    $option = array(
-                        'table' => 'referrals_request_history',
-                        'data' => $data
-                    );
-                    $this->common_model->customInsert($option);
-
-                    $flag = false;
-                    if (!empty($phone)) {
-                        $postfields = array('mobile' => $phone,
-                            'message' => "Here is ₹100 to playwinfantasy with me on $siteTitle. Click $base_url to download the playwinfantasy app & use my code $userInviteCode to register.",
-                        );
-                        if ($this->smsSend($postfields)) {
-                            $flag = true;
-                        } else {
-                            $flag = false;
-                        }
-                    }
-
-                    if (!empty($email)) {
-                        $base_url = base_url() . '#/signup?referral=' . $userInviteCode;
-                        $html = array();
-                        $html['logo'] = base_url() . getConfig('site_logo');
-                        $html['site'] = getConfig('site_name');
-                        $html['message'] = "Here is ₹100 to playwinfantasy with me on $siteTitle. Click $base_url to download the playwinfantasy app & use my code $userInviteCode to register.";
-                        $email_template = $this->load->view('email/email_user_invite_tpl', $html, true);
-                        $status = send_mail($email_template, '[' . getConfig('site_name') . '] Invite', $email, getConfig('admin_email'));
-                        if ($status) {
-                            $flag = true;
-                        } else {
-                            $flag = false;
-                        }
-                    }
-
-                    if ($flag) {
-
-                        $response = array('status' => 1, 'message' => 'Successfully invited', 'url' => base_url('vendors/venderReferral'));
-                    } else {
-                        $response = array('status' => 0, 'message' => 'Failed to invite please try again', 'url' => base_url('vendors/venderReferral'));
-                    }
-                } else {
-                    $response = array('status' => 0, 'message' => 'User alredy invited by this person', 'url' => base_url('vendors/venderReferral'));
-                }
-            } else {
-                $response = array('status' => 0, 'message' => 'User alredy invited by this person', 'url' => base_url('vendors/venderReferral'));
-            }
-        }
-
-        echo json_encode($response);
-    }
-
+    
     /**
      * @method users_add
      * @description add dynamic rows
@@ -536,7 +174,7 @@ class Vendors extends Common_Controller {
                         'team_code' => $code,
                         'username' => $username[0],
                         'date_of_birth' => (!empty($this->input->post('date_of_birth'))) ? date('Y-m-d', strtotime($this->input->post('date_of_birth'))) : date('Y-m-d'),
-                        'gender' => $this->input->post('user_gender'),
+                        //'gender' => $this->input->post('user_gender'),
                         'profile_pic' => $image,
                         'phone' => $this->input->post('phone_no'),
                         'phone_code' => $this->input->post('phone_code'),
@@ -556,6 +194,8 @@ class Vendors extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
+                        'category_id' => $this->input->post('category_id'),
+                        'company_name' => $this->input->post('company_name'),
                         'update_date' => date('Y-m-d H:i:s')
                     );
                     $this->db->insert('vendor_sale_user_profile', $additional_data_profile);
@@ -585,7 +225,8 @@ class Vendors extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
-                        //'profile_pic' => $this->input->post('profile_pic'),
+                        'category_id' => $this->input->post('category_id'),
+                        'company_name' => $this->input->post('company_name'),
                         'update_date' => date('Y-m-d H:i:s')
                     );
                     $this->db->where("user_id", $where_id);
@@ -710,7 +351,7 @@ class Vendors extends Common_Controller {
 
                     $options_data = array(
                         'first_name' => $this->input->post('first_name'),
-                        'last_name' => null,
+                        'last_name' => $this->input->post('last_name'),
                         'date_of_birth' => "0000-00-00",
                         'gender' => "OTHER",
                         'phone' => $this->input->post('phone_no'),

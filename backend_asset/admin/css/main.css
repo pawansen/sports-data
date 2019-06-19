@@ -4147,3 +4147,37 @@ only screen and (min-device-pixel-ratio: 1.5) {
     .block, .block.full {border: none !important; padding: 0 !important;}
     .block-title {margin: 0 0 20px !important;}
 }
+
+
+
+
+.totle_eShop_heading h3 {
+    line-height: 40px;
+}
+.table_fonts_size td {
+    font-size: 13px;
+}
+.table_fonts_size.table thead > tr > th {
+    font-size: 13px;
+    font-weight: 600;
+}
+.title_none_table_header div#dtVerticalScrollExample_info, .title_none_table_header div#dtVerticalScrollExample_paginate, .title_none_table_header div#dtVerticalScrollExample_length, .title_none_table_header div#dtVerticalScrollExample_filter {
+    display: none;
+}
+ 
+.title_none_table_header div#dtVerticalScrollExample2_info, .title_none_table_header div#dtVerticalScrollExample2_paginate, .title_none_table_header div#dtVerticalScrollExample2_length, .title_none_table_header div#dtVerticalScrollExample2_filter {
+    display: none;
+}
+
+
+
+.title_none_table_header div#dtVerticalScrollExample3_info, .title_none_table_header div#dtVerticalScrollExample3_paginate, .title_none_table_header div#dtVerticalScrollExample3_length, .title_none_table_header div#dtVerticalScrollExample3_filter {
+    display: none;
+}
+
+ 
+
+
+
+
+

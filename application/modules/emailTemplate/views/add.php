@@ -21,9 +21,11 @@
                                   <div class="col-md-9">
                                        <select class="form-control" name="email_type" id="email_type">
                                           <option value="">Select</option>
-                                          <option value="verification">Verification</option>
+                                          <option value="verification">Email Verification</option>
                                           <option value="forgot_password">Forgot Password</option>
-                                          <option value="vendor_inquiry">Vendor Inquiry</option>
+                                          <option value="vendor_verify">Admin Vendor Verify</option>
+                                          <option value="vendor_inquiry">Client Send Inquiry</option>
+                                          <option value="welcome_mail">Weclome Email</option>
                                       </select>
                                   </div>
                                  

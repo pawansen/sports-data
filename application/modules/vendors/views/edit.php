@@ -61,7 +61,7 @@
                                         <option value="0">Please select</option>
                                         <?php foreach($countries as $country){?>
                                                     
-                                        <option value="<?php echo $country->phonecode;?>"><?php echo $country->sortname."(".$country->phonecode.")";?></option>
+                                        <option value="<?php echo $country->phonecode;?>" <?php echo ($results->phone_code == $country->phonecode) ? "selected": "";?>><?php echo $country->sortname."(".$country->phonecode.")";?></option>
                                                 
                                         <?php }?>
                                     </select>
@@ -94,55 +94,7 @@
                             </div>
                         </div>
 
-                       
-<!--                       <div class="col-md-12" >
-                            <div class="form-group">
-                                <label class="col-md-3 control-label"><?php //echo lang('user_gender');?></label>
-                                <div class="col-md-9">
-                                    <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" <?php if($results->gender=='MALE') echo 'checked="checked"';?> value="MALE">MALE</label>
-                                    <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" <?php if($results->gender=='FEMALE') echo 'checked="checked"';?> value="FEMALE">FEMALE</label>
-                                </div>
-                            </div>
-                        </div>
-
-                         <div class="col-md-12" >
-                           <div class="form-group">
-                                <label class="col-md-3 control-label"><?php //echo lang('date_of_birth');?></label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" value="<?php if($results->date_of_birth != '0000-00-00'){echo $results->date_of_birth;}?>" readonly=""/>
-                                </div>
-                            </div>
-                        </div>-->
-                        <?php //$zipcodeAccess = (!empty($results->zipcode_access)) ? json_decode($results->zipcode_access) : array();?>
-                        <!-- <div class="col-md-12" >
-                           <div class="form-group">
-                             <label class="col-md-3 control-label">Zipcode Access</label>
-                                <div class="col-md-9">
-                                     <select class="" name="zipcode[]" id="zipcode" multiple="" style="width:100%;" placeholder="Select Zipcode">
-                                         <option value="">Select Zipcode</option>
-                                        <?php// foreach($zipcode_list as $key=>$val){?>
-                                            <option value="<?php// echo $val->zipcode;?>" <?php //echo ($zipcodeAccess)? (in_array($val->zipcode,$zipcodeAccess)) ? "selected": "":"";?>><?php //echo $val->zipcode;?></option>
-                                        <?php// }?>
-                                    </select>
-                                </div>
-                               
-                            </div>
-                        </div> -->
-                        <!--<div class="form-group"><label class="col-lg-3 control-label"><?php //echo lang('user_image');?></label>
-
-                           <div class="col-lg-9"><input type="file" name="user_image" id="file_name">
-                            <span class="help-block m-b-none"><?php //echo (isset($error)) ? $error : ""; ?></span>
-                            <span class="help-block m-b-none"><?php //echo form_error('user_image'); ?></span>
-                           </div>
-                       </div>
-                            <?php if(!empty($results->category_image)){?>
-                            <div class="form-group">
-                                <label class="col-lg-5 col-md-offset-2 control-label">
-                            <div class="image">
-                              <img class="img-responsive" src="<?php echo base_url();?>uploads/users/<?php echo $results->user_image;?>" alt="image">
-                            </div></label>
-                             </div>
-                            <?php }?> -->
+                    
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Software Category</label>
@@ -151,7 +103,7 @@
                                               <option value="" disabled selected>Please select</option>
                                                 <?php foreach($categorys as $category){?>
                                                             
-                                                <option value="<?php echo $category->id;?>"><?php echo $category->category_name;?></option>
+                                                <option value="<?php echo $category->id;?>" <?php echo ($results->category_id == $category->id) ? "selected": "";?>><?php echo $category->category_name;?></option>
                                                         
                                                 <?php }?>
                                             </select>
@@ -185,7 +137,7 @@
                                                 <option value="" disabled selected>Please select</option>
                                                 <?php foreach($countries as $country){?>
                                                             
-                                                <option value="<?php echo $country->id;?>"><?php echo $country->name;?></option>
+                                                <option value="<?php echo $country->id;?>" <?php echo ($results->country == $country->id) ? "selected": "";?>><?php echo $country->name;?></option>
                                                         
                                                 <?php }?>
                                             </select>
@@ -201,7 +153,7 @@
                                                 <option value="" disabled selected>Please select</option>
                                                 <?php foreach($states as $state){?>
                                                             
-                                                <option value="<?php echo $state->id;?>"><?php echo $state->name;?></option>
+                                                <option value="<?php echo $state->id;?>"  <?php echo ($results->state == $state->id) ? "selected": "";?>><?php echo $state->name;?></option>
                                                         
                                                 <?php }?>
                                             </select>

@@ -1,4 +1,0 @@
-<script>
-     $('#payment').DataTable();
-</script>
-

@@ -68,25 +68,6 @@
                     </div>
                 </div>
                 
-
-<!--                <div class="col-md-12" >
-                    <div class="form-group">
-                        <label class="col-md-3 control-label"><?php echo lang('user_gender');?></label>
-                        <div class="col-md-9">
-                            <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" checked value="MALE">MALE</label>
-                            <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" value="FEMALE">FEMALE</label>
-                        </div>
-                    </div>
-                </div>
-
-                 <div class="col-md-12" >
-                   <div class="form-group">
-                        <label class="col-md-3 control-label"><?php echo lang('date_of_birth');?></label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" placeholder="<?php echo lang('date_of_birth');?>" readonly=""/>
-                        </div>
-                    </div>
-                </div>-->
                <div class="col-md-12" >
                     <div class="form-group">
                         <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>

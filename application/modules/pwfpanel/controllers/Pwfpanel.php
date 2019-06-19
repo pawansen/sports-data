@@ -22,15 +22,44 @@ class Pwfpanel extends Common_Controller {
             redirect('pwfpanel/login', 'refresh');
         } else {
             if ($this->ion_auth->is_admin() || $this->ion_auth->is_subAdmin()) {
-                $option = array(
-                  'table' => 'login_session',
-                  'select' => 'login_session.last_login,users.first_name,users.email',
-                  'join' => array('users' => 'users.id=login_session.user_id',
-                  'users_groups' => 'users_groups.user_id=users.id'),
-                  'where' => array('users_groups.group_id' => 4),
-                  'order' => array('login_session.last_login' => 'desc')
-                  );
-                $this->data['list'] = $this->common_model->customGet($option);
+
+                $option = array('table' => USERS . ' as user',
+                    'select' => 'user.*,group.name as group_name,UP.doc_file',
+                    'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+                        array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+                        array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                            'order' => array('user.id' => 'ASC'),
+                            'where' => array('user.delete_status' => 0,
+                            'group.id' => 3),
+                    'order' => array('user.id' => 'desc')
+                );
+                $this->data['vendors'] = $this->common_model->customGet($option);
+
+                $option = array('table' => USERS . ' as user',
+                    'select' => 'user.*,group.name as group_name,UP.doc_file',
+                    'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+                        array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+                        array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                            'order' => array('user.id' => 'ASC'),
+                            'where' => array('user.delete_status' => 0,
+                            'group.id' => 2),
+                    'order' => array('user.id' => 'desc')
+                );
+                $this->data['users'] = $this->common_model->customGet($option);
+
+                $option = array('table' => "client_inquiry CU",
+                    'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,
+                    CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,
+                    C.category_name,P.company_name,UP.first_name as c_first_name,UP.last_name as c_last_name",
+                    'join' => array("users U" => "U.id=CU.vendor_id",
+                                    "users UP" => "UP.id=CU.user_id",
+                        "item_category C" => "C.id=CU.rq_software_categories",
+                        "user_profile P" => "P.user_id=U.id"),
+                    'where' => array("CU.is_request_draft" => 'no'),
+                    'limit'=> 20
+                );
+                $this->data['enquiries'] = $this->common_model->customGet($option);
+
                 $this->load->admin_render('dashboard', $this->data, 'inner_script');
             } else if ($this->ion_auth->is_vendor()) {
                 $this->load->admin_render('vendorDashboard', $this->data, 'inner_script');

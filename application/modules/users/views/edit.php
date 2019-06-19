@@ -80,41 +80,6 @@
                                     </div>
                                 </div>
                             </div>
-                           
-<!--                           <div class="col-md-12" >
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label"><?php echo lang('user_gender');?></label>
-                                    <div class="col-md-9">
-                                        <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" <?php if($results->gender=='MALE') echo 'checked="checked"';?> value="MALE">MALE</label>
-                                        <label class="checkbox-inline"><input type="radio" name="user_gender" id="user_gender" <?php if($results->gender=='FEMALE') echo 'checked="checked"';?> value="FEMALE">FEMALE</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                             <div class="col-md-12" >
-                               <div class="form-group">
-                                    <label class="col-md-3 control-label"><?php echo lang('date_of_birth');?></label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="date_of_birth" id="date_of_birth" value="<?php if($results->date_of_birth != '0000-00-00'){echo $results->date_of_birth;}?>" readonly=""/>
-                                    </div>
-                                </div>
-                            </div>-->
-
-                            <!--<div class="form-group"><label class="col-lg-3 control-label"><?php echo lang('user_image');?></label>
-
-                               <div class="col-lg-9"><input type="file" name="user_image" id="file_name">
-                                <span class="help-block m-b-none"><?php echo (isset($error)) ? $error : ""; ?></span>
-                                <span class="help-block m-b-none"><?php echo form_error('user_image'); ?></span>
-                               </div>
-                           </div>
-                                <?php if(!empty($results->category_image)){?>
-                                <div class="form-group">
-                                    <label class="col-lg-5 col-md-offset-2 control-label">
-                                <div class="image">
-                                  <img class="img-responsive" src="<?php echo base_url();?>uploads/users/<?php echo $results->user_image;?>" alt="image">
-                                </div></label>
-                                 </div>
-                                <?php }?> -->
                                 <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>

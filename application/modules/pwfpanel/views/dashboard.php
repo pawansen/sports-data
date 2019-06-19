@@ -1,70 +1,7 @@
 <?php if ($this->ion_auth->is_admin() || $this->ion_auth->is_subAdmin()) { ?>               
 
-
-
                     <!-- Page content -->
                     <div id="page-content">
-                        <!-- eCommerce Dashboard Header -->
-                        <div class="content-header">
-                            <ul class="nav-horizontal text-center">
-                                <li class="active">
-                                    <a href="page_ecom_dashboard.html"><i class="fa fa-bar-chart"></i> Dashboard</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_orders.html"><i class="gi gi-shop_window"></i> Orders</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_order_view.html"><i class="gi gi-shopping_cart"></i> Order View</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_products.html"><i class="gi gi-shopping_bag"></i> Products</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_product_edit.html"><i class="gi gi-pencil"></i> Product Edit</a>
-                                </li>
-                                <li>
-                                    <a href="page_ecom_customer_view.html"><i class="gi gi-user"></i> Customer View</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- END eCommerce Dashboard Header -->
-
-                        <!-- Quick Stats -->
-                        <div class="row text-center">
-                            <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                                    <div class="widget-extra themed-background">
-                                        <h4 class="widget-content-light"><strong>Pending</strong> Orders</h4>
-                                    </div>
-                                    <div class="widget-extra-full"><span class="h2 animation-expandOpen">3</span></div>
-                                </a>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                                    <div class="widget-extra themed-background-dark">
-                                        <h4 class="widget-content-light"><strong>Conversion</strong> Rate</h4>
-                                    </div>
-                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">4.7%</span></div>
-                                </a>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                                    <div class="widget-extra themed-background-dark">
-                                        <h4 class="widget-content-light"><strong>Orders</strong> Today</h4>
-                                    </div>
-                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">120</span></div>
-                                </a>
-                            </div>
-                            <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                                    <div class="widget-extra themed-background-dark">
-                                        <h4 class="widget-content-light"><strong>Earnings</strong> Today</h4>
-                                    </div>
-                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">$ 4.250</span></div>
-                                </a>
-                            </div>
-                        </div>
-                        <!-- END Quick Stats -->
 
                         <!-- eShop Overview Block -->
                         <div class="block full">
@@ -97,7 +34,7 @@
                             <!-- eShop Overview Content -->
                             <div class="row">
                                 <div class="col-md-6 col-lg-4">
-                                    <div class="row push">
+                                    <div class="row push totle_eShop_heading">
                                         <div class="col-xs-6">
                                             <h3><strong class="animation-fadeInQuick">45.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Orders</a></small></h3>
                                         </div>
@@ -134,6 +71,110 @@
                         <!-- END eShop Overview Block -->
 
                         <!-- Orders and Products -->
+                        
+                        
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <!-- Latest Orders Block -->
+                                <div class="block title_none_table_header">
+                                    <!-- Latest Orders Title -->
+                                    <div class="block-title">
+                                        <div class="block-options pull-right">
+                                            <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                        </div>
+                                        <h2><strong>Enquiries</strong></h2>
+                                    </div>
+                                    <!-- END Latest Orders Title -->
+
+                                    <!-- Latest Orders Content -->
+                                    
+                                    <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm table-borderless table-vcenter table_fonts_size" cellspacing="0"
+                                        width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th class="hidden-xs th-sm">No
+                                            </th>
+                                            <th class="th-sm">Name
+                                            </th>
+                                            <th class="th-sm">Software Category
+                                            </th>
+                                            <th class="th-sm">Vandore Name
+                                            </th>
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $i=1; foreach($enquiries as $rows){?>
+                                            <tr>
+                                            <td class="hidden-xs text-center" style="width: 100px;">
+                                            <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
+                                            <td class=""><a href="javascript:void(0)"><?php echo $rows->c_first_name.' '.$rows->c_last_name;?></a></td>
+                                            <td><?php echo $rows->company_name?></td>
+                                            <td><?php echo $rows->company_name;?></td>
+                                            </tr>
+                                        <?php $i++;}?>
+                                        </tbody>
+                                        
+                                    </table>
+                                    
+                                    
+                                
+                                    <!-- END Latest Orders Content -->
+                                </div>
+                                <!-- END Latest Orders Block -->
+                            </div>
+                            <div class="col-lg-6">
+                                <!-- Top Products Block -->
+                                <div class="block title_none_table_header">
+                                    <!-- Top Products Title -->
+                                    <div class="block-title">
+                                        <div class="block-options pull-right">
+                                            <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                        </div>
+                                        <h2><strong>Vendors</strong></h2>
+                                    </div>
+                                    <!-- END Top Products Title -->
+
+                                    <!-- Top Products Content -->
+                                    <table id="dtVerticalScrollExample2" class="table table-striped table-bordered table-sm table-borderless table-vcenter table_fonts_size" cellspacing="0"
+                                        width="100%">
+                                        <thead>
+                                            <tr>
+                                            <th class="hidden-xs th-sm">No
+                                            </th>
+                                            <th class="th-sm">Vandore Name
+                                            </th>
+                                            <th class="th-sm">vendors status
+                                            </th>
+                                            
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        <?php $i=1; foreach($vendors as $rows){?>
+                                            <tr>
+                                            <td class="hidden-xs text-center" style="width: 100px;">
+                                            <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
+                                            <td class=""><a href="javascript:void(0)"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
+                                            <td class="text-center"><span class="label label-success"><?php echo ($rows->vendor_profile_activate == "Yes") ? "Verified":"Processing";?></span></ td>
+                                            
+                                            </tr>
+                                        <?php $i++;}?>
+        
+                                        </tbody>
+                                        
+                                        </table>
+                                    <!-- END Top Products Content -->
+                                </div>
+                                <!-- END Top Products Block -->
+                            </div>
+                        </div>
+                        <!-- END Orders and Products -->
+                        
+                        
+                        
+                        
                         <div class="row">
                             <div class="col-lg-6">
                                 <!-- Latest Orders Block -->
@@ -144,104 +185,63 @@
                                             <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Latest</strong> Orders</h2>
+                                        <h2><strong>Client</strong></h2>
                                     </div>
                                     <!-- END Latest Orders Title -->
 
                                     <!-- Latest Orders Content -->
-                                    <table class="table table-borderless table-striped table-vcenter table-bordered">
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="javascript:void(0)"><strong>ORD.685116</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Gerald Berry</a></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="text-right"><strong>$65,00</strong></td>
-                                                <td class="text-right"><span class="label label-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685115</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Patrick Bates</a></td>
-                                                <td class="hidden-xs">Bank wire</td>
-                                                <td class="text-right"><strong>$268,00</strong></td>
-                                                <td class="text-right"><span class="label label-danger">Canceled</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685114</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Ethan Greene</a></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="text-right"><strong>$362,00</strong></td>
-                                                <td class="text-right"><span class="label label-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685113</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Bruce Hicks</a></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="text-right"><strong>$23,00</strong></td>
-                                                <td class="text-right"><span class="label label-warning">Processing</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685112</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Harry Burke</a></td>
-                                                <td class="hidden-xs">Bank wire</td>
-                                                <td class="text-right"><strong>$1360,00</strong></td>
-                                                <td class="text-right"><span class="label label-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685111</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Nancy Rose</a></td>
-                                                <td class="hidden-xs">Bank wire</td>
-                                                <td class="text-right"><strong>$2685,00</strong></td>
-                                                <td class="text-right"><span class="label label-warning">Processing</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685110</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Helen Jensen</a></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="text-right"><strong>$128,00</strong></td>
-                                                <td class="text-right"><span class="label label-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685109</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Harry Medina</a></td>
-                                                <td class="hidden-xs">Check</td>
-                                                <td class="text-right"><strong>$3150,00</strong></td>
-                                                <td class="text-right"><span class="label label-warning">Processing</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685108</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Ryan Hopkins</a></td>
-                                                <td class="hidden-xs">Check</td>
-                                                <td class="text-right"><strong>$750,00</strong></td>
-                                                <td class="text-right"><span class="label label-success">Delivered</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center"><a href="javascript:void(0)"><strong>ORD.685107</strong></a></td>
-                                                <td class="hidden-xs"><a href="javascript:void(0)">Anthony Franklin</a></td>
-                                                <td class="hidden-xs">Paypal</td>
-                                                <td class="text-right"><strong>$630,00</strong></td>
-                                                <td class="text-right"><span class="label label-danger">Canceled</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                    
+                                    
+                                                                        <table id="dtVerticalScrollExample3" class="table table-striped table-bordered table-sm12 table-borderless table-vcenter table_fonts_size" cellspacing="0"
+                                                                    width="100%">
+                                                                    <thead>
+                                                                        <tr>
+                                                                        <th class="hidden-xs th-sm">No
+                                                                        </th>
+                                                                        <th class="th-sm">Client Name
+                                                                        </th>
+                                                                        <th class="th-sm">Client status
+                                                                        </th>
+                                                                        
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                    <?php $i=1; foreach($users as $rows){?>
+                                                                        <tr>
+                                                                        <td class="hidden-xs text-center" style="width: 100px;">
+                                                                        <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
+                                                                        <td class=""><a href="javascript:void(0)"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
+                                                                        <td class="text-center"><span class="label label-success"><?php echo ($rows->active == 1) ? "Verified":"Processing";?></span></ td>
+                                                                        
+                                                                        </tr>
+                                                                    <?php $i++;}?>
+                                                                      
+                                                                    </tbody>
+                                                                    
+                                                                    </table>
+                                    
                                     <!-- END Latest Orders Content -->
                                 </div>
                                 <!-- END Latest Orders Block -->
                             </div>
+                            
+                            
+                            
                             <div class="col-lg-6">
                                 <!-- Top Products Block -->
-                                <div class="block">
+                                <div class="block2">
                                     <!-- Top Products Title -->
-                                    <div class="block-title">
+                                    <!--<div class="block-title">
                                         <div class="block-options pull-right">
                                             <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
                                             <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                         </div>
-                                        <h2><strong>Top</strong> Products</h2>
-                                    </div>
+                                        <h2><strong>Vendors</strong></h2>
+                                    </div>-->
                                     <!-- END Top Products Title -->
 
                                     <!-- Top Products Content -->
-                                    <table class="table table-borderless table-striped table-vcenter table-bordered">
+                                    <!--<table class="table table-borderless table-striped table-vcenter table-bordered table_fonts_size">
                                         <tbody>
                                             <tr>
                                                 <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8765</strong></a></td>
@@ -384,13 +384,18 @@
                                                 </td>
                                             </tr>
                                         </tbody>
-                                    </table>
+                                    </table>-->
                                     <!-- END Top Products Content -->
                                 </div>
                                 <!-- END Top Products Block -->
                             </div>
                         </div>
                         <!-- END Orders and Products -->
+                        
+                        
+                        
+                        
+                        
                     </div>
                     <!-- END Page Content -->
 

@@ -186,8 +186,8 @@ class Users extends Common_Controller {
                         $datetime = UTCToConvertIST($users->created_date, 'Asia/Kolkata');
                     }
 
-                    $userData['created_on'] = isset($datetime) ? $datetime : '';
-                    /* $userData['created_on'] = isset($users->created_date) ? date('d-m-Y H:i', strtotime($users->created_date)) : ''; */
+                    //$userData['created_on'] = isset($datetime) ? $datetime : '';
+                    $userData['created_on'] = isset($users->created_on) ? date('d-m-Y H:i', $users->created_on) : '';
 
                     if ($users->id != 1) {
                         if ($users->active == 1) {
@@ -281,131 +281,6 @@ class Users extends Common_Controller {
         echo json_encode($json_data);
     }
 
-    public function myReferrals($uid = "") {
-        $this->data['parent'] = "Referrals";
-        $this->data['title'] = "Referrals";
-        if (empty($uid)) {
-            redirect('users');
-        }
-        $querySql = "SELECT UR.user_id,UR.invite_user_id,UR.id,UR.create_date,u1.email,u1.phone as mobile,"
-                . " CONCAT(user.first_name,'</br>(',user.email,' / ',user.phone,')') as userByInvited,"
-                . " CONCAT(u1.first_name,'</br>(',u1.email,' / ',u1.phone,')') as userInvited"
-                . " FROM user_referrals as UR INNER JOIN users as user ON user.id=UR.user_id "
-                . " INNER JOIN users as u1 ON u1.id = UR.invite_user_id WHERE UR.user_id = $uid ";
-        $userReferralsList = $this->common_model->customQuery($querySql);
-        $start = 1;
-        $data = array();
-        if (!empty($userReferralsList)) {
-            foreach ($userReferralsList as $users) {
-                $start++;
-                $nestedData['id'] = $start;
-                $nestedData['userByInvited'] = isset($users->userByInvited) ? $users->userByInvited : '';
-                $email = $temp['user_email'] = (!empty($users->email)) ? $users->email : "";
-                $mobile = $temp['user_mobile'] = (!empty($users->mobile)) ? $users->mobile : "";
-                $nestedData['userInvited'] = (!empty($users->email)) ? $users->email : $users->mobile;
-                $nestedData['registerdStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                $nestedData['verifiedStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                $nestedData['addCashStatus'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                $nestedData['appDownload'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                $nestedData['invitedDate'] = isset($users->create_date) ? date('d-m-Y H:i', strtotime($users->create_date)) : '';
-                $nestedData['PANVerified'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-                $nestedData['AadharVerified'] = "<p class='text-danger'><i class='fa fa-times'><i></p>";
-
-                $invite_user_id = $users->invite_user_id;
-                $option = array(
-                    'table' => 'user_pan_card',
-                    'select' => 'verification_status',
-                    'where' => array('user_id' => $invite_user_id),
-                    'single' => true
-                );
-                $get_pan_verified = $this->common_model->customGet($option);
-                if (!empty($get_pan_verified)) {
-                    if ($get_pan_verified->verification_status == 2) {
-                        $nestedData['PANVerified'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                    }
-                }
-                $option = array(
-                    'table' => 'user_aadhar_card',
-                    'select' => 'verification_status',
-                    'where' => array('user_id' => $invite_user_id),
-                    'single' => true
-                );
-                $get_aadhar_verified = $this->common_model->customGet($option);
-                if (!empty($get_aadhar_verified)) {
-                    if ($get_aadhar_verified->verification_status == 2) {
-                        $nestedData['AadharVerified'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                    }
-                }
-                if (!empty($email)) {
-                    $query = "SELECT users.id,users.email_verify,users.verify_mobile,user_pan_card.verification_status FROM users "
-                            . " LEFT JOIN user_pan_card ON user_pan_card.user_id= users.id WHERE email= '" . $users->email . "'";
-                    $isRegisterd = $this->common_model->customQuery($query, true);
-                    if (!empty($isRegisterd)) {
-
-                        $option = array(
-                            'table' => 'user_referrals',
-                            'select' => 'is_app_download',
-                            'where' => array('user_id' => $users->user_id, 'invite_user_id' => $isRegisterd->id),
-                            'single' => true
-                        );
-                        $user_referrals = $this->common_model->customGet($option);
-
-                        if (!empty($user_referrals)) {
-                            $nestedData['appDownload'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-
-
-                        $nestedData['registerdStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        if ($isRegisterd->email_verify == 1 && $isRegisterd->verify_mobile == 1 && $isRegisterd->verification_status == 2) {
-                            $nestedData['verifiedStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-                        $querySql = "SELECT id"
-                                . " FROM transactions_history"
-                                . " WHERE user_id=$isRegisterd->id AND transaction_type = 'CASH' "
-                                . " AND pay_type = 'DEPOSIT' ";
-                        $addCash = $this->common_model->customQuery($querySql, true);
-                        if (!empty($addCash)) {
-                            $nestedData['addCashStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-                    }
-                }
-                if (!empty($mobile)) {
-                    $query = "SELECT users.id,users.email_verify,users.verify_mobile,user_pan_card.verification_status FROM users "
-                            . " LEFT JOIN user_pan_card ON user_pan_card.user_id= users.id WHERE phone= '" . $users->mobile . "'";
-                    $isRegisterd = $this->common_model->customQuery($query, true);
-                    if (!empty($isRegisterd)) {
-
-                        $option = array(
-                            'table' => 'user_referrals',
-                            'select' => 'is_app_download',
-                            'where' => array('user_id' => $users->user_id, 'invite_user_id' => $isRegisterd->id),
-                            'single' => true
-                        );
-                        $user_referrals = $this->common_model->customGet($option);
-
-                        if (!empty($user_referrals)) {
-                            $nestedData['appDownload'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-                        $nestedData['registerdStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        if ($isRegisterd->email_verify == 1 && $isRegisterd->verify_mobile == 1 && $isRegisterd->verification_status == 2) {
-                            $nestedData['verifiedStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-                        $querySql = "SELECT id"
-                                . " FROM transactions_history"
-                                . " WHERE user_id=$isRegisterd->id AND transaction_type = 'CASH' "
-                                . " AND pay_type = 'DEPOSIT' ";
-                        $addCash = $this->common_model->customQuery($querySql, true);
-                        if (!empty($addCash)) {
-                            $nestedData['addCashStatus'] = "<p class='text-success'><i class='fa fa-check'><i></p>";
-                        }
-                    }
-                }
-                $data[] = $nestedData;
-            }
-        }
-        $this->data['list'] = $data;
-        $this->load->admin_render('referral_history', $this->data, 'inner_script');
-    }
 
     /**
      * @method open_model
@@ -419,35 +294,6 @@ class Users extends Common_Controller {
         );
         $this->data['countries'] = $this->common_model->customGet($option);
         $this->load->admin_render('add', $this->data, 'inner_script');
-    }
-
-    /**
-     * @method open_cash_model
-     * @description load model box
-     * @return array
-     */
-    function open_cash_model($user_id = '') {
-        $this->data['title'] = "Add Cash";
-        $this->data['user_id'] = $user_id;
-        $this->load->view('add_cash', $this->data);
-    }
-
-    function open_chip_model($user_id = '') {
-        $this->data['title'] = "Add Chip";
-        $this->data['user_id'] = $user_id;
-        $this->load->view('add_chip', $this->data);
-    }
-
-    function open_chip_model_all() {
-        $this->data['title'] = "Add Chip";
-        //$this->data['user_id'] = $user_id;
-        $this->load->view('add_chip_all', $this->data);
-    }
-
-    function remove_cash_model($user_id = '') {
-        $this->data['title'] = "Remove Cash";
-        $this->data['user_id'] = $user_id;
-        $this->load->view('remove_cash', $this->data);
     }
 
     /**
@@ -492,7 +338,7 @@ class Users extends Common_Controller {
 
                 $additional_data = array(
                     'first_name' => $this->input->post('first_name'),
-                    'last_name' => null,
+                    'last_name' => $this->input->post('last_name'),
                     'team_code' => $code,
                     'username' => $username[0],
                     'date_of_birth' => (!empty($this->input->post('date_of_birth'))) ? date('Y-m-d', strtotime($this->input->post('date_of_birth'))) : date('Y-m-d'),
