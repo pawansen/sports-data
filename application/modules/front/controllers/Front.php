@@ -195,6 +195,7 @@ class Front extends Common_Controller {
      *
      * @param string|null $code The reset code
      */
+    
     public function reset_password($code = NULL) {
         if (!$code) {
             show_404();
