@@ -431,36 +431,36 @@ class Front extends Common_Controller {
         //$return['response'] = new stdClass();
         $signUpType = "APP";
         //$this->form_validation->set_rules('signup_type', 'Sign Up Type', 'trim|required|in_list[WEB,APP]');
-        $this->form_validation->set_rules('country', 'Country', 'trim|required');
-        $this->form_validation->set_rules('tnc', 'terms and conditions', 'trim|required');
-        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email Id', 'trim|required|valid_email|is_unique[' . USERS . '.email]');
-        $this->form_validation->set_rules('mobile', 'Phone Number', 'trim|required|numeric|min_length[10]|max_length[11]|is_unique[' . USERS . '.phone]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]|max_length[14]');
-        $this->form_validation->set_rules('confm_pswd', 'Confirm Password', 'trim|required|min_length[6]|max_length[14]|matches[password]');
+        $this->form_validation->set_rules('c_country', 'Country', 'trim|required');
+        $this->form_validation->set_rules('c_tnc', 'terms and conditions', 'trim|required');
+        $this->form_validation->set_rules('c_first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('c_last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('c_email', 'Email Id', 'trim|required|valid_email|is_unique[' . USERS . '.email]');
+        $this->form_validation->set_rules('c_mobile', 'Phone Number', 'trim|required|numeric|min_length[10]|max_length[11]|is_unique[' . USERS . '.phone]');
+        $this->form_validation->set_rules('c_password', 'Password', 'trim|required|min_length[6]|max_length[14]');
+        $this->form_validation->set_rules('c_confm_pswd', 'Confirm Password', 'trim|required|min_length[6]|max_length[14]|matches[c_password]');
         $this->form_validation->set_error_delimiters('<div class="text-danger">', '</div>');
         $user_type = extract_value($data, 'user_type', '');
         if ($this->form_validation->run() == FALSE) {
+            //$this->data['error']= $this->form_validation->rest_first_error_string();
             $this->data['active'] = $user_type;
             $option = array('table' => "countries",
             );
             $this->data['countries'] = $this->common_model->customGet($option);
             $this->load->front_render('register', $this->data, 'inner_script');
         } else {
-
-            $country = extract_value($data, 'country', '');
+            $country = extract_value($data, 'c_country', '');
             $designation = extract_value($data, 'designation', '');
-            $first_name = extract_value($data, 'first_name', '');
-            $last_name = extract_value($data, 'last_name', '');
-            $mobile = extract_value($data, 'mobile', '');
+            $first_name = extract_value($data, 'c_first_name', '');
+            $last_name = extract_value($data, 'c_last_name', '');
+            $mobile = extract_value($data, 'c_mobile', '');
             $dateOfBirth = null;
             $identity_column = $this->config->item('identity', 'ion_auth');
             $this->data['identity_column'] = $identity_column;
-            $identity = extract_value($data, 'email', '');
-            $password = extract_value($data, 'password', '');
-            $email = strtolower(extract_value($data, 'email', ''));
-            $identity = ($identity_column === 'email') ? $email : extract_value($data, 'email', '');
+            $identity = extract_value($data, 'c_email', '');
+            $password = extract_value($data, 'c_password', '');
+            $email = strtolower(extract_value($data, 'c_email', ''));
+            $identity = ($identity_column === 'email') ? $email : extract_value($data, 'c_email', '');
             $dataArr = array();
             $dataArr['first_name'] = $first_name;
             $dataArr['last_name'] = $last_name;
