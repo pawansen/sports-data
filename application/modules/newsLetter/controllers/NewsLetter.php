@@ -34,23 +34,49 @@ class NewsLetter extends Common_Controller {
      */
 
     function open_model() {
+        $this->data['parent'] = "NewsLetter";
         $this->data['title'] = 'Add NewsLetter';
-        $this->load->view('add', $this->data);
+        $option = array('table' => USERS . ' as user',
+        'select' => 'user.*,group.name as group_name,UP.doc_file',
+        'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+            array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+            array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                'order' => array('user.id' => 'ASC'),
+                'where' => array('user.delete_status' => 0,
+                'group.id' => 3),
+        'order' => array('user.id' => 'desc')
+    );
+    $this->data['vendors'] = $this->common_model->customGet($option);
+
+    $option = array('table' => USERS . ' as user',
+        'select' => 'user.*,group.name as group_name,UP.doc_file',
+        'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+            array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+            array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                'order' => array('user.id' => 'ASC'),
+                'where' => array('user.delete_status' => 0,
+                'group.id' => 2),
+        'order' => array('user.id' => 'desc')
+    );
+    $this->data['users'] = $this->common_model->customGet($option);
+        $this->load->admin_render('newsletterAdd', $this->data, 'inner_script');
      }
 
     function news_add(){
       $this->form_validation->set_rules('title', 'Title', 'required|trim');
       $this->form_validation->set_rules('description', 'Message', 'required|trim');
+      $this->form_validation->set_rules('userType', 'Select Sender', 'required|trim');
          
-        if ($this->form_validation->run() == true) {
+     if ($this->form_validation->run() == true) {
 
             $options_data = array(
                     'title'        => $this->input->post('title'),
                     'description'    => $this->input->post('description'),
+                    'user_type'    => $this->input->post('userType'),
+                    'users'    => json_encode($this->input->post('email')),
                     'create_date'    => datetime(),
                     'is_active'      => 1,
                 );
-           
                 $option = array('table' => $this->_table, 'data' => $options_data);
                 if ($this->common_model->customInsert($option)) {
                     $response = array('status' => 1, 'message' => 'Successfully Saved', 'url' => base_url('newsLetter'));
@@ -107,7 +133,6 @@ class NewsLetter extends Common_Controller {
             }else{
               $getMail = $this->input->post('email');
             }
-            print_r($getMail); die();
             if(!empty($getMail))
             {
                 foreach($getMail as $mail)

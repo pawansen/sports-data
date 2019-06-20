@@ -1,5 +1,4 @@
-<script src="<?php echo base_url() . 'backend_asset/js/' ?>select2.js"></script>
-<link rel="stylesheet" href="<?php echo base_url(); ?>backend_asset/css/select2.min.css">
+
 <style>
     #message_div{
         background-color: #ffffff;
@@ -50,7 +49,7 @@
             <div class="block-title">
                 <h2><strong>Newsletter</strong> Panel</h2>
             <?php if ($this->ion_auth->is_admin()) {?>
-                <h2><a href="javascript:void(0)" onclick="open_modal('newsLetter')" class="btn btn-sm btn-primary">
+                <h2><a href="<?php echo site_url('newsLetter/open_model');?>" class="btn btn-sm btn-primary">
                 <i class="gi gi-circle_plus"></i> Add Newsletter
                 </a>
             <?php }?>
@@ -64,9 +63,8 @@
                     <thead>
                         <tr>
                             <th><?php echo lang('serial_no'); ?></th>
-                            <th>Send</th>
                             <th>Title</th>
-                            <th>Message</th>
+                            <th style="width:500px;">Message</th>
                             <th><?php echo lang('action'); ?></th>
                         </tr>
                     </thead>
@@ -80,11 +78,10 @@
                                 ?>
                                 <tr>
                                     <td><?php echo $rowCount; ?></td>
-                                    <td align="center"><a href="<?php echo base_url(); ?>newsLetter/getList?id=<?php echo $rows->id; ?>" class="btn btn-sm btn-primary" target="_blank"><i class="gi gi-envelope"></i> Send</a></td>          
                                     <td><?php echo $rows->title; ?></td>
                                     <td><?php echo $rows->description; ?></td>
                                     <td class="actions" align="center">
-                                        <a href="javascript:void(0)" class="btn btn-xs btn-default" onclick="editFn('Newsletter', 'news_edit', '<?php echo encoding($rows->id) ?>');"><i class="fa fa-pencil"></i></a>
+                                        <!-- <a href="javascript:void(0)" class="btn btn-xs btn-default" onclick="editFn('Newsletter', 'news_edit', '<?php echo encoding($rows->id) ?>');"><i class="fa fa-pencil"></i></a> -->
                                         <?php if($rows->is_active == 1) {?>
                                             <a href="javascript:void(0)" class="btn btn-xs btn-success" onclick="editStatusFn('vendor_sale_newsletter','id','<?php echo encoding($rows->id);?>','<?php echo $rows->is_active;?>')" title="Inactive Now"><i class="fa fa-check"></i></a>
                                         <?php } else { ?>

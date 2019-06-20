@@ -1,3 +1,4 @@
+<script src="<?php echo base_url() . 'backend_asset/admin/js/' ?>helpers/ckeditor/ckeditor.js"></script>
 <script>
  jQuery('body').on('click', '#submit', function () {
         
@@ -215,6 +216,13 @@ jQuery('body').on('click', '.button_close', function () {
    
  });
 
- 
+ function changeType(type) {
+        if (type == 'All') {
+            $('.userselectID').hide();
+        }else if(type == 'Selected'){
+            $('.userselectID').show();
+        }
+    }
+
 </script>
 
