@@ -195,7 +195,6 @@ class Front extends Common_Controller {
      *
      * @param string|null $code The reset code
      */
-    
     public function reset_password($code = NULL) {
         if (!$code) {
             show_404();
@@ -475,6 +474,7 @@ class Front extends Common_Controller {
                 $dataArr['device_type'] = extract_value($data, 'device_type', '');
                 $dataArr['device_id'] = extract_value($data, 'device_id', '');
             }
+            $dataArr['activation_code'] = get_guid();
             $lid = $this->ion_auth->register($identity, $password, $email, $dataArr, array($user_type));
             if ($lid) {
                 $login_session_key = get_guid();
@@ -506,12 +506,34 @@ class Front extends Common_Controller {
                 );
                 $this->common_model->customInsert($option);
 
-                //$html = array();
-                //$html['logo'] = base_url() . getConfig('site_logo');
-                //$html['site'] = getConfig('site_name');
-                //$html['user'] = ucwords($isLogin->first_name);
-                //$email_template = $this->load->view('email/user_registration_tpl', $html, true);
-                //$status = send_mail($email_template, '[' . getConfig('site_name') . '] User Registration', $isLogin->email, getConfig('admin_email'));
+                /** welcome email * */
+                $EmailTemplate = getEmailTemplate("welcome");
+                if (!empty($EmailTemplate)) {
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = ucwords($isLogin->first_name);
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/welcome', $html, true);
+                    $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                    send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
+                }
+                
+                /** Verification email * */
+                $EmailTemplate = getEmailTemplate("verification");
+                if (!empty($EmailTemplate)) {
+                    $html = array();
+                    $html['active_url']= base_url().'front/activate/'.base64_encode($isLogin->email).'/'.$isLogin->activation_code;
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = ucwords($isLogin->first_name);
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/verify_email', $html, true);
+                    $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                    send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
+                }
 
                 $this->session->set_flashdata('message', 'You have been successfully registered, please check spam folder if you do not received it in your inbox and add our mail id in your addressbook.');
                 redirect("front/login");
@@ -1018,6 +1040,35 @@ class Front extends Common_Controller {
     public function partnership_document() {
         $this->data['title'] = 'Partnership Documents';
         $this->load->front_render('partnership_document', $this->data, 'inner_script');
+    }
+    
+        /**
+     * Function Name: user
+     * Description:   To user verification
+     */
+    public function activate($email="",$activation_code="") {
+        if ($email && $activation_code) {
+            $email = base64_decode($email);
+            $token = $activation_code;
+            $where = array('email' => $email, 'activation_code' => $token);
+            $result = $this->common_model->getsingle(USERS, $where);
+            if (!empty($result)) {
+                /* Update user status */
+                $Status = $this->common_model->updateFields(USERS, array('activation_code' => NULL, 'email_verify' => 1), array('id' => $result->id));
+                if ($Status) {
+                    $this->session->set_flashdata('user_verify', "Your email successfully verified");
+                    $this->load->view('verification');
+                } else {
+                    $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+                }
+            } else {
+                $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+                $this->load->view('verification');
+            }
+        } else {
+            $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+            $this->load->view('verification');
+        }
     }
 
     public function about_us() {

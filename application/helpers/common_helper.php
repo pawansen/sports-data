@@ -61,6 +61,27 @@ if (!function_exists('getConfig')) {
 }
 
 /**
+ * [get common configure ]
+ */
+if (!function_exists('getEmailTemplate')) {
+
+    function getEmailTemplate($key) {
+        $ci = get_instance();
+        $option = array('table' => "email_template",
+            'where' => array('email_type' => $key, 'is_active' => 1, 'delete_status' => 0),
+            'single' => true,
+        );
+        $is_result = $ci->common_model->customGet($option);
+        if (!empty($is_result)) {
+            return $is_result;
+        } else {
+            return false;
+        }
+    }
+
+}
+
+/**
  * [Multidimensional Array Searching (Find key by specific value)]
  */
 if (!function_exists('matchKeyValue')) {

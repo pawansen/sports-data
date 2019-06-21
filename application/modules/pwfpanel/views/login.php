@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
 
-        <title>ProUI - Responsive Bootstrap Admin Template</title>
+        <title><?php echo getConfig('site_name'); ?></title>
 
         <meta name="description" content="ProUI is a Responsive Bootstrap Admin Template created by pixelcave and published on Themeforest.">
         <meta name="author" content="pixelcave">
@@ -55,7 +55,7 @@
         <div id="login-container" class="animation-fadeIn">
             <!-- Login Title -->
             <div class="login-title text-center">
-                <h1><i class="gi gi-flash"></i> <strong>ProUI</strong><br><small>Please <strong>Login</strong> or <strong>Register</strong></small></h1>
+                <h1><i class="gi gi-flash"></i><small>Please <strong>Login</strong> or <strong>Register</strong></small></h1>
             </div>
             <!-- END Login Title -->
                 <?php if (isset($message) && $message != "") { ?>
@@ -99,12 +99,12 @@
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
                         </div>
                     </div>
-                    <div class="form-group">
+<!--                    <div class="form-group">
                         <div class="col-xs-12 text-center">
                             <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
                             <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
                         </div>
-                    </div>
+                    </div>-->
                 </form>
                 <!-- END Login Form -->
 
@@ -118,11 +118,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group form-actions">
+<!--                    <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Reset Password</button>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group">
                         <div class="col-xs-12 text-center">
                             <small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>
@@ -192,7 +192,7 @@
 
             <!-- Footer -->
             <footer class="text-muted text-center">
-                <small><span id="year-copy"></span> &copy; <a href="https://1.envato.market/x4R" target="_blank">ProUI 3.8</a></small>
+                <small><span id="year-copy"></span> &copy; <a href="<?php echo base_url();?>" target="_blank"><?php echo getConfig('site_name'); ?></a></small>
             </footer>
             <!-- END Footer -->
         </div>

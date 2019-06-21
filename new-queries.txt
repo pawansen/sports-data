@@ -1,1 +1,2 @@
 ALTER TABLE `vendor_sale_newsletter` ADD `user_type` VARCHAR(50) NULL AFTER `description`, ADD `users` LONGTEXT NULL AFTER `user_type`;
+LTER TABLE `vendor_sale_email_template` CHANGE `email_type` `email_type` ENUM('verification','forgot_password','vendor_inquiry','welcome') CHARACTER SET latin1 COLLATE latin1_swedish_ci NULL DEFAULT NULL;

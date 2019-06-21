@@ -50,6 +50,10 @@
                                                             <div class="col-sm-10"><input type="text" name="site_name" id="site_name" class="form-control" placeholder="<?php echo lang('site_name'); ?>" value="<?php echo getConfig('site_name'); ?>">
                                                             </div>
                                                         </div>
+                                                        <div class="form-group"><label class="col-sm-2 control-label">Company name & Address</label>
+                                                            <div class="col-sm-10"><input type="text" name="site_meta_title" id="site_meta_title" class="form-control" placeholder="Company" value="<?php echo getConfig('site_meta_title'); ?>">
+                                                            </div>
+                                                        </div>
                                                         <div class="form-group"><label class="col-sm-2 control-label"><?php echo lang('site_logo'); ?></label>
                                                             <div class="col-sm-10">
                                                                 <div class="col-md-9">
@@ -66,7 +70,7 @@
                                                                                         <img src="<?php echo base_url() . $site_logo; ?>">
                                                                                     <?php } else { ?>
                                                                                         <img src="<?php echo base_url() . 'backend_asset/images/default.jpg'; ?>">
-<?php } ?>
+                                                                                    <?php } ?>
 
                                                                                     <input type="hidden" name="site_logo_url" value="<?php echo $site_logo; ?>" />
 
