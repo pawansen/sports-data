@@ -1,5 +1,6 @@
 <script src="<?php echo base_url() . 'backend_asset/admin/js/' ?>helpers/ckeditor/ckeditor.js"></script>
 <script>
+
  jQuery('body').on('click', '#submit', function () {
         
         var form_name= this.form.id;
@@ -222,6 +223,26 @@ jQuery('body').on('click', '.button_close', function () {
         }else if(type == 'Selected'){
             $('.userselectID').show();
         }
+    }
+
+    function getMoreNewsletter() {
+        var url = "<?php echo base_url() ?>newsLetter/getMoreNewsletter";
+        $.ajax({
+            method: "POST",
+            url: url,
+            success: function (response) {
+               
+                $("#newsletter").append(response);
+                $( '#ckeditor' ).ckeditor();
+            },
+            error: function (error, ror, r) {
+                bootbox.alert(error);
+            },
+        });
+    }
+
+    function removeMoreNewsletter(key){
+        $("#"+key).remove();
     }
 
 </script>

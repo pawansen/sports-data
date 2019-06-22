@@ -63,15 +63,43 @@ class NewsLetter extends Common_Controller {
      }
 
     function news_add(){
-      $this->form_validation->set_rules('title', 'Title', 'required|trim');
-      $this->form_validation->set_rules('description', 'Message', 'required|trim');
+      $this->form_validation->set_rules('description[]', 'Message', 'required|trim');
       $this->form_validation->set_rules('userType', 'Select Sender', 'required|trim');
+      $this->form_validation->set_rules('subject', 'Subject', 'required|trim');
          
      if ($this->form_validation->run() == true) {
+            $templatearray=array();
+            $ct = count($_POST['description']);
+            for($i=0;$i<$ct;$i++){
 
+                // $_FILES['files']['name']     = $_FILES['files']['name'][$i];
+                // $_FILES['files']['type']     = $_FILES['files']['type'][$i];
+                // $_FILES['files']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+                // $_FILES['files']['error']     = $_FILES['files']['error'][$i];
+                // $_FILES['files']['size']     = $_FILES['files']['size'][$i];
+
+                //  $uploadPath = 'uploads/emailTemplate/';
+                //  $config['upload_path'] = $uploadPath;
+                //  $config['allowed_types'] = 'jpg|jpeg|png|gif';
+
+                // $this->load->library('upload', $config);
+                // $this->upload->initialize($config);
+
+         
+                // if($this->upload->do_upload('files')){
+                   
+                //     $fileData = $this->upload->data();
+                //     $temp['img'] = 'uploads/emailTemplate/' . $fileData['file_name'];
+                // }
+                    $temp['img'] = "";
+                    $temp['title'] = $_POST['title'][$i];
+                    $temp['description'] = $_POST['description'][$i];
+                    $templatearray[] = $temp;
+
+            }
             $options_data = array(
-                    'title'        => $this->input->post('title'),
-                    'description'    => $this->input->post('description'),
+                    'title'    => $this->input->post('subject'),
+                    'description'    => json_encode($templatearray),
                     'user_type'    => $this->input->post('userType'),
                     'users'    => json_encode($this->input->post('email')),
                     'create_date'    => datetime(),
@@ -294,5 +322,11 @@ class NewsLetter extends Common_Controller {
             fputcsv($fp, $row);
         }
         $this->session->set_flashdata('success', "Successfully Exported");
+    }
+
+    function getMoreNewsletter(){
+        $data=array();
+        $data['key'] = rand();
+        $this->load->view("more_news_letter",$data);
     }
 }

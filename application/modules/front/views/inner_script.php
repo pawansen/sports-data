@@ -186,4 +186,16 @@ function getVendorListSoftware(keyword){
         });  
 }
 
+function resendEmailVerification(){
+    $("#verificationemail").text("Sending...");
+    $.ajax({
+            url: '<?php echo base_url(); ?>' + "front/resendEmailVerification",
+            type: "post",
+            success: function (data, textStatus, jqXHR) {
+             $("#verificationemail").text("Resend Email Verification");
+              alert("Successfully email verification sent");
+            }
+        });  
+}
+
 </script>

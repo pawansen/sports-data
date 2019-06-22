@@ -172,14 +172,24 @@ class Front extends Common_Controller {
                 $dataArr['email'] = $forgotten['identity'];
                 /* Get User Data From Users Table */
                 $result = $this->common_model->getsingle(USERS, $dataArr);
-                $html = array();
-                $html['token'] = base_url() . "front/reset_password/" . $forgotten['forgotten_password_code'];
-                $html['logo'] = base_url() . getConfig('site_logo');
-                $html['site'] = getConfig('site_name');
-                $html['user'] = ucwords($result->first_name);
-                $email_template = $this->load->view('email/forgot_password_code_tpl', $html, true);
 
-                $status = send_mail($email_template, '[' . getConfig('site_name') . '] Forgot Password Code', $forgotten['identity'], getConfig('admin_email'));
+               /** Verification email * */
+               $EmailTemplate = getEmailTemplate("forgot_password");
+               if (!empty($EmailTemplate)) {
+                   $html = array();
+                   $html['active_url']= base_url() . "front/reset_password/" . $forgotten['forgotten_password_code'];
+                   $html['logo'] = base_url() . getConfig('site_logo');
+                   $html['site'] = getConfig('site_name');
+                   $html['site_meta_title'] = getConfig('site_meta_title');
+                   $html['user'] = ucwords($result->first_name);
+                   $html['email'] = $result->email;
+                   $html['content'] = $EmailTemplate->description;
+                   $email_template = $this->load->view('email-template/forgot_password', $html, true);
+                   $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                   send_mail($email_template, $title, $forgotten['identity'], getConfig('admin_email'));
+               }
+
+                //$status = send_mail($email_template, '[' . getConfig('site_name') . '] Forgot Password Code', $forgotten['identity'], getConfig('admin_email'));
                 // if there were no errors
                 $this->session->set_flashdata('message', "An email has been sent Reset Password link, please check spam folder if you do not received it in your inbox and add our mail id in your addressbook.");
                 redirect("front/forgot_password", 'refresh'); //we should display a confirmation page here instead of the login page
@@ -404,12 +414,37 @@ class Front extends Common_Controller {
                 );
                 $this->common_model->customInsert($option);
 
-                $html = array();
-                $html['logo'] = base_url() . getConfig('site_logo');
-                $html['site'] = getConfig('site_name');
-                $html['user'] = ucwords($isLogin->first_name);
-                $email_template = $this->load->view('email/user_registration_tpl', $html, true);
-                $status = send_mail($email_template, '[' . getConfig('site_name') . '] User Registration', $isLogin->email, getConfig('admin_email'));
+
+                       /** welcome email * */
+                       $EmailTemplate = getEmailTemplate("welcome");
+                       if (!empty($EmailTemplate)) {
+                           $html = array();
+                           $html['logo'] = base_url() . getConfig('site_logo');
+                           $html['site'] = getConfig('site_name');
+                           $html['site_meta_title'] = getConfig('site_meta_title');
+                           $html['user'] = ucwords($isLogin->first_name);
+                           $html['content'] = $EmailTemplate->description;
+                           $email_template = $this->load->view('email-template/welcome', $html, true);
+                           $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                           send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
+                       }
+                       
+                       /** Verification email * */
+                       $EmailTemplate = getEmailTemplate("verification");
+                       if (!empty($EmailTemplate)) {
+                           $html = array();
+                           $html['active_url']= base_url().'front/activate/'.base64_encode($isLogin->email).'/'.$isLogin->activation_code;
+                           $html['logo'] = base_url() . getConfig('site_logo');
+                           $html['site'] = getConfig('site_name');
+                           $html['site_meta_title'] = getConfig('site_meta_title');
+                           $html['user'] = ucwords($isLogin->first_name);
+                           $html['content'] = $EmailTemplate->description;
+                           $email_template = $this->load->view('email-template/verify_email', $html, true);
+                           $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                           send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
+                       }
+
+
 
                 $this->session->set_flashdata('message', 'You have been successfully registered, please check spam folder if you do not received it in your inbox and add our mail id in your addressbook.');
                 redirect("front/login");
@@ -547,6 +582,28 @@ class Front extends Common_Controller {
         }
     }
 
+    public function resendEmailVerification(){
+        $this->data['title'] = 'Verification'; 
+                        /** Verification email * */
+                        $EmailTemplate = getEmailTemplate("verification");
+                        if (!empty($EmailTemplate)) {
+                            $dataArrUsers['activation_code'] = rand().time();
+                            $status = $this->common_model->updateFields('users', $dataArrUsers, array('id' => $this->session->userdata('login_user_id')));
+                            $dataArr['id'] = $this->session->userdata('login_user_id');
+                            $isLogin = $this->common_model->getsingle(USERS, $dataArr);
+                            $html = array();
+                            $html['active_url']= base_url().'front/activate/'.base64_encode($isLogin->email).'/'.$isLogin->activation_code;
+                            $html['logo'] = base_url() . getConfig('site_logo');
+                            $html['site'] = getConfig('site_name');
+                            $html['site_meta_title'] = getConfig('site_meta_title');
+                            $html['user'] = ucwords($isLogin->first_name);
+                            $html['content'] = $EmailTemplate->description;
+                            $email_template = $this->load->view('email-template/verify_email', $html, true);
+                            $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                            send_mail_old_old($email_template, $title, "pawansen9770@gmail.com", getConfig('admin_email'));
+                        }
+    }
+
     public function auth() {
         $return['code'] = 200;
         $this->data['error'] = "";
@@ -594,6 +651,7 @@ class Front extends Common_Controller {
                 $this->session->set_userdata("first_name", $isLogin->first_name);
                 $this->session->set_userdata("last_name", $isLogin->last_name);
                 $this->session->set_userdata("email", $isLogin->email);
+                $this->session->set_userdata("email_verify", $isLogin->email_verify);
                 $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
                 $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
                 $this->session->set_userdata("image", $user_image);
@@ -914,6 +972,29 @@ class Front extends Common_Controller {
             if ($this->input->post('is_request_draft') == 'yes') {
                 redirect("front/client_enquiries_draft");
             } else {
+
+                /** welcome email * */
+                    $EmailTemplate = getEmailTemplate("vendor_inquiry");
+                    if (!empty($EmailTemplate)) {
+
+                        $option = array('table' => "users U",
+                        'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+                        'join' => array("user_profile UP" => "UP.user_id=U.id"),
+                        'where' => array("U.id" => $this->input->post('vendor_id')),
+                        'single' => true
+                    );
+                    $client = $this->common_model->customGet($option);
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = $this->session->userdata('first_name')."(".$this->session->userdata('email').")";
+                    $html['client'] =  $client->company_name."(".$client->email.")";
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/client_enquiry', $html, true);
+                    $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                    send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                }
                 redirect("front/client_enquiries");
             }
         }
@@ -957,6 +1038,28 @@ class Front extends Common_Controller {
             if ($this->input->post('is_request_draft') == 'yes') {
                 redirect("front/client_enquiries_draft");
             } else {
+                         /** welcome email * */
+                         $EmailTemplate = getEmailTemplate("vendor_inquiry");
+                         if (!empty($EmailTemplate)) {
+     
+                             $option = array('table' => "users U",
+                             'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+                             'join' => array("user_profile UP" => "UP.user_id=U.id"),
+                             'where' => array("U.id" => $this->input->post('vendor_id')),
+                             'single' => true
+                         );
+                         $client = $this->common_model->customGet($option);
+                         $html = array();
+                         $html['logo'] = base_url() . getConfig('site_logo');
+                         $html['site'] = getConfig('site_name');
+                         $html['site_meta_title'] = getConfig('site_meta_title');
+                         $html['user'] = $this->session->userdata('first_name')."(".$this->session->userdata('email').")";
+                         $html['client'] =  $client->company_name."(".$client->email.")";
+                         $html['content'] = $EmailTemplate->description;
+                         $email_template = $this->load->view('email-template/client_enquiry', $html, true);
+                         $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
+                         send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                     }
                 redirect("front/client_enquiries");
             }
         }
@@ -977,7 +1080,8 @@ class Front extends Common_Controller {
             'where' => array("U.id" => $this->session->userdata('login_user_id')),
             'single' => true
         );
-        $this->data['profile'] = $this->common_model->customGet($option);
+        $this->data['profile'] = $profile = $this->common_model->customGet($option);
+        $this->session->set_userdata("email_verify",$profile->email_verify);
         $this->load->front_render('vendor_profile', $this->data, 'inner_script');
     }
 

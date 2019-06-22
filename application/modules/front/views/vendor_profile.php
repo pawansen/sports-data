@@ -98,9 +98,14 @@
                                     <div class="register_btn">
                                        <button type="submit" id="profile_submit" class="btn save_btn_profile">Save</button>
                                     </div>
+                                    
                                       
                                      </div>
-                                     <div class="col-md-6"></div>
+                                     <div class="col-md-6"><?php if( $this->session->userdata('email_verify') != 1){?>  
+                                       <div class="register_btn">
+                                          <button type="button" id="verificationemail" onclick="resendEmailVerification()" class="btn btn-danger save_btn_profile">Resend Email Verification</button>
+                                       </div>
+                                    <?php }?></div>
                                  </div>
 
 

@@ -64,7 +64,7 @@
                         <tr>
                             <th><?php echo lang('serial_no'); ?></th>
                             <th>Title</th>
-                            <th style="width:500px;">Message</th>
+                            <!-- <th style="width:500px;">Message</th> -->
                             <th><?php echo lang('action'); ?></th>
                         </tr>
                     </thead>
@@ -79,7 +79,7 @@
                                 <tr>
                                     <td><?php echo $rowCount; ?></td>
                                     <td><?php echo $rows->title; ?></td>
-                                    <td><?php echo $rows->description; ?></td>
+                                    <!-- <td><?php //echo $rows->description; ?></td> -->
                                     <td class="actions" align="center">
                                         <!-- <a href="javascript:void(0)" class="btn btn-xs btn-default" onclick="editFn('Newsletter', 'news_edit', '<?php echo encoding($rows->id) ?>');"><i class="fa fa-pencil"></i></a> -->
                                         <?php if($rows->is_active == 1) {?>

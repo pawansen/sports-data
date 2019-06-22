@@ -152,12 +152,20 @@
                                   <div class="row register_feild Profile_col_6_space">
                                   <div class="col-md-6 left_col6">
                                     <div class="register_btn">
+
+                                     <?php if( $this->session->userdata('email_verify') == 1){?>     
                                     <?php if($profile->vendor_profile_activate == "No"){?>
+                                       <?php if(empty($profile->company_name)){?>
                                        <button type="submit" id="submit" class="btn save_btn_profile">Save</button>
+                                       <?php }?>
                                     <?php }else{?>
                                        <div class="col-md-12 text-success">Your business profile verified</div>
+                                    <?php }}else{?>
+                                       <div class="col-md-12 text-danger">Please your email verify & update your business profile</div>
                                     <?php }?>
+
                                     </div>
+
                                    
                                      </div>
                                      <div class="col-md-6"></div>

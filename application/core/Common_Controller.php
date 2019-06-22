@@ -106,6 +106,29 @@ class Common_Controller extends MX_Controller {
      * @param 
      * @return array
      */
+    public function commonUploadImageMulti($data = '', $folder = '', $i) {
+
+        $this->load->library('upload');
+        $config = array(
+            'upload_path' => "./uploads/" . $folder,
+            'allowed_types' => "gif|jpg|png|jpeg",
+            'max_size' => "10000000",
+            'max_height' => "4048",
+            'max_width' => "4048",
+            'file_name' => time() . "_" . $_FILES['image']['name'][$i]
+        );
+        $this->upload->initialize($config);
+        if ($this->upload->do_upload('image')) {
+            $this_filedata = array('upload_data' => $this->upload->data());
+            $this_filedata['status'] = 1;
+            return $this_filedata;
+        } else {
+            $this_filedata = array('error' => $this->upload->display_errors());
+            $this_filedata['status'] = 0;
+            return $this_filedata;
+        }
+    }
+
     public function commonUploadImage($data = '', $folder = '', $file_name = '') {
 
         $this->load->library('upload');
