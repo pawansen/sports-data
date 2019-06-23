@@ -50,13 +50,69 @@
                             <div class="form-group">
                                <label class="col-md-3 control-label">Image</label>
                                   <div class="col-md-9">
-                                       <input type="file" name="files[]" class="form-control">
+                                       <input type="file" name="files" class="form-control">
                                   </div>
                               </div>
                               <div class="form-group"><div class="col-md-12 col-md-offset-10">
                                <button type="button" id="newsletterbutton" onclick="getMoreNewsletter()" class="btn btn-info"><i class="fa fa-plus"></i> ADD MORE</button></div></div>
                               
-                              <div id="newsletter"></div>
+                              <!-- <div id="newsletter"></div> -->
+
+
+                           <div class="col-md-12">
+                            <div class="form-group">
+                               <label class="col-md-3 control-label">Title</label>
+                                  <div class="col-md-9">
+                                       <input type="text" name="title[]" class="form-control">
+                                  </div>
+                              </div>
+                            <div class="form-group">
+                                 <label class="col-md-3 control-label">Message</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control ckeditor" id="ckeditor" name="description[]"></textarea>
+                                    </div>
+                                     <span class="help-block m-b-none col-md-offset-3">
+                                </div>    
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                               <label class="col-md-3 control-label">Image</label>
+                                  <div class="col-md-9">
+                                       <input type="file" name="files1" class="form-control">
+                                  </div>
+                              </div>
+                              <!-- <div class="form-group"><div class="col-md-12 col-md-offset-10">
+                               <button type="button" id="newsletterbutton" onclick="removeMoreNewsletter(<?php echo $key;?>)" class="btn btn-primary">
+                               <i class="fa fa-minus"></i> REMOVE</button></div> -->
+                               </div>
+                               </div>
+
+
+                           <div class="col-md-12" >
+                            <div class="form-group">
+                               <label class="col-md-3 control-label">Title</label>
+                                  <div class="col-md-9">
+                                       <input type="text" name="title[]" class="form-control">
+                                  </div>
+                              </div>
+                            <div class="form-group">
+                                 <label class="col-md-3 control-label">Message</label>
+                                    <div class="col-md-9">
+                                        <textarea class="form-control ckeditor" id="ckeditor" name="description[]"></textarea>
+                                    </div>
+                                     <span class="help-block m-b-none col-md-offset-3">
+                                </div>    
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                               <label class="col-md-3 control-label">Image</label>
+                                  <div class="col-md-9">
+                                       <input type="file" name="files2" class="form-control">
+                                  </div>
+                              </div>
+                              <!-- <div class="form-group"><div class="col-md-12 col-md-offset-10">
+                               <button type="button" id="newsletterbutton" onclick="removeMoreNewsletter(<?php echo $key;?>)" class="btn btn-primary">
+                               <i class="fa fa-minus"></i> REMOVE</button></div> -->
+                               </div>
+                               </div>
 
                             <hr>
                             <div class="form-group">

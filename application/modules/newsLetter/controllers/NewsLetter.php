@@ -71,27 +71,22 @@ class NewsLetter extends Common_Controller {
             $templatearray=array();
             $ct = count($_POST['description']);
             for($i=0;$i<$ct;$i++){
-
-                // $_FILES['files']['name']     = $_FILES['files']['name'][$i];
-                // $_FILES['files']['type']     = $_FILES['files']['type'][$i];
-                // $_FILES['files']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
-                // $_FILES['files']['error']     = $_FILES['files']['error'][$i];
-                // $_FILES['files']['size']     = $_FILES['files']['size'][$i];
-
-                //  $uploadPath = 'uploads/emailTemplate/';
-                //  $config['upload_path'] = $uploadPath;
-                //  $config['allowed_types'] = 'jpg|jpeg|png|gif';
-
-                // $this->load->library('upload', $config);
-                // $this->upload->initialize($config);
-
-         
-                // if($this->upload->do_upload('files')){
-                   
-                //     $fileData = $this->upload->data();
-                //     $temp['img'] = 'uploads/emailTemplate/' . $fileData['file_name'];
-                // }
                     $temp['img'] = "";
+                    if($i > 0){
+                        if (!empty($_FILES['files'.$i]['name'])) {
+                            $t1 = $this->commonUploadImage($_POST, 'cms', 'files'.$i);
+                            if ($t1['status'] == 1) {
+                                $temp['img'] = 'uploads/cms/' . $t1['upload_data']['file_name'];
+                            }
+                        }
+                    }else{
+                        if (!empty($_FILES['files']['name'])) {
+                            $t2 = $this->commonUploadImage($_POST, 'cms', 'files');
+                            if ($t2['status'] == 1) {
+                                $temp['img'] = 'uploads/cms/' . $t2['upload_data']['file_name'];
+                            }
+                        }
+                    }
                     $temp['title'] = $_POST['title'][$i];
                     $temp['description'] = $_POST['description'][$i];
                     $templatearray[] = $temp;
