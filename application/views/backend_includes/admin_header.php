@@ -63,7 +63,7 @@
                 </div>
             </div>
 
-            <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+            <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations style-alt">
                 <!-- Alternative Sidebar -->
                 <!-- END Alternative Sidebar -->
 
@@ -75,7 +75,7 @@
                         <div class="sidebar-content">
                             <!-- Brand -->
                             <a href="index.html" class="sidebar-brand">
-                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Pro</strong>UI</span>
+                                <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin </strong><?php echo getConfig('site_name');?></span>
                             </a>
                             <!-- END Brand -->
 
@@ -174,7 +174,7 @@
 
                             <!-- Template Options -->
                             <!-- Change Options functionality can be found in js/app.js - templateOptions() -->
-                            <li class="dropdown">
+                            <!-- <li class="dropdown">
                                 <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="gi gi-settings"></i>
                                 </a>
@@ -194,17 +194,17 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </li>
+                            </li> -->
                             <!-- END Template Options -->
                         </ul>
                         <!-- END Left Header Navigation -->
 
                         <!-- Search Form -->
-                        <form action="page_ready_search_results.html" method="post" class="navbar-form-custom">
+                        <!-- <form action="page_ready_search_results.html" method="post" class="navbar-form-custom">
                             <div class="form-group">
                                 <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
                             </div>
-                        </form>
+                        </form> -->
                         <!-- END Search Form -->
 
                         <!-- Right Header Navigation -->
@@ -248,10 +248,10 @@
                                     </li> -->
                                     <!-- <li class="divider"></li> -->
                                     <li>
-                                        <a href="page_ready_user_profile.html">
+                                        <!-- <a href="page_ready_user_profile.html">
                                             <i class="fa fa-user fa-fw pull-right"></i>
                                             Profile
-                                        </a>
+                                        </a> -->
                                         <!-- Opens the user settings modal that can be found at the bottom of each page (page_footer.html in PHP version) -->
                                         <a href="#modal-user-settings" data-toggle="modal">
                                             <i class="fa fa-cog fa-fw pull-right"></i>
@@ -260,7 +260,7 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="page_ready_lock_screen.html"><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a>
+                                        <!-- <a href="page_ready_lock_screen.html"><i class="fa fa-lock fa-fw pull-right"></i> Lock Account</a> -->
                                         <a href="javascript:void(0)" onclick="logout()"><i class="fa fa-ban fa-fw pull-right"></i> Logout</a>
                                     </li>
 <!--                                    <li class="dropdown-header text-center">Activity</li>

@@ -376,6 +376,7 @@ class Front extends Common_Controller {
             $dataArr['date_of_birth'] = $dateOfBirth;
             $dataArr['is_pass_token'] = $password;
             $dataArr['email_verify'] = 0;
+            $dataArr['created_date'] = date('Y-m-d');
             $username = explode('@', $identity);
             $dataArr['username'] = $username[0];
             if ($signUpType == "APP") {
@@ -502,6 +503,7 @@ class Front extends Common_Controller {
             $dataArr['date_of_birth'] = $dateOfBirth;
             $dataArr['is_pass_token'] = $password;
             $dataArr['email_verify'] = 0;
+            $dataArr['created_date'] = date('Y-m-d');
             $username = explode('@', $identity);
             $dataArr['username'] = $username[0];
             if ($signUpType == "APP") {

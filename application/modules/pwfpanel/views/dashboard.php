@@ -2,32 +2,32 @@
 
                     <!-- Page content -->
                     <div id="page-content">
-
+                        <div id="msg"></div>
                         <!-- eShop Overview Block -->
                         <div class="block full">
                             <!-- eShop Overview Title -->
                             <div class="block-title">
                                 <div class="block-options pull-right">
                                     <div class="btn-group btn-group-sm">
-                                        <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Last Year <span class="caret"></span></a>
+                                        <a href="javascript:void(0)" onclick="getCharts('currentYear')" class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Current Year <span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
-                                            <li class="active">
-                                                <a href="javascript:void(0)">Last Year</a>
+                                            <li>
+                                                <a href="javascript:void(0)" onclick="getCharts('currentYear')">Current Year</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">Last Month</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('lastYear')">Last Year</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">This Month</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('lastMonth')">Last Month</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)">Today</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('currentMonth')">Current Month</a>
                                             </li>
                                         </ul>
                                     </div>
                                     <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
                                 </div>
-                                <h2><strong>eShop</strong> Overview</h2>
+                                <h2><strong>Dashboard</strong> Overview</h2>
                             </div>
                             <!-- END eShop Overview Title -->
 
@@ -35,30 +35,16 @@
                             <div class="row">
                                 <div class="col-md-6 col-lg-4">
                                     <div class="row push totle_eShop_heading">
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">45.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Orders</a></small></h3>
+                                        <div class="col-xs-12">
+                                            <h3><strong class="animation-fadeInQuick" id="totalv"><?php echo $total_vendors;?></strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Vendors</a></small></h3>
                                         </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">$ 1.200,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Cart Value</a></small></h3>
+                                        <div class="col-xs-12">
+                                            <h3><strong class="animation-fadeInQuick" id="totalu"><?php echo $total_users;?></strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Clients</a></small></h3>
                                         </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">1.520.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Visits</a></small></h3>
+                                        <div class="col-xs-12">
+                                            <h3><strong class="animation-fadeInQuick" id="totale"><?php echo $total_enquiries;?></strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Total Enquiries</a></small></h3>
                                         </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">28.000</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Customers</a></small></h3>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">3.5%</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Conv. Rate</a></small></h3>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">4.250</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Products</a></small></h3>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">$ 260.000,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Net Profit</a></small></h3>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <h3><strong class="animation-fadeInQuick">$ 16.850,00</strong><br><small class="text-uppercase animation-fadeInQuickInv"><a href="javascript:void(0)">Payment Fees</a></small></h3>
-                                        </div>
+
                                     </div>
                                 </div>
                                 <div class="col-md-6 col-lg-8">
@@ -80,8 +66,8 @@
                                     <!-- Latest Orders Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
-                                            <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                            <!-- <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                         </div>
                                         <h2><strong>Enquiries</strong></h2>
                                     </div>
@@ -130,8 +116,8 @@
                                     <!-- Top Products Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
-                                            <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                            <!-- <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                         </div>
                                         <h2><strong>Vendors</strong></h2>
                                     </div>
@@ -182,8 +168,8 @@
                                     <!-- Latest Orders Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
-                                            <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
+                                            <!-- <a href="page_ecom_orders.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
+                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a> -->
                                         </div>
                                         <h2><strong>Client</strong></h2>
                                     </div>

@@ -31,7 +31,8 @@ class Pwfpanel extends Common_Controller {
                             'order' => array('user.id' => 'ASC'),
                             'where' => array('user.delete_status' => 0,
                             'group.id' => 3),
-                    'order' => array('user.id' => 'desc')
+                    'order' => array('user.id' => 'desc'),
+                    'limit'=> 20
                 );
                 $this->data['vendors'] = $this->common_model->customGet($option);
 
@@ -43,7 +44,8 @@ class Pwfpanel extends Common_Controller {
                             'order' => array('user.id' => 'ASC'),
                             'where' => array('user.delete_status' => 0,
                             'group.id' => 2),
-                    'order' => array('user.id' => 'desc')
+                    'order' => array('user.id' => 'desc'),
+                    'limit'=> 20
                 );
                 $this->data['users'] = $this->common_model->customGet($option);
 
@@ -60,7 +62,43 @@ class Pwfpanel extends Common_Controller {
                 );
                 $this->data['enquiries'] = $this->common_model->customGet($option);
 
-                $this->load->admin_render('dashboard', $this->data, 'inner_script');
+
+            $option = array('table' => USERS . ' as user',
+                'select' => 'user.id',
+                'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+                    array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+                    array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                        'order' => array('user.id' => 'ASC'),
+                        'where' => array('user.delete_status' => 0,
+                        'group.id' => 3),
+                'order' => array('user.id' => 'desc'),
+         
+            );
+            $this->data['total_vendors'] = $this->common_model->customCount($option);
+
+            $option = array('table' => USERS . ' as user',
+                'select' => 'user.id',
+                'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+                    array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
+                    array('user_profile UP', 'UP.user_id=user.id', 'left')),
+                        'order' => array('user.id' => 'ASC'),
+                        'where' => array('user.delete_status' => 0,
+                        'group.id' => 2),
+                'order' => array('user.id' => 'desc'),
+            );
+            $this->data['total_users'] = $this->common_model->customCount($option);
+
+
+            $option = array('table' => "client_inquiry CU",
+                    'select' => "CU.id",
+                    'where' => array("CU.is_request_draft" => 'no'),
+                    'limit'=> 20
+                );
+                $this->data['total_enquiries'] = $this->common_model->customCount($option);
+
+
+
+            $this->load->admin_render('dashboard', $this->data, 'inner_script');
             } else if ($this->ion_auth->is_vendor()) {
                 $this->load->admin_render('vendorDashboard', $this->data, 'inner_script');
             } else {
@@ -68,6 +106,87 @@ class Pwfpanel extends Common_Controller {
                 redirect('pwfpanel/login', 'refresh');
             }
         }
+    }
+
+    public function getcharts(){
+        $return = array();
+        $return['status'] = 200;
+        $filterval = $this->input->post('filterval');
+        $year = date('Y');
+        $where = " YEAR(U.`created_date`) = $year ";
+        $where1 = " YEAR(U.`datetime`) = $year ";
+        if($filterval == "lastYear"){
+          $year = date("Y",strtotime("-1 year"));
+          $where = " YEAR(U.`created_date`) = $year ";
+          $where1 = " YEAR(U.`datetime`) = $year ";
+        }
+        if($filterval == "lastMonth"){
+            $month = date("m",strtotime("-1 month"));
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        if($filterval == "currentMonth"){
+            $month = date("m");
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        
+        $Sql = "SELECT COUNT(U.id) total ,MONTH(U.`created_date`) as months
+        FROM  vendor_sale_users U  INNER JOIN vendor_sale_users_groups UG on UG.user_id=U.id
+        WHERE   $where AND UG.group_id =3
+        GROUP BY  MONTH(U.`created_date`)";
+        $TotalVendors = $this->common_model->customQuery($Sql);
+        $vendor = array();
+        $totalv=0;
+        foreach($TotalVendors as $rows){
+            $temp = array();
+            $temp[]=$rows->months;
+            $temp[]=$rows->total;
+            $vendor[] = $temp;
+            $totalv = $totalv + $rows->total;
+        }
+        
+        $return['vendors'] = $vendor;
+
+
+        $Sql = "SELECT COUNT(U.id) total ,MONTH(U.`created_date`) as months
+        FROM  vendor_sale_users U  INNER JOIN vendor_sale_users_groups UG on UG.user_id=U.id
+        WHERE   $where AND UG.group_id =2
+        GROUP BY  MONTH(U.`created_date`)";
+        $TotalUsers = $this->common_model->customQuery($Sql);
+        $users = array();
+        $totalu=0;
+        foreach($TotalUsers as $rows){
+            $temp = array();
+            $temp[]=$rows->months;
+            $temp[]=$rows->total;
+            $users[] = $temp;
+            $totalu = $totalu + $rows->total;
+        }
+        $return['users'] = $users;
+
+
+        $Sql = "SELECT COUNT(U.id) total ,MONTH(U.`datetime`) as months
+        FROM  vendor_sale_client_inquiry U
+        WHERE  $where1 AND U.is_request_draft = 'no'
+        GROUP BY  MONTH(U.`datetime`)";
+        $TotalEnquiry = $this->common_model->customQuery($Sql);
+        $enquiries = array();
+        $totale = 0;
+        foreach($TotalEnquiry as $rows){
+            $temp = array();
+            $temp[]=$rows->months;
+            $temp[]=$rows->total;
+            $enquiries[] = $temp;
+            $totale = $totale + $rows->total;
+        }
+        
+        $return['enquiries'] = $enquiries;
+        $return['totalv'] = $totalv;
+        $return['totalu'] = $totalu;
+        $return['totale'] = $totale;
+
+        echo json_encode($return);
     }
 
     public function logAuth() {
