@@ -484,9 +484,9 @@ if (!function_exists('ExecuteCurl')) {
  * @param string $subject
  * @param string $message
  */
-if (!function_exists('send_mail')) {
+if (!function_exists('send_mail_old_old')) {
 
-    function send_mail($message, $subject, $to_email, $from_email = "", $attach = "") {
+    function send_mail_old_old($message, $subject, $to_email, $from_email = "", $attach = "") {
         $ci = &get_instance();
         $config['mailtype'] = 'html';
         $ci->email->initialize($config);
@@ -575,9 +575,9 @@ if (!function_exists('send_mail_live')) {
     }
 
 }
-if (!function_exists('send_mail_old_old')) {
+if (!function_exists('send_mail')) {
 
-    function send_mail_old_old($message, $subject, $to_email, $from_email = "", $attach = "") {
+    function send_mail($message, $subject, $to_email, $from_email = "", $attach = "") {
         require APPPATH . "third_party/vendor/autoload.php";
         
         $mail = new PHPMailer();
@@ -585,8 +585,10 @@ if (!function_exists('send_mail_old_old')) {
         $mail->Host = "smtp.gmail.com";  // specify main and backup server
         $mail->SMTPAuth = true;     // turn on SMTP authentication
         $mail->Port = 587;                                 // set word wrap to 50 characters
-        $mail->Username = "btmarket.postmaster@gmail.com";  // SMTP username
-        $mail->Password = 'BTMarket@123'; // SMTP password
+//        $mail->Username = "btmarket.postmaster@gmail.com";  // SMTP username
+//        $mail->Password = 'BTMarket@123'; // SMTP password
+        $mail->Username = "aj7099702@gmail.com";  // SMTP username
+        $mail->Password = 'greenapple'; // SMTP password
         $mail->From     = $from_email;
         $mail->FromName = getConfig('site_name');
         $mail->AddAddress($to_email, "");
