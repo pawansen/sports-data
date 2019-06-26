@@ -602,7 +602,7 @@ class Front extends Common_Controller {
                             $html['content'] = $EmailTemplate->description;
                             $email_template = $this->load->view('email-template/verify_email', $html, true);
                             $title = '[' . getConfig('site_name') . '] '.$EmailTemplate->title;
-                            send_mail_old_old($email_template, $title, "pawansen9770@gmail.com", getConfig('admin_email'));
+                            send_mail($email_template, $title, "pawansen9770@gmail.com", getConfig('admin_email'));
                         }
     }
 
@@ -657,13 +657,30 @@ class Front extends Common_Controller {
                 $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
                 $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
                 $this->session->set_userdata("image", $user_image);
-                if ($this->ion_auth->is_user()) {
-                    redirect("front/user_dashbaord");
-                } else {
-                    redirect("front/vendor_dashbaord");
-                }
+                if($isLogin->email_verify != 1){
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                    }
+                    redirect("front/verificationAuth");
+                }else{
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                        //redirect("front/user_dashbaord");
+                        redirect("front/client_search");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                        redirect("front/vendor_dashbaord");
+                    }
+                } 
             }
         }
+    }
+
+    public function verificationAuth(){
+        $this->data['title'] = 'Verification';
+        $this->load->front_render('verification', $this->data, 'inner_script');
     }
 
     public function vendor_dashbaord() {
@@ -938,6 +955,12 @@ class Front extends Common_Controller {
         $this->load->front_render('request_admin', $this->data, 'inner_script');
     }
 
+    public function clientAdminRequest() {
+        $this->userAuth();
+        $this->data['title'] = 'Request Admin';
+        $this->load->front_render('client_admin_request', $this->data, 'inner_script');
+    }
+
     public function client_inquiry() {
         $this->userAuth();
         $this->data['title'] = 'Request Admin';
@@ -1162,18 +1185,19 @@ class Front extends Common_Controller {
                 /* Update user status */
                 $Status = $this->common_model->updateFields(USERS, array('activation_code' => NULL, 'email_verify' => 1), array('id' => $result->id));
                 if ($Status) {
+                    $this->session->sess_destroy();
                     $this->session->set_flashdata('user_verify', "Your email successfully verified");
-                    $this->load->view('verification');
+                    $this->load->view('verified');
                 } else {
                     $this->session->set_flashdata('user_verify', GENERAL_ERROR);
                 }
             } else {
                 $this->session->set_flashdata('user_verify', GENERAL_ERROR);
-                $this->load->view('verification');
+                $this->load->view('verified');
             }
         } else {
             $this->session->set_flashdata('user_verify', GENERAL_ERROR);
-            $this->load->view('verification');
+            $this->load->view('verified');
         }
     }
 
@@ -1182,33 +1206,30 @@ class Front extends Common_Controller {
 
         $option = array('table' => 'cms',
             'where' => array('page_id' => 'about',
-                'active' => 1),
+                'is_active' => 1),
             'single' => true
         );
         $this->data['response'] = $this->common_model->customGet($option);
 
-        $this->load->view('about_us', $this->data);
+        $this->load->front_render('aboutus', $this->data, 'inner_script');
     }
 
-    public function how_to_play() {
-        $this->data['title'] = 'How ToPLAY';
+    public function how_to_works() {
+        $this->data['title'] = 'How it works';
 
-        $this->load->view('how_to_play', $this->data);
+        $this->load->front_render('how_to_works', $this->data, 'inner_script');
     }
 
-    public function faq() {
-        $this->data['title'] = 'Help Desk';
-        $option = array('table' => 'faq',
-            'where' => array('delete_status' => 0)
-        );
-        $this->data['response'] = $this->common_model->customGet($option);
-        $this->load->view('help_desk', $this->data);
+    public function services() {
+        $this->data['title'] = 'Services';
+
+        $this->load->front_render('services', $this->data, 'inner_script');
     }
 
     public function contact_us() {
         $this->data['title'] = 'Contact Us';
 
-        $this->load->view('contact_us', $this->data);
+        $this->load->front_render('contactus', $this->data, 'inner_script');
     }
 
     public function terms_condition() {

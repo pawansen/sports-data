@@ -14,14 +14,16 @@
                             <div class="input-container">
                                 <i class="fa fa-envelope-o icon"></i>
                                 <input class="input-field" type="text" placeholder="Email address" name="email" value="<?php echo set_value('email'); ?>">
-                                <?php echo form_error('email'); ?>
+                                
                             </div>
+                            <?php echo form_error('email'); ?>
                             
                             <div class="input-container">
                                 <i class="fa fa-key icon"></i>
                                 <input class="input-field" type="password" placeholder="Password" name="password">
-                                <?php echo form_error('password'); ?>
+                                
                             </div>
+                            <?php echo form_error('password'); ?>
                             <input class="input-field" type="hidden" placeholder="WEB" name="signup_type" value='WEB'>
                             <div class="input-container_text">
                                 <div class="forget_pass"><p><a href="<?php echo base_url().'front/forgot_password';?>">Forgot password?</a></p></div>

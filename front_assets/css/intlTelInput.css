@@ -8,6 +8,7 @@ input#phone {
     height: 49px;
     line-height: 49px;
     width: 100%!important;
+        padding-left: 20px;
 }
 input#phone1 {
     display: -ms-flexbox;
@@ -18,6 +19,7 @@ input#phone1 {
     height: 49px;
     line-height: 49px;
     width: 100%!important;
+        padding-left: 20px;
 }
 
 

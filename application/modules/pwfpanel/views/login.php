@@ -47,7 +47,7 @@
         <!-- Login Background -->
         <div id="login-background">
             <!-- For best results use an image with a resolution of 2560x400 pixels (prefer a blurred image for smaller file size) -->
-            <img src="<?php echo base_url(); ?>backend_asset/admin/img/placeholders/headers/login_header.jpg" alt="Login Background" class="animation-pulseSlow">
+            <img src="<?php echo base_url(); ?>backend_asset/admin/img/placeholders/headers/login_header.png" alt="Login Background" class="animation-pulseSlow">
         </div>
         <!-- END Login Background -->
 
@@ -55,16 +55,16 @@
         <div id="login-container" class="animation-fadeIn">
             <!-- Login Title -->
             <div class="login-title text-center">
-                <h1><i class="gi gi-flash"></i><small>Please <strong>Login</strong> or <strong>Register</strong></small></h1>
+                <h1><small> <strong>Login</strong></small></h1>
             </div>
             <!-- END Login Title -->
                 <?php if (isset($message) && $message != "") { ?>
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger space_bottom_lgout">
                         <span style="text-align: center"><?php echo $message; ?></span>
                     </div>
                 <?php } ?>
                        <?php if (isset($success) && $success != "") { ?>
-                    <div class="alert alert-success">
+                    <div class="alert alert-success space_bottom_login">
                         <span style="text-align: center"><?php echo $success; ?></span>
                     </div>
                 <?php } ?>
@@ -89,16 +89,22 @@
                         </div>
                     </div>
                     <div class="form-group form-actions">
-                        <div class="col-xs-4">
+                        <div class="col-xs-12">
                             <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
                                 <input type="checkbox" id="remember" name="remember" value="1" checked>
                                 <span></span>
                             </label>
                         </div>
-                        <div class="col-xs-8 text-right">
+                        <div class="col-xs-12 text-right-login_admin">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
                         </div>
+                       
                     </div>
+                    
+                    <!--<div class="form-group form-actions">-->
+                        
+                        
+                    <!--</div>-->
 <!--                    <div class="form-group">
                         <div class="col-xs-12 text-center">
                             <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
@@ -192,7 +198,7 @@
 
             <!-- Footer -->
             <footer class="text-muted text-center">
-                <small><span id="year-copy"></span> &copy; <a href="<?php echo base_url();?>" target="_blank"><?php echo getConfig('site_name'); ?></a></small>
+                <small><span id="year-copy1"></span>2019 &nbsp; &copy; &nbsp; <a href="<?php echo base_url();?>" target="_blank"><?php echo getConfig('site_name'); ?></a></small>
             </footer>
             <!-- END Footer -->
         </div>

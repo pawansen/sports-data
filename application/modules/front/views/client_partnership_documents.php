@@ -49,7 +49,7 @@
                                            </ul>
                                           </li>
                                   <li><a  href="<?php echo base_url().'front/user_account_setting';?>"><i class="fa fa-cog icon_menu"></i> Account settings</a></li>
-                                  <li><a href="<?php echo base_url().'front/client_search';?>"><i class="fa fa-exchange icon_menu"></i>Request Admin</a></li>
+                                  <li><a href="<?php echo base_url().'front/clientAdminRequest';?>"><i class="fa fa-exchange icon_menu"></i>Request Admin</a></li>
                                   <li><a class="active" href="<?php echo base_url().'front/client_partnership_documents';?>"><i class="fa fa-file-text-o icon_menu"></i>Partnership Documents</a></li>
                                   <li><a href="<?php echo base_url().'front/logout';?>"><i class="fa fa-sign-out icon_menu"></i> Logout</a></li>
                                   </ul>

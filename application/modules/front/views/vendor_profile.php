@@ -102,9 +102,9 @@
                                       
                                      </div>
                                      <div class="col-md-6"><?php if( $this->session->userdata('email_verify') != 1){?>  
-                                       <div class="register_btn">
+                                       <!-- <div class="register_btn">
                                           <button type="button" id="verificationemail" onclick="resendEmailVerification()" class="btn btn-danger save_btn_profile">Resend Email Verification</button>
-                                       </div>
+                                       </div> -->
                                     <?php }?></div>
                                  </div>
 

@@ -43,13 +43,21 @@
                             <span class="icon-bar"></span>
                         </button>
                          -->
-                        <a href="<?php echo base_url()."/front/client_search" ?>" class="navbar-brand logo_text"><h3> Vendors</h3></a>
+                        <a href="<?php echo base_url()."front/client_search" ?>" class="navbar-brand logo_text"><h3> Vendors</h3></a>
 
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">
-                        <?php if($this->ion_auth->is_user()){?>
+                    
+                        <?php if($this->ion_auth->is_user()){
+                            if($this->session->userdata('email_verify')){?>
+
+
                             <div class="navbar-right deshbord">
+                            
                         <div class="dropdown deshbord_menu_width_icon">
+
+                            <a class="btn btn-default" style="margin-top: 19px;" href="<?php echo base_url()."front/client_search" ?>" >Search Vendors</a>
+
 							  <button class="btn  dropdown-toggle dashboard_btn" type="button" data-toggle="dropdown"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard 
 							  <span class="caret"></span></button>
 							  <ul class="dropdown-menu">
@@ -63,17 +71,27 @@
 							     
 							    </div>
 							  </li>
-   
-    
-                            <li><a href="<?php echo base_url().'front/request_admin';?>">Request Admin</a></li>
+                            <li><a href="<?php echo base_url().'front/clientAdminRequest';?>">Request Admin</a></li>
                             <li><a href="<?php echo base_url().'front/client_partnership_documents';?>">Partnership Documents</a></li>
                             <li><a href="<?php echo base_url()."front/logout";?>">Logout </a></li>
                         </ul>
                         </div>
                                                 
-                                            </div>
-
-                        <?php }else if($this->ion_auth->is_vendor()){?>
+                            </div>
+                            <?php }else{?>
+                                <div class="navbar-right deshbord">
+                        <div class="dropdown deshbord_menu_width_icon">
+							  <button class="btn  dropdown-toggle dashboard_btn" type="button" data-toggle="dropdown"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard 
+							  <span class="caret"></span></button>
+							  <ul class="dropdown-menu">
+                            <li><a href="<?php echo base_url()."front/logout";?>">Logout </a></li>
+                        </ul>
+                        </div>
+                                                
+                            </div>
+                            <?php }?>
+                        <?php }else if($this->ion_auth->is_vendor()){
+                            if($this->session->userdata('email_verify')){?>
                             <div class="navbar-right deshbord">
                         <div class="dropdown deshbord_menu_width_icon">
                           <button class="btn  dropdown-toggle dashboard_btn" type="button" data-toggle="dropdown"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard 
@@ -92,13 +110,27 @@
                           <!-- <button type="submit" class="btn ">dashboard</button> -->
                        </div>
 
-                        <?php }else{?>
+                       <?php }else{?>
+                        <div class="navbar-right deshbord">
+                        <div class="dropdown deshbord_menu_width_icon">
+                          <button class="btn  dropdown-toggle dashboard_btn" type="button" data-toggle="dropdown"><i class="fa fa-tachometer" aria-hidden="true"></i>Dashboard 
+                          <span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a href="<?php echo base_url()."front/logout";?>">Logout </a></li>
+                            
+                          </ul>
+                          
+                        </div>
+                          <!-- <button type="submit" class="btn ">dashboard</button> -->
+                       </div>
+                        <?php }?>
+                       <?php }else{?>
                             <ul class="nav navbar-nav navbar-right">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">How It Works</a></li>
-                            <li><a href="#">Service</a></li>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="<?php echo base_url();?>">Home</a></li>
+                            <li><a href="<?php echo base_url().'front/about_us';?>">About us</a></li>
+                            <li><a href="<?php echo base_url().'front/how_to_works';?>">How It Works</a></li>
+                            <li><a href="<?php echo base_url().'front/services';?>">Service</a></li>
+                            <li><a href="<?php echo base_url().'front/contact_us';?>">Contact us</a></li>
                             <li><a href="<?php echo base_url().'front/login'?>">Register/Login</a></li>
                         </ul>
                         <?php }?>

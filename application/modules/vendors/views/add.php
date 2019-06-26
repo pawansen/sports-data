@@ -13,6 +13,10 @@
     <!-- END Datatables Header -->
 
     <!-- Datatables Content -->
+    
+    
+ 
+    
     <div class="block full">
         <div class="block-title">
             <h2><strong>Vendor's</strong> Panel</h2>

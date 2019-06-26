@@ -10,6 +10,37 @@
         </li>
     </ul>
     <!-- END Datatables Header -->
+    
+     <!-- Quick Stats -->
+  <div class="block_list full">
+      
+                        <div class="row text-center">
+                            <div class="col-sm-6 col-lg-3">
+                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                    <div class="widget-extra themed-background">
+                                        <h4 class="widget-content-light"><strong> Unverified </strong> Vendors</h4>
+                                    </div>
+                                    <div class="widget-extra-full"><span class="h2 animation-expandOpen">3</span></div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                    <div class="widget-extra themed-background-dark">
+                                        <h4 class="widget-content-light"><strong> Verified </strong> Vendors</h4>
+                                    </div>
+                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">120</span></div>
+                                </a>
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                                
+                            </div>
+                            <div class="col-sm-6 col-lg-3">
+                               
+                            </div>
+                        </div>
+                        
+                        </div>
+                        <!-- END Quick Stats -->
 
     <!-- Datatables Content -->
     <div class="block full">

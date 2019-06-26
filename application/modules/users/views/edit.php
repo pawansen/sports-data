@@ -10,8 +10,56 @@
         </li>
     </ul>
     <!-- END Datatables Header -->
+<div class="row">
+    <div class="col-md-4">
+        <div class="block">
+                                    <!-- Customer Info Title -->
+                                    <div class="block-title">
+                                        <h2><i class="fa fa-file-o"></i> <strong>User's</strong> Info</h2>
+                                    </div>
+                                    <!-- END Customer Info Title -->
 
-    <!-- Datatables Content -->
+                                    <!-- Customer Info -->
+                                    <div class="block-section text-center">
+                                        <a href="javascript:void(0)">
+                                           <img src="<?php echo base_url().'backend_asset/images/default.jpg';?>" alt="avatar" class="img-circle" style=" width: 100px; height: 100px;">
+                                        </a>
+                                        <h3>
+                                            <strong>Jonathan Taylor</strong><br><small></small>
+                                        </h3>
+                                    </div>
+                                    <table class="table table-borderless table-striped table-vcenter">
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-right" style="width: 50%;"><strong> First Name</strong></td>
+                                                <td>Honda</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Last Name</strong></td>
+                                                <td>Honda</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Email</strong></td>
+                                                <td>aymanjain007@gmail.com</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>Phone No</strong></td>
+                                                <td>0123456789</td>
+                                            </tr>
+                                           
+                                           
+                                            
+                                            <!--<tr>-->
+                                            <!--    <td class="text-right"><strong>Status</strong></td>-->
+                                            <!--    <td><span class="label label-success"><i class="fa fa-check"></i> Active</span></td>-->
+                                            <!--</tr>-->
+                                        </tbody>
+                                    </table>
+                                    <!-- END Customer Info -->
+                                </div>
+    </div>
+    <div class="col-md-8">
+        <!-- Datatables Content -->
     <div class="block full">
         <div class="block-title">
             <h2><strong>User</strong> Panel</h2>
@@ -131,6 +179,13 @@
                 </div>
             </form>
        </div>
+    </div>
+</div>
+
+
+    
+       
+       
 </div>
 <script type="text/javascript">
  $('#date_of_birth').datepicker({

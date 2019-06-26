@@ -54,7 +54,7 @@
                                         <select class="input-container" name='country' value="<?php echo set_value('country'); ?>">
                                       <option value="" disabled selected>Select Country</option>
                                       <?php foreach($countries as $row){?>
-                                      <option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
+                                      <option value="<?php echo $row->id;?>" <?php echo set_select('country', $row->id); ?>><?php echo $row->name;?></option>
                                       <?php } ?>
                                     </select>
                                    
@@ -171,7 +171,7 @@
                                         <select class="input-container" name='c_country' value="<?php echo set_value('c_country'); ?>">
                                       <option value="" disabled selected>Select Country</option>
                                       <?php foreach($countries as $row){?>
-                                      <option value="<?php echo $row->id;?>"><?php echo $row->name;?></option>
+                                      <option value="<?php echo $row->id;?>" <?php echo set_select('c_country', $row->id); ?>><?php echo $row->name;?></option>
                                       <?php } ?>
                                     </select>
                                    

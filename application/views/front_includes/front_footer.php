@@ -6,10 +6,10 @@
                         <div class="footer_text">
                             <h4>Usefull links</h4>
                             <ul class="footer_menu">
-                                <li> <a href="#"> About us</a></li>
-                                <li><a href="#"> How it works</a></li>
-                                <li><a href="#"> Service</a></li>
-                                <li><a href="#"> Contact Us</a></li>
+                                <li> <a href="<?php echo base_url().'front/about_us';?>"> About us</a></li>
+                                <li><a href="<?php echo base_url().'front/how_to_works';?>"> How it works</a></li>
+                                <li><a href="<?php echo base_url().'front/services';?>"> Service</a></li>
+                                <li><a href="<?php echo base_url().'front/contact_us';?>"> Contact Us</a></li>
                             </ul>
                         </div>
                     </div>

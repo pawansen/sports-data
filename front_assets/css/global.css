@@ -1206,6 +1206,11 @@ div#testimonial-slider-page2 .owl-next{
     font-size: 13px;
     font-family: 'mulilight';
 }
+
+button.btn.edit_profile_btn a {
+    color: white;
+    text-decoration: none;
+}
   
   button.edit_profile_btn {
     background-color: #3759D1;
@@ -2090,5 +2095,11 @@ hr.hr_line_popup {
     background-color: #ff0000;
     color: white;
 }
+
+
+.main_rigister_tab .text-danger {
+    margin-top: -17px;
+    margin-bottom: 14px;
+} 
 
 
