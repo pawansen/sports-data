@@ -2103,3 +2103,31 @@ hr.hr_line_popup {
 } 
 
 
+.contact_us_page {
+    padding: 50px 50px;
+}
+
+ .contact_box1 {
+    /*background-color: #FFFFFF;*/
+    /*box-shadow: 0 0 12px 5px rgba(0,0,0,0.2);*/
+    /*-webkit-box-shadow: 0 0 12px 5px rgba(0,0,0,0.2);*/
+    /*padding: 16px 17px;*/
+    /*text-align: center;*/
+    /*height: 210px;*/
+    /*    border-radius: 12px;*/
+}
+.contact_box1 img {
+    margin: 0 auto;
+}
+.contact_box1 h5 {
+    color: #f3f3f3;
+    font-weight: bold;
+    /*text-align: center;*/
+    margin-top: 15px;
+}
+
+.contact_box1 p {
+    color: #f3f3f3;
+    font-weight: 300;
+    line-height: 22px;
+}

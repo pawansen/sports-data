@@ -65,7 +65,7 @@
 
                              
                            
-                           <!-- <div class="col-md-12" >
+                           <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo lang('image'); ?></label>
                                     <div class="col-md-9">
@@ -86,7 +86,7 @@
                                           <div class="ceo_file_error file_error text-danger"></div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <div class="space-22"></div>
                         </div>

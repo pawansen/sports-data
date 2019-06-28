@@ -641,7 +641,8 @@ if (!function_exists('allModules')) {
             'home_slider_video' => "Home Slider Video Content",
             'home_footer_get_in_touch' => "Home Get In Touch",
             'home_get_started_now' => "Home Get Started Now",
-            'home_trust_by_customer' => "Home Trusted By Customer"
+            'home_trust_by_customer' => "Home Trusted By Customer",
+            'our_story' => "Our Story"
             // 'indian_law' => "Indial Law on Gambling",
             // 'game_of_skills' => "Game of Skills",
             // 'career' => "Career",

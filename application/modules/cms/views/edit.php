@@ -111,7 +111,7 @@
                                 </div>
                             </div>
                           
-<!--                             
+                            
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo lang('image'); ?></label>
@@ -138,7 +138,7 @@
                                           <div class="ceo_file_error file_error text-danger"></div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                              
                             <input type="hidden" name="id" value="<?php echo $results->id;?>" />
                             <!-- <input type="hidden" name="exists_image" value="<?php echo $results->image;?>" /> -->

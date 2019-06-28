@@ -186,6 +186,18 @@ function getVendorListSoftware(keyword){
         });  
 }
 
+function submitFormSubscribe(){
+    var email = $("#email_address").val("");
+    $.ajax({
+            url: '<?php echo base_url(); ?>' + "front/subscribe",
+            type: "post",
+            data: {email: email},
+            success: function (data, textStatus, jqXHR) {
+              alert(data.message);
+            }
+        });  
+}
+
 function resendEmailVerification(){
     $("#verificationemail").text("Sending...");
     $.ajax({

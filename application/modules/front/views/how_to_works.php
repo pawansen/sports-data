@@ -10,34 +10,16 @@
                 </div>
 
                   <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                      <div class="work_box">
-                          <img src="images/how-it-works-icon-1.png">
-                          <h5>Post a project</h5>
-                          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-                      </div>
-                </div>
-                    <div class="col-md-3 col-sm-6">
+                
+                  <?php if(!empty($how_it_works)){foreach($how_it_works as $how_it_work){ ?>
+                        <div class="col-md-3 col-sm-6">
                         <div class="work_box">
-                          <img src="images/how-it-works-icon-2.png">
-                          <h5>Vendors come to you</h5>
-                          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-                      </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="work_box">
-                          <img src="images/how-it-works-icon-3.png">
-                          <h5>Collaborate easily</h5>
-                          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-                      </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="work_box">
-                          <img src="images/how-it-works-icon-4.png">
-                          <h5>Payment simplified</h5>
-                          <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered</p>
-                      </div>
-                    </div>
+                            <img src="<?php echo base_url(); ?>uploads/emailTemplate/<?php echo $how_it_work->image;?>">
+                            <h5><?php echo ucwords($how_it_work->title);?></h5>
+                            <p><?php echo $how_it_work->description;?></p>
+                        </div>
+                        </div>
+                    <?php }}?>
 
                  </div>
             </div>
@@ -51,8 +33,11 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="heading_title_white pb-30">
-                        <h2>Lounch your program in minutes</h2>
-                        <h5  class="sub_description">It is a long established fact that a reader will be distracted by the alteration in some form, by injected humour, or randomised </h5>
+                    <?php $cmsContentStarted = commonGetHelper(array('table' => "cms",
+        'where' => array('delete_status'=> 0,"is_active"=>1,'page_id' => "home_get_started_now"),'single'=>true));
+        ?>
+                        <h2><?php if(!empty($cmsContentStarted)){echo $cmsContentStarted->title;}?></h2>
+                        <h5  class="sub_description"><?php if(!empty($cmsContentStarted)){echo $cmsContentStarted->description;}?> </h5>
 
                     </div>
                     <div class=" center pt-20 pb-10 ">

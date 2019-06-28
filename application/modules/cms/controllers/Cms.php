@@ -57,7 +57,7 @@ class Cms extends Common_Controller {
                 if (!empty($_FILES['image']['name'])) {
                     $this->filedata = $this->commonUploadImage($_POST, 'cms', 'image');
                     if ($this->filedata['status'] == 1) {
-                     $image = $this->filedata['upload_data']['file_name'];
+                     $image = 'uploads/cms/' . $this->filedata['upload_data']['file_name'];
                      //$full_path = $this->filedata['upload_data']['full_path'];
                      //$folder = "cms/thumb";
                     //$this->resizeNewImage($full_path,$folder,480,828);
@@ -81,7 +81,7 @@ class Cms extends Common_Controller {
                         'description'    => $this->input->post('description'),
                         'title'    => $this->input->post('title'),
                         'video_url'    => $this->input->post('video_url'),
-                        'image'          => "",
+                        'image'          =>  $image,
                         'create_date'    => datetime(),
                         'is_active'      => 1,
                     );
@@ -158,7 +158,7 @@ class Cms extends Common_Controller {
                     $this->filedata = $this->commonUploadImage($_POST, 'cms', 'image');
                     
                     if ($this->filedata['status'] == 1) {
-                     $image = $this->filedata['upload_data']['file_name'];
+                        $image = 'uploads/cms/' . $this->filedata['upload_data']['file_name'];
                     // $full_path = $this->filedata['upload_data']['full_path'];
                      //$folder = "cms/thumb";
                     //$this->resizeNewImage($full_path,$folder,480,828);

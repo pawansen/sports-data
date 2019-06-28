@@ -1216,13 +1216,23 @@ class Front extends Common_Controller {
 
     public function how_to_works() {
         $this->data['title'] = 'How it works';
-
+        $option = array('table' => "how_it_works",
+        'where' => array('delete_status' => 0, "is_active" => 1)
+    );
+    $this->data['how_it_works'] = $this->common_model->customGet($option);
         $this->load->front_render('how_to_works', $this->data, 'inner_script');
     }
 
     public function services() {
         $this->data['title'] = 'Services';
-
+        $option = array('table' => "services",
+            'where' => array('delete_status' => 0, "is_active" => 1)
+        );
+        $this->data['services'] = $this->common_model->customGet($option);
+        $option = array('table' => "testimonial",
+        'where' => array('delete_status' => 0, "status" => 1)
+    );
+    $this->data['testimonial'] = $this->common_model->customGet($option);
         $this->load->front_render('services', $this->data, 'inner_script');
     }
 
@@ -1254,6 +1264,63 @@ class Front extends Common_Controller {
         $this->data['response'] = $this->common_model->customGet($option);
 
         $this->load->view('privacy_policy', $this->data);
+    }
+
+        /**
+     * Function Name: contact_us
+     * Description:   To contact request
+     */
+    function contact_us_submit() {
+        $this->data['title'] = 'Contact Us';
+        $this->form_validation->set_rules('c_frist_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('c_last_name', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('c_email', 'Email', 'required|trim|valid_email');
+        $this->form_validation->set_rules('c_subject', 'Subject', 'required|trim');
+        $this->form_validation->set_rules('c_description', 'Description', 'required|trim');
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->front_render('contactus', $this->data, 'inner_script');
+        } else {
+            $dataArr = array();
+            $dataArr['full_name'] = $this->input->post('c_frist_name')." ".$this->input->post('c_last_name');
+            $dataArr['email'] = $this->input->post('c_email');
+            $dataArr['subject'] = $this->input->post('c_subject');
+            $dataArr['message'] = $this->input->post('c_description');
+            $dataArr['phone'] = 0;
+            $dataArr['created_date'] = date('Y-m-d H:i:s');
+            $option = array(
+                'table' => 'contact_us',
+                'data' => $dataArr
+            );
+            $career_data = $this->common_model->customInsert($option);
+            $this->data['message'] = 'Your information successfully submitted, We will contact you soon.';
+            $this->load->front_render('contactus', $this->data, 'inner_script');
+
+        }
+    }
+
+    function subscribe() {
+        $this->data['title'] = 'Subscribe';
+        $return = array();
+        $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+        if ($this->form_validation->run() == FALSE) {
+            $error = $this->form_validation->rest_first_error_string();
+            $return['status'] = 0;
+            $return['message'] = $error;
+        } else {
+            $dataArr = array();
+            $dataArr['email'] = $this->input->post('email');
+            $dataArr['subscribe_status'] = 1;
+            $dataArr['created_date'] = date('Y-m-d H:i:s');
+            $option = array(
+                'table' => 'email_subscription',
+                'data' => $dataArr
+            );
+            $career_data = $this->common_model->customInsert($option);
+            $return['status'] = 1;
+            $return['message'] = 'Your email successfully submitted.';
+        }
+
+        echo json_encode($return);
     }
 
     public function getipenc() {

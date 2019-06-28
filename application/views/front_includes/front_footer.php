@@ -26,11 +26,11 @@
                          <div class="footer_text">
                             <h4>Subscribe </h4>
                             <div class="subscribe_form">
-                              <form>
+                            <form action="<?php echo site_url('front/subscribe');?>" class="form_width" method="post">
                                 <div class="input-container">
                                           
-                                          <input class="input-field" type="text" placeholder="Email Address " name="Email_subscribe">
-                                          <button class="send_subs"><i class="fa fa-paper-plane-o icon"></i></button>
+                                          <input class="input-field" type="email" placeholder="Email Address" id="email_address" name="email">
+                                          <button type="button" onclick="submitFormSubscribe()" class="send_subs"><i class="fa fa-paper-plane-o icon"></i></button>
                                   </div>
                               </form>
 
@@ -82,8 +82,8 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/custom.js"></script>
 
 <script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/owl.carousel.min.js"></script>
-
-
+ 
+<script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/html5lightbox.js"></script>
 
 
 </body>
