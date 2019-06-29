@@ -585,10 +585,10 @@ if (!function_exists('send_mail')) {
         $mail->Host = "smtp.gmail.com";  // specify main and backup server
         $mail->SMTPAuth = true;     // turn on SMTP authentication
         $mail->Port = 587;                                 // set word wrap to 50 characters
-        $mail->Username = "btmarket.postmaster@gmail.com";  // SMTP username
-        $mail->Password = 'BTMarket@123'; // SMTP password
-        // $mail->Username = "aj7099702@gmail.com";  // SMTP username
-        // $mail->Password = 'greenapple'; // SMTP password
+        //$mail->Username = "btmarket.postmaster@gmail.com";  // SMTP username
+        //$mail->Password = 'BTMarket@123'; // SMTP password
+        $mail->Username = "aj7099702@gmail.com";  // SMTP username
+        $mail->Password = 'greenapple'; // SMTP password
         $mail->From     = $from_email;
         $mail->FromName = getConfig('site_name');
         $mail->AddAddress($to_email, "");
