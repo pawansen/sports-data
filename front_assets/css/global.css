@@ -1574,6 +1574,7 @@ p.upload_text {
     box-shadow: 5px 0 27px rgba(0,0,0,0.05);
     padding: 21px 10px 21px 16px;
     border-radius: 6px;
+        margin-bottom: 13px;
 
 }
 .col-md-3.client_box {
@@ -2106,6 +2107,13 @@ hr.hr_line_popup {
 .contact_us_page {
     padding: 50px 50px;
 }
+.contact_us_bg {
+    padding-top: 150px;
+    overflow: hidden;
+    width: 100%;
+    padding-bottom: 90px;
+    background-color: #fff;
+}
 
  .contact_box1 {
     /*background-color: #FFFFFF;*/
@@ -2120,14 +2128,39 @@ hr.hr_line_popup {
     margin: 0 auto;
 }
 .contact_box1 h5 {
-    color: #f3f3f3;
+    color: #5a5a5a;
     font-weight: bold;
     /*text-align: center;*/
     margin-top: 15px;
-}
+} 
 
 .contact_box1 p {
-    color: #f3f3f3;
+    color: #5a5a5a;
     font-weight: 300;
     line-height: 22px;
+}
+.deshbord_menu_width_icon .btn-default {
+    background-color: white;
+    border: 0;
+    color: #000;
+    background-image: linear-gradient(to bottom,#fff 0,#ffffff 100%)!important;
+    box-shadow: inset 0 0px 0 rgba(255,255,255,.15), 0 0px 0px rgba(0,0,0,.075)!important;
+}
+
+.deshbord_menu_width_icon .btn-default:active:focus {
+    background-image: linear-gradient(to bottom,#fff 0,#ffffff 100%);
+    /* text-shadow: 0 1px 0 #fff; */
+    box-shadow: inset 0 0px 0 rgba(255,255,255,.15), 0 0px 0px rgba(0,0,0,.075);
+     
+}
+.deshbord_menu_width_icon .btn-default:focus, .deshbord_menu_width_icon .btn-default:hover {
+    
+    background-position: 0 0px;
+    
+}
+.vendor_details_img {
+    width: 110px;
+    /* height: 102px; */
+    padding-top: 7px;
+    padding-bottom: 7px;
 }

@@ -16,7 +16,7 @@
       
                         <div class="row text-center">
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                <a href="<?php echo base_url() ?>enquiries/index/No" class="widget widget-hover-effect2">
                                     <div class="widget-extra themed-background">
                                         <h4 class="widget-content-light"><strong> Pending </strong> Enquiries</h4>
                                     </div>
@@ -24,7 +24,7 @@
                                 </a>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                <a href="<?php echo base_url() ?>enquiries/index/Yes" class="widget widget-hover-effect2">
                                     <div class="widget-extra themed-background-dark">
                                         <h4 class="widget-content-light"><strong> Verified </strong> Enquiries</h4>
                                     </div>
@@ -54,7 +54,7 @@
             <?php } ?> -->
         </div>
 
-        <div class="content-header">
+        <!-- <div class="content-header">
             <ul class="nav-horizontal text-center">
                 <li class="<?php echo ($this->uri->segment(3) == "No") ? 'active' : '';?>">
                     <a href="<?php echo base_url() ?>enquiries/index/No"><i class="fa fa-times"></i> Pending Enquiries</a>
@@ -63,7 +63,7 @@
                     <a href="<?php echo base_url() ?>enquiries/index/Yes"><i class="gi gi-check"></i> Verified Enquiries</a>
                 </li>
             </ul>
-        </div>
+        </div> -->
         <div class="table-responsive">
             <table id="common_datatable_users" class="table table-vcenter table-condensed table-bordered">
                 <thead>
@@ -118,9 +118,9 @@
                                                 <?php }
                                                 if ($rows->inq_active == 'Yes') {
                                                     ?>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" class="btn btn-xs btn-success" onclick="changeVendorStatus('<?php echo encoding($rows->inq_id); ?>', 'No')" title="Unverified Now"><i class="fa fa-check"></i></a>
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" class="btn btn-xs btn-success" onclick="changeVendorStatus('<?php echo encoding($rows->inq_id); ?>', 'No')" title="Unverified Now"><i class="fa fa-check"></i> Verified</a>
                 <?php } else { ?>
-                                                    <a href="javascript:void(0)" data-toggle="tooltip" class="btn btn-xs btn-danger" onclick="changeVendorStatus('<?php echo encoding($rows->inq_id); ?>', 'Yes')" title="Verified Now"><i class="fa fa-times"></i></a>
+                                                    <a href="javascript:void(0)" data-toggle="tooltip" class="btn btn-xs btn-danger" onclick="changeVendorStatus('<?php echo encoding($rows->inq_id); ?>', 'Yes')" title="Verified Now"><i class="fa fa-times"></i> Unverified</a>
                                     <?php } ?>
                                                 <!-- <a href="javascript:void(0)" data-toggle="tooltip"   onclick="deleteFn('<?php echo USERS; ?>', 'id', '<?php echo encoding($rows->id); ?>', 'vendors', 'business/delVendors')" class="btn btn-danger"><i class="fa fa-trash"></i></a> -->
             <?php 

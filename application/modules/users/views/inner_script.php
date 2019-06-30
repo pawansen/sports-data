@@ -17,7 +17,7 @@
   function getUsersByDates(){
      var from_date = $('#from_date').val();
      var to_date = $('#to_date').val();
-   
+     var UserStatus = $("#UserStatus").val();
      $("#users").dataTable().fnDestroy();
         $('#users').DataTable({
             "processing": true,
@@ -26,7 +26,7 @@
                 "url": base_url + "users/get_users_list",
                 "dataType": "json",
                 "type": "POST",
-                "data": {from_date: from_date,to_date: to_date}
+                "data": {from_date: from_date,to_date: to_date,UserStatus:UserStatus}
             },
             "columns": [
                 {"data": "id"},

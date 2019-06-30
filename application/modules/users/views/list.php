@@ -22,19 +22,19 @@
      
                         <div class="row text-center">
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                <a href="<?php echo base_url()."users/index/No";?>" class="widget widget-hover-effect2">
                                     <div class="widget-extra themed-background">
                                         <h4 class="widget-content-light"><strong> Unverified </strong> Users</h4>
                                     </div>
-                                    <div class="widget-extra-full"><span class="h2 animation-expandOpen">3</span></div>
+                                    <div class="widget-extra-full"><span class="h2 animation-expandOpen"><?php echo $inactive;?></span></div>
                                 </a>
                             </div>
                             <div class="col-sm-6 col-lg-3">
-                                <a href="javascript:void(0)" class="widget widget-hover-effect2">
+                                <a href="<?php echo base_url()."users/index/Yes";?>" class="widget widget-hover-effect2">
                                     <div class="widget-extra themed-background-dark">
                                         <h4 class="widget-content-light"><strong> Verified </strong> Users</h4>
                                     </div>
-                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen">120</span></div>
+                                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen"><?php echo $active;?></span></div>
                                 </a>
                             </div>
                             <div class="col-sm-6 col-lg-3">
@@ -89,3 +89,4 @@
 </div>
 <!-- END Page Content -->
 <div id="form-modal-box"></div>
+<input type="hidden" id="UserStatus" value="<?php echo $status;?>" />

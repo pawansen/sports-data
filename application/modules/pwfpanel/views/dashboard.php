@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <!-- Latest Orders Block -->
-                                <div class="block title_none_table_header">
+                                <div class="block title_none_table_header height_box">
                                     <!-- Latest Orders Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
@@ -112,7 +112,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <!-- Top Products Block -->
-                                <div class="block title_none_table_header">
+                                <div class="block title_none_table_header height_box">
                                     <!-- Top Products Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
@@ -142,7 +142,7 @@
                                             <tr>
                                             <td class="hidden-xs text-center" style="width: 100px;">
                                             <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
-                                            <td class=""><a href="javascript:void(0)"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
+                                            <td class=""><a href="<?php echo base_url().'vendors/vendor_edit?id='. encoding($rows->id);?>"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
                                             <td class="text-center"><span class="label label-success"><?php echo ($rows->vendor_profile_activate == "Yes") ? "Verified":"Processing";?></span></ td>
                                             
                                             </tr>
@@ -164,7 +164,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <!-- Latest Orders Block -->
-                                <div class="block">
+                                <div class="block height_box">
                                     <!-- Latest Orders Title -->
                                     <div class="block-title">
                                         <div class="block-options pull-right">
@@ -196,7 +196,7 @@
                                                                         <tr>
                                                                         <td class="hidden-xs text-center" style="width: 100px;">
                                                                         <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
-                                                                        <td class=""><a href="javascript:void(0)"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
+                                                                        <td class=""><a href="<?php echo base_url().'users/user_edit?id='. encoding($rows->id);?>"><?php echo $rows->first_name.' '.$rows->last_name;?></a></td>
                                                                         <td class="text-center"><span class="label label-success"><?php echo ($rows->active == 1) ? "Verified":"Processing";?></span></ td>
                                                                         
                                                                         </tr>
@@ -215,163 +215,22 @@
                             
                             <div class="col-lg-6">
                                 <!-- Top Products Block -->
-                                <div class="block2">
+                                <div class="block height_box">
                                     <!-- Top Products Title -->
-                                    <!--<div class="block-title">
-                                        <div class="block-options pull-right">
-                                            <a href="page_ecom_products.html" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Show All"><i class="fa fa-eye"></i></a>
-                                            <a href="javascript:void(0)" class="btn btn-alt btn-sm btn-default" data-toggle="tooltip" title="Settings"><i class="fa fa-cog"></i></a>
-                                        </div>
-                                        <h2><strong>Vendors</strong></h2>
-                                    </div>-->
+                                   <!--<div class="block-title">-->
+                                       
+                                   <!--     <h2><strong>WelCome</strong></h2>-->
+                                   <!-- </div>-->
+                                    
+                                     <div class="block_vendors_welcome">
+                                       
+                                        <h2><strong>Welcome to Vendors</strong></h2>
+                                    </div>
+                                    
                                     <!-- END Top Products Title -->
 
-                                    <!-- Top Products Content -->
-                                    <!--<table class="table table-borderless table-striped table-vcenter table-bordered table_fonts_size">
-                                        <tbody>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8765</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">iPhone 6 Plus 32GB</a></td>
-                                                <td class="text-center"><strong>435</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8764</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">Wii U</a></td>
-                                                <td class="text-center"><strong>502</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8763</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">Samsung Galaxy Note 4 32GB</a></td>
-                                                <td class="text-center"><strong>440</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8762</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">Playstation 4</a></td>
-                                                <td class="text-center"><strong>750</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8761</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">HTC One 32GB</a></td>
-                                                <td class="text-center"><strong>420</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8760</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">Xbox One</a></td>
-                                                <td class="text-center"><strong>650</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8762</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">iPad Mini Retina 64GB</a></td>
-                                                <td class="text-center"><strong>521</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8761</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">LG Tab 10.1</a></td>
-                                                <td class="text-center"><strong>427</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8760</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">Macbook Pro 15' Retina</a></td>
-                                                <td class="text-center"><strong>392</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center" style="width: 100px;"><a href="page_ecom_product_edit.html"><strong>PID.8760</strong></a></td>
-                                                <td><a href="page_ecom_product_edit.html">PS Vita</a></td>
-                                                <td class="text-center"><strong>380</strong> orders</td>
-                                                <td class="hidden-xs text-center">
-                                                    <div class="text-warning">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-half-o"></i>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>-->
-                                    <!-- END Top Products Content -->
+                                    
+                                  
                                 </div>
                                 <!-- END Top Products Block -->
                             </div>

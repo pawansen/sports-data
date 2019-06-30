@@ -17,15 +17,41 @@ class Users extends Common_Controller {
      * @description listing display
      * @return array
      */
-    public function index() {
+    public function index($status="No") {
 
         $this->data['parent'] = "User";
         $this->data['title'] = "Users";
-
+        $this->data['status'] = ($status == "Yes") ? 1 : 0;
         $role_name = $this->input->post('role_name');
         $this->data['roles'] = array(
             'role_name' => $role_name
         );
+        $option = array('table' => USERS . ' as user',
+        'select' => 'user.*,group.name as group_name',
+        'join' => array(
+            array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+            array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
+        'order' => array('user.id' => 'DESC'),
+        'where' => array('user.active'=>1),
+        'where_not_in' => array('group.id' => array(1, 3, 4)
+        )
+    );
+
+        $this->data['active'] = count($this->common_model->customGet($option));
+
+        $option = array('table' => USERS . ' as user',
+        'select' => 'user.*,group.name as group_name',
+        'join' => array(
+            array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+            array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
+        'order' => array('user.id' => 'DESC'),
+        'where' => array('user.active'=>0),
+        'where_not_in' => array('group.id' => array(1, 3, 4)
+        )
+    );
+
+        $this->data['inactive'] = count($this->common_model->customGet($option));
+
         $this->load->admin_render('list', $this->data, 'inner_script');
     }
 
@@ -70,13 +96,14 @@ class Users extends Common_Controller {
 
         $from_date = $this->input->post('from_date');
         $to_date = $this->input->post('to_date');
+        $UserStatus = $this->input->post('UserStatus');
 
         $this->data['user'] = array(
             'from_date' => $from_date,
             'to_date' => $to_date
         );
 
-        $where = ' user.id IS NOT NULL';
+        $where = ' user.active='.$UserStatus.' AND user.id IS NOT NULL';
         if (!empty($from_date) || !empty($to_date)) {
             $from_date = date('Y-m-d', strtotime($from_date));
 
