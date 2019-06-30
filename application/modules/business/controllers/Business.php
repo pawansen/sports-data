@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vendors extends Common_Controller {
+class Business extends Common_Controller {
 
     public $data = array();
     public $file_data = "";
@@ -23,18 +23,14 @@ class Vendors extends Common_Controller {
         $this->data['roles'] = array(
             'role_name' => $role_name
         );
-        if($vendor_profile_activate == "No"){
-            $vendor_profile_activate = 0;
-        }else{
-            $vendor_profile_activate = 1; 
-        }
+
         $option = array('table' => USERS . ' as user',
             'select' => 'user.*,group.name as group_name,UP.doc_file',
             'join' => array(array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
                 array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
                 array('user_profile UP', 'UP.user_id=user.id', 'left')),
             'order' => array('user.id' => 'ASC'),
-            'where' => array('user.delete_status' => 0, "user.active" => $vendor_profile_activate, 'group.id' => 3),
+            'where' => array('user.delete_status' => 0, "user.vendor_profile_activate" => $vendor_profile_activate, 'group.id' => 3),
             //'where_not_in' => array('group.id' => array(1, 2, 4)),
             'order' => array('user.id' => 'desc')
         );
@@ -46,11 +42,11 @@ class Vendors extends Common_Controller {
                 array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
                 array('user_profile UP', 'UP.user_id=user.id', 'left')),
             'order' => array('user.id' => 'ASC'),
-            'where' => array('user.delete_status' => 0, "user.active" => 1, 'group.id' => 3),
+            'where' => array('user.delete_status' => 0, "user.vendor_profile_activate" => "Yes", 'group.id' => 3),
             //'where_not_in' => array('group.id' => array(1, 2, 4)),
             'order' => array('user.id' => 'desc')
         );
-        $this->data['active_vendors'] = count($this->common_model->customGet($option));
+        $this->data['active'] = count($this->common_model->customGet($option));
 
         $option = array('table' => USERS . ' as user',
             'select' => 'user.*,group.name as group_name,UP.doc_file',
@@ -58,11 +54,11 @@ class Vendors extends Common_Controller {
                 array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left'),
                 array('user_profile UP', 'UP.user_id=user.id', 'left')),
             'order' => array('user.id' => 'ASC'),
-            'where' => array('user.delete_status' => 0, "user.active" => 0, 'group.id' => 3),
+            'where' => array('user.delete_status' => 0, "user.vendor_profile_activate" => "No", 'group.id' => 3),
             //'where_not_in' => array('group.id' => array(1, 2, 4)),
             'order' => array('user.id' => 'desc')
         );
-        $this->data['inactive_vendors'] = count($this->common_model->customGet($option));
+        $this->data['inactive'] = count($this->common_model->customGet($option));
 
         $this->data['title'] = "Vendors";
         $this->load->admin_render('list', $this->data, 'inner_script');
@@ -114,7 +110,7 @@ class Vendors extends Common_Controller {
     function paymentList($sales_id = "") {
         if (empty($sales_id)) {
             $this->session->set_flashdata('error', "Records not found");
-            redirect('vendors');
+            redirect('business');
         }
         $this->data['parent'] = "Payment List";
         $this->data['title'] = "Payment List";
@@ -261,7 +257,7 @@ class Vendors extends Common_Controller {
                 }
                 if ($insert_id) {
                     $html = array();
-                    $response = array('status' => 1, 'message' => 'Sales Added Successfully', 'url' => base_url('vendors'));
+                    $response = array('status' => 1, 'message' => 'Sales Added Successfully', 'url' => base_url('business'));
                 } else {
                     $response = array('status' => 0, 'message' => lang('user_failed'));
                 }
@@ -287,7 +283,7 @@ class Vendors extends Common_Controller {
                 'table' => USERS . ' as user',
                 'select' => 'user.*, UP.address1,UP.city,UP.country,UP.state,UP.description,'
                 . 'UP.designation,UP.website,group.name as group_name,group.id as g_id,'
-                . 'UP.doc_file,UP.company_name,UP.category_id,UP.profile_pic img',
+                . 'UP.doc_file,UP.company_name,UP.category_id,UP.profile_pic as img',
                 'join' => array(
                     array(USER_GROUPS . ' as u_group', 'u_group.user_id=user.id', ''),
                     array(GROUPS . ' as group', 'group.id=u_group.group_id', ''),
@@ -311,11 +307,11 @@ class Vendors extends Common_Controller {
                 $this->load->admin_render('edit', $this->data, 'inner_script');
             } else {
                 $this->session->set_flashdata('error', lang('not_found'));
-                redirect('vendors');
+                redirect('business');
             }
         } else {
             $this->session->set_flashdata('error', lang('not_found'));
-            redirect('vendors');
+            redirect('business');
         }
     }
 
@@ -326,8 +322,7 @@ class Vendors extends Common_Controller {
      */
     public function vendor_update() {
 
-        $this->form_validation->set_rules('first_name', lang('first_name'), 'required|trim|xss_clean');
-        $this->form_validation->set_rules('user_email', lang('user_email'), 'required|trim|xss_clean');
+        $this->form_validation->set_rules('company_name', "company_name", 'required|trim|xss_clean');
         $newpass = $this->input->post('new_password');
         $user_email = $this->input->post('user_email');
         if ($newpass != "") {
@@ -376,21 +371,20 @@ class Vendors extends Common_Controller {
                         $currentPass = $newpass;
                     }
 
-                    $options_data = array(
-                        'first_name' => $this->input->post('first_name'),
-                        'last_name' => $this->input->post('last_name'),
-                        'date_of_birth' => "0000-00-00",
-                        'gender' => "OTHER",
-                        'phone' => $this->input->post('phone_no'),
-                        'profile_pic' => $image,
-                        'email' => $user_email,
-                        'zipcode_access' => json_encode($this->input->post('zipcode')),
-                        'is_pass_token' => $currentPass,
-                    );
-                    $this->ion_auth->update($where_id, $options_data);
+                    // $options_data = array(
+                    //     'first_name' => $this->input->post('first_name'),
+                    //     'last_name' => $this->input->post('last_name'),
+                    //     'date_of_birth' => "0000-00-00",
+                    //     'gender' => "OTHER",
+                    //     'phone' => $this->input->post('phone_no'),
+                    //     'profile_pic' => $image,
+                    //     'email' => $user_email,
+                    //     'zipcode_access' => json_encode($this->input->post('zipcode')),
+                    //     'is_pass_token' => $currentPass,
+                    // );
+                    // $this->ion_auth->update($where_id, $options_data);
                     $additional_data_profile = array(
                         'description' => $this->input->post('description'),
-                        'designation' => $this->input->post('designation'),
                         'website' => $this->input->post('website'),
                         'country' => $this->input->post('country'),
                         'state' => $this->input->post('state'),
@@ -403,12 +397,12 @@ class Vendors extends Common_Controller {
                     );
                     $this->db->where("user_id", $where_id);
                     $this->db->update('vendor_sale_user_profile', $additional_data_profile);
-                    if ($newpass != "") {
-                        $pass_new = $this->common_model->encryptPassword($this->input->post('new_password'));
-                        $this->common_model->customUpdate(array('table' => 'users', 'data' => array('password' => $pass_new), 'where' => array('id' => $where_id)));
-                    }
+                    // if ($newpass != "") {
+                    //     $pass_new = $this->common_model->encryptPassword($this->input->post('new_password'));
+                    //     $this->common_model->customUpdate(array('table' => 'users', 'data' => array('password' => $pass_new), 'where' => array('id' => $where_id)));
+                    // }
 
-                    $response = array('status' => 1, 'message' => 'Vendor updated Successfully', 'url' => base_url('vendors/vendor_edit'), 'id' => encoding($this->input->post('id')));
+                    $response = array('status' => 1, 'message' => 'Vendor updated Successfully', 'url' => base_url('business/vendor_edit'), 'id' => encoding($this->input->post('id')));
                 }
             } else {
                 $response = array('status' => 0, 'message' => "The email address already exists");
@@ -422,12 +416,8 @@ class Vendors extends Common_Controller {
     public function updateAccountStatus() {
         $id = decoding($this->input->post('userId'));
         $status = $this->input->post('status');
-        if($status=="No"){
-            $status=0;
-        }else{
-            $status=1;
-        }
-        $update = $this->common_model->customUpdate(array('table' => 'users', 'data' => array('active' => $status), 'where' => array('id' => $id)));
+
+        $update = $this->common_model->customUpdate(array('table' => 'users', 'data' => array('vendor_profile_activate' => $status), 'where' => array('id' => $id)));
         if ($update) {
             $response = array('status' => 1, 'message' => "Vendor Verified Successfully");
         } else {
@@ -471,7 +461,7 @@ class Vendors extends Common_Controller {
             }
         } else {
             $this->session->set_flashdata('error', lang('not_found'));
-            redirect('vendors');
+            redirect('business');
         }
     }
 
@@ -596,7 +586,7 @@ class Vendors extends Common_Controller {
             }
         } else {
             $this->session->set_flashdata('error', lang('not_found'));
-            redirect('vendors');
+            redirect('business');
         }
     }
 
@@ -711,7 +701,7 @@ class Vendors extends Common_Controller {
             }
         } else {
             $this->session->set_flashdata('error', lang('not_found'));
-            redirect('vendors');
+            redirect('business');
         }
     }
 
@@ -785,7 +775,7 @@ class Vendors extends Common_Controller {
                 }
 
 
-                $response = array('status' => 1, 'message' => 'Bank Account Details added successfully', 'url' => base_url('vendors'));
+                $response = array('status' => 1, 'message' => 'Bank Account Details added successfully', 'url' => base_url('business'));
             }
 
 
@@ -1009,7 +999,7 @@ class Vendors extends Common_Controller {
         }
         //echo $this->db->last_query();
         //echo '<pre>'; print_r($this->data);die;
-        $this->load->admin_render('vendors/affiliate_sales_list', $this->data, 'inner_script');
+        $this->load->admin_render('business/affiliate_sales_list', $this->data, 'inner_script');
     }
 
     public function new_registration() {

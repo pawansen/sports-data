@@ -15,3 +15,5 @@ ALTER TABLE `vendor_sale_email_subscription`
 
 ALTER TABLE `vendor_sale_email_subscription`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `vendor_sale_client_inquiry` ADD `is_active` INT(11) NOT NULL DEFAULT '0' AFTER `is_request_draft`;
+ALTER TABLE `vendor_sale_client_inquiry` CHANGE `is_active` `is_active` ENUM('No','Yes') NOT NULL DEFAULT 'No';

@@ -98,20 +98,20 @@ class Users extends Common_Controller {
         $data = array();
         $totalData = 0;
         $totalFiltered = 0;
-        if ($this->ion_auth->is_vendor()) {
-            $vendor_user_id = $this->session->userdata('user_id');
+        // if ($this->ion_auth->is_vendor()) {
+        //     $vendor_user_id = $this->session->userdata('user_id');
 
-            $where .= ' and referral.user_id="' . $vendor_user_id . '"';
-            $option = array(
-                'table' => 'user_referrals as referral',
-                'select' => 'user.*,referral.user_id,referral.invite_user_id',
-                'join' => array(array('users as user' => 'user.id=referral.invite_user_id'),
-                    array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=referral.user_id', 'left'),
-                    array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
-                'order' => array('user.id' => 'DESC'),
-                'where' => $where,
-                'where_not_in' => array('group.id' => array(1, 2, 4)));
-        } else {
+        //     $where .= ' and referral.user_id="' . $vendor_user_id . '"';
+        //     $option = array(
+        //         'table' => 'user_referrals as referral',
+        //         'select' => 'user.*,referral.user_id,referral.invite_user_id',
+        //         'join' => array(array('users as user' => 'user.id=referral.invite_user_id'),
+        //             array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=referral.user_id', 'left'),
+        //             array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
+        //         'order' => array('user.id' => 'DESC'),
+        //         'where' => $where,
+        //         'where_not_in' => array('group.id' => array(1, 2, 4)));
+        // } else {
             $option = array('table' => USERS . ' as user',
                 'select' => 'user.*,group.name as group_name',
                 'join' => array(
@@ -120,7 +120,7 @@ class Users extends Common_Controller {
                 'order' => array('user.id' => 'DESC'),
                 'where' => $where,
                 'where_not_in' => array('group.id' => array(1, 3, 4)));
-        }
+       // }
 
 
         $user_list = $this->common_model->customGet($option);
@@ -354,23 +354,23 @@ class Users extends Common_Controller {
 
                     $user_id = $this->session->userdata('user_id');
 
-                    $option = array(
-                        'table' => 'user_referrals',
-                        'where' => array('user_id' => $user_id,
-                            'invite_user_id' => $insert_id)
-                    );
-                    $alreadyUsed = $this->common_model->customGet($option);
-                    if (empty($alreadyUsed)) {
+                    // $option = array(
+                    //     'table' => 'user_referrals',
+                    //     'where' => array('user_id' => $user_id,
+                    //         'invite_user_id' => $insert_id)
+                    // );
+                    // $alreadyUsed = $this->common_model->customGet($option);
+                    // if (empty($alreadyUsed)) {
 
-                        $options_data = array(
-                            'user_id' => $user_id,
-                            'invite_user_id' => $insert_id,
-                            'create_date' => datetime(),
-                        );
+                    //     $options_data = array(
+                    //         'user_id' => $user_id,
+                    //         'invite_user_id' => $insert_id,
+                    //         'create_date' => datetime(),
+                    //     );
 
-                        $option = array('table' => 'user_referrals', 'data' => $options_data);
-                        $this->common_model->customInsert($option);
-                    }
+                    //     $option = array('table' => 'user_referrals', 'data' => $options_data);
+                    //     $this->common_model->customInsert($option);
+                    // }
                 } else {
 
                     $insert_id = $this->ion_auth->register($identity, $password, $email, $additional_data, array(2));

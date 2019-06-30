@@ -114,6 +114,12 @@
                                 <li>
                                     <a href="<?php echo site_url('vendors')."/index/No"; ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "vendors") ? "active" : "" ?>"><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Vendor</span></a>
                                 </li>
+                                <li>
+                                    <a href="<?php echo site_url('business')."/index/No"; ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "business") ? "active" : "" ?>"><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Vendor Business Profile</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php echo site_url('enquiries'); ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "enquiries") ? "active" : "" ?>"><i class="gi gi-user sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Enquiries</span></a>
+                                </li>
                                 <li class="sidebar-header">
                                     <span class="sidebar-header-options clearfix"><a href="javascript:void(0)" data-toggle="tooltip" title="Quick Settings"><i class="gi gi-settings"></i></a><a href="javascript:void(0)" data-toggle="tooltip" title="Create the most amazing pages with the widget kit!"><i class="gi gi-lightbulb"></i></a></span>
                                     <span class="sidebar-header-title">Widget Kit</span>

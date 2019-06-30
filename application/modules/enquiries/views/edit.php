@@ -7,7 +7,7 @@
             <a href="<?php echo site_url('pwfpanel');?>">Home</a>
         </li>
         <li>
-            <a href="<?php echo site_url('vendors');?>">Vendor</a>
+            <a href="<?php echo site_url('business');?>">Vendor</a>
         </li>
     </ul>
     <!-- END Datatables Header -->
@@ -19,7 +19,7 @@
            <div class="block">
                                     <!-- Customer Info Title -->
                                     <div class="block-title">
-                                        <h2><i class="fa fa-file-o"></i> <strong>Vendor</strong> Info</h2>
+                                        <h2><i class="fa fa-file-o"></i> <strong>Vendor</strong> Profile</h2>
                                     </div>
                                     <!-- END Customer Info Title -->
 
@@ -34,48 +34,31 @@
                                     </div>
                                     <table class="table table-borderless table-striped table-vcenter">
                                         <tbody>
-                                            <tr>
-                                                <td class="text-right"><strong>Email</strong></td>
-                                                <td><?php echo $results->email;?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Country Phone Code </strong></td>
-                                                <td>+<?php echo $results->phone_code;?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Phone No</strong></td>
-                                                <td><?php echo $results->phone;?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Description</strong></td>
-                                                <td><?php echo $results->description;?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Designation</strong></td>
-                                                <td><?php echo $results->designation;?></td>
-                                            </tr>
-                                            
-                                          
-                                            <tr>
+                                        <tr>
                                                 <td class="text-right"><strong>Company Name</strong></td>
-                                                <td><?php echo $results->phone_code;?></td>
+                                                <td><?php echo $results->company_name;?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Company Website</strong></td>
                                                 <td><?php echo $results->website;?></td>
                                             </tr>
-
+                                            <tr>
+                                                <td class="text-right"><strong>Description</strong></td>
+                                                <td><?php echo $results->description;?></td>
+                                            </tr>
+                                            
                                             <tr>
                                                 <td class="text-right"><strong>Software Category</strong></td>
                                                 <td><?php foreach($categorys as $category){?>
                                                             
-                                                            <?php echo ($results->category_id == $category->id) ? $category->category_name: "";?>
-                                                                     
-                                                             <?php }?></td>
+                                                           <?php echo ($results->category_id == $category->id) ? $category->category_name: "";?>
+                                                                    
+                                                            <?php }?></td>
                                             </tr>
+                                          
                                             <tr>
                                                 <td class="text-right"><strong> Country</strong></td>
-                                                <td><?php foreach($countries as $country){?>
+                                                <td>    <?php foreach($countries as $country){?>
                                                             
                                                             <?php echo ($results->country == $country->id) ? $country->name: "";?>
                                                                     
@@ -83,7 +66,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>State </strong></td>
-                                                <td><?php foreach($states as $state){?>
+                                                <td>            <?php foreach($states as $state){?>
                                                             
                                                             <?php echo ($results->state == $state->id) ? $state->name: "";?>
                                                                     
@@ -114,7 +97,7 @@
         <div class="block-title">
             <h2><strong>Vendor's</strong> Panel</h2>
         </div>        
-            <form class="form-horizontal" role="form" id="editFormAjaxUser" method="post" action="<?php echo base_url('vendors/vendor_update') ?>" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" id="editFormAjaxUser" method="post" action="<?php echo base_url('business/vendor_update') ?>" enctype="multipart/form-data">
             <div class="modal-header text-center">
                 <h2 class="modal-title"><i class="fa fa-pencil"></i> <?php echo (isset($title)) ? ucwords($title) : "" ?></h2>
             </div>
@@ -124,16 +107,16 @@
                 <div class="alert alert-danger" id="error-box" style="display: none"></div>
                 <div class="form-body">
                     <div class="row">
-                             <div class="col-md-12" >
+                         <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label">First Name</label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="first_name" id="first_name" placeholder="<?php echo lang('first_name');?>" value="<?php echo $results->first_name;?>"/>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         
-                          <div class="col-md-12" >
+                          <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><?php echo lang('last_name');?></label>
                                 <div class="col-md-9">
@@ -141,16 +124,16 @@
                                 </div>
                             </div>
                         </div>
-                        
-                         <div class="col-md-12" >
+                         -->
+                         <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label"><?php echo lang('user_email');?></label>
                                 <div class="col-md-9">
                                     <input type="email" class="form-control" name="user_email" id="user_email" value="<?php echo $results->email;?>" readonly/>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-12" >
+                        </div> -->
+                        <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Country Phone Code</label>
                                 <div class="col-md-9">                                
@@ -164,16 +147,23 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-12" >
-                            <div class="form-group">
-                                <label class="col-md-3 control-label"><?php echo lang('phone_no');?></label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="phone_no" id="phone_no" placeholder="<?php echo lang('phone_no');?>" value="<?php echo $results->phone;?>"/>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Company Name</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="company_name" value="<?php echo $results->company_name; ?>" />
+                                    </div>
                                 </div>
-                                <!-- <span class="help-block m-b-none col-md-offset-3"><i class="fa fa-arrow-circle-o-up"></i> <?php echo lang('english_note');?></span> -->
                             </div>
-                        </div>
+                            <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Company Website</label>
+                                    <div class="col-md-9">
+                                        <input type="text" class="form-control" name="website" value="<?php echo $results->website; ?>" />
+                                    </div>
+                                </div>
+                            </div>
                         <div class="col-md-12" >
                         <div class="form-group">
                             <label class="col-md-3 control-label">Description</label>
@@ -182,14 +172,14 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12" >
+                        <!-- <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Designation</label>
                                 <div class="col-md-9">
                                     <input type="text" class="form-control" name="designation" id="designation" value="<?php echo $results->designation; ?>"/>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
 
                     
                             <div class="col-md-12" >
@@ -208,22 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-                             <div class="col-md-12" >
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Company Name</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="company_name" value="<?php echo $results->company_name; ?>" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12" >
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Company Website</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="website" value="<?php echo $results->website; ?>" />
-                                    </div>
-                                </div>
-                            </div>
+                           
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Country</label>
@@ -274,7 +249,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-12" >
+                            <!-- <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo "Current Password";?></label>
                                     <div class="col-md-9">
@@ -290,10 +265,10 @@
                                       <input type="text" class="form-control" name="new_password" id="new_password"/>
                                   </div>
                               </div>
-                          </div>
+                          </div> -->
                             <div class="col-md-12" >
                             <div class="form-group">
-                                <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>
+                                <label class="col-md-3 control-label">Company Logo</label>
                                 <div class="col-md-9">
                                         <div class="profile_content edit_img">
                                         <div class="file_btn file_btn_logo">
