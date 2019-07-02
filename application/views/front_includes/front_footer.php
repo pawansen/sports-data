@@ -57,7 +57,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 bootom_text_footer">
-              <p>Copyright 2019 | All rights reserved. <b><a href="<?php echo base_url().'front/terms_condition';?>">Terms & Conditions</a></b> | <b><a href="<?php echo base_url().'front/privacy_policy';?>">Privacy Policy</a></b></p>
+            <p>Copyright 2019 | All rights reserved. <b>Terms & Conditions</b> | <b>Privacy Policy</b></p>
           </div>
         </div>
       </div>
@@ -85,6 +85,7 @@
  
 <script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/html5lightbox.js"></script>
 
+<script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/jquery.uploadPreview.min.js"></script>
 
 </body>
 <script>
@@ -99,5 +100,32 @@
     window.intlTelInput(input, {
       utilsScript: "/front_assets/js/utils.js",
     });
+  </script>
+  <script>
+       $(document).ready(function() {
+  $.uploadPreview({
+    input_field: "#image-upload",   // Default: .image-upload
+    preview_box: "#image-preview",  // Default: .image-preview
+    label_field: "#image-label",    // Default: .image-label
+    label_default: "Upload Photo",   // Default: Choose File
+    label_selected: "Change Photo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+
+
+
+
+$(document).ready(function() {
+  $.uploadPreview2({
+    input_field: "#image-upload-academic",   // Default: .image-upload
+    preview_box: "#image-preview-academic",  // Default: .image-preview
+    label_field: "#image-label-academic",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+
   </script>
 </html>

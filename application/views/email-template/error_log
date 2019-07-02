@@ -1,0 +1,35 @@
+[01-Jul-2019 11:08:55 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 5
+[01-Jul-2019 11:08:55 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 40
+[01-Jul-2019 11:09:06 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 5
+[01-Jul-2019 11:09:06 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 40
+[01-Jul-2019 11:10:25 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php on line 5
+[01-Jul-2019 11:10:25 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php on line 40
+[01-Jul-2019 11:12:19 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 5
+[01-Jul-2019 11:12:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/verify_email.php on line 40
+[01-Jul-2019 11:12:35 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php on line 5
+[01-Jul-2019 11:12:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/welcome.php on line 40
+[01-Jul-2019 11:12:49 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/client_enquiry.php on line 5
+[01-Jul-2019 11:12:49 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/client_enquiry.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/client_enquiry.php on line 40
+[01-Jul-2019 11:13:04 UTC] PHP Notice:  Undefined variable: site in /home/plminfotech/public_html/vendor-live/application/views/email-template/forgot_password.php on line 5
+[01-Jul-2019 11:13:04 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function base_url() in /home/plminfotech/public_html/vendor-live/application/views/email-template/forgot_password.php:40
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email-template/forgot_password.php on line 40

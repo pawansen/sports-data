@@ -43,7 +43,7 @@
                             <span class="icon-bar"></span>
                         </button>
                          -->
-                        <a href="<?php echo base_url()."front/client_search" ?>" class="navbar-brand logo_text"><h3> Vendors</h3></a>
+                        <a href="#<?php //echo base_url()."front/client_search" ?>" class="navbar-brand logo_text"><h3> Vendors</h3></a>
 
                     </div>
                     <div id="navbar" class="navbar-collapse collapse">

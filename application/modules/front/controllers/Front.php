@@ -200,6 +200,43 @@ class Front extends Common_Controller {
         }
     }
 
+        /**
+     * Function Name: user
+     * Description:   To user verification
+     */
+    public function activate($email = "", $activation_code = "") {
+        if ($email && $activation_code) {
+            $email = base64_decode($email);
+            $token = $activation_code;
+            $where = array('email' => $email, 'activation_code' => $token);
+            $result = $this->common_model->getsingle(USERS, $where);
+            if (!empty($result)) {
+                /* Update user status */
+                $Status = $this->common_model->updateFields(USERS, array('activation_code' => NULL, 'email_verify' => 1), array('id' => $result->id));
+                if ($Status) {
+                    $this->session->set_userdata("email_verify", 1);
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                        redirect("front/client_search");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                        redirect("front/vendor_dashbaord");
+                    }
+                    $this->session->set_flashdata('user_verify', "Your email successfully verified");
+                    $this->load->view('verified');
+                } else {
+                    $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+                }
+            } else {
+                $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+                $this->load->view('verified');
+            }
+        } else {
+            $this->session->set_flashdata('user_verify', GENERAL_ERROR);
+            $this->load->view('verified');
+        }
+    }
+
     /**
      * Reset password - final step for forgotten password
      *
@@ -444,6 +481,33 @@ class Front extends Common_Controller {
                     $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
+                $isLoginAuth = $this->ion_auth->login($isLogin->email, $password, FALSE);
+                $this->session->set_userdata("login_session_key", $login_session_key);
+                $this->session->set_userdata("login_user_id", $isLogin->id);
+                $this->session->set_userdata("first_name", $isLogin->first_name);
+                $this->session->set_userdata("last_name", $isLogin->last_name);
+                $this->session->set_userdata("email", $isLogin->email);
+                $this->session->set_userdata("email_verify", $isLogin->email_verify);
+                $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
+                $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
+                $this->session->set_userdata("image", $user_image);
+                if ($isLogin->email_verify != 1) {
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                    }
+                    redirect("front/verificationAuth");
+                } else {
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                        //redirect("front/user_dashbaord");
+                        redirect("front/client_search");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                        redirect("front/vendor_dashbaord");
+                    }
+                }
 
 
 
@@ -572,6 +636,34 @@ class Front extends Common_Controller {
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
 
+                $isLoginAuth = $this->ion_auth->login($isLogin->email, $password, FALSE);
+                $this->session->set_userdata("login_session_key", $login_session_key);
+                $this->session->set_userdata("login_user_id", $isLogin->id);
+                $this->session->set_userdata("first_name", $isLogin->first_name);
+                $this->session->set_userdata("last_name", $isLogin->last_name);
+                $this->session->set_userdata("email", $isLogin->email);
+                $this->session->set_userdata("email_verify", $isLogin->email_verify);
+                $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
+                $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
+                $this->session->set_userdata("image", $user_image);
+                if ($isLogin->email_verify != 1) {
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                    }
+                    redirect("front/verificationAuth");
+                } else {
+                    if ($this->ion_auth->is_user()) {
+                        $this->session->set_userdata("login_role", "USER");
+                        //redirect("front/user_dashbaord");
+                        redirect("front/client_search");
+                    } else {
+                        $this->session->set_userdata("login_role", "VENDOR");
+                        redirect("front/vendor_dashbaord");
+                    }
+                }
+
                 $this->session->set_flashdata('message', 'You have been successfully registered, please check spam folder if you do not received it in your inbox and add our mail id in your addressbook.');
                 redirect("front/login");
             } else {
@@ -603,6 +695,7 @@ class Front extends Common_Controller {
             $email_template = $this->load->view('email-template/verify_email', $html, true);
             $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
             send_mail($email_template, $title, $this->session->userdata('email'), getConfig('admin_email'));
+            //echo $this->session->userdata('email');exit;
         }
     }
 
@@ -679,6 +772,16 @@ class Front extends Common_Controller {
     }
 
     public function verificationAuth() {
+        if($this->session->userdata('email_verify')){
+        if ($this->ion_auth->is_user()) {
+            $this->session->set_userdata("login_role", "USER");
+            //redirect("front/user_dashbaord");
+            redirect("front/client_search");
+        } else {
+            $this->session->set_userdata("login_role", "VENDOR");
+            redirect("front/vendor_dashbaord");
+        }
+    }
         $this->data['title'] = 'Verification';
         $this->load->front_render('verification', $this->data, 'inner_script');
     }
@@ -1171,35 +1274,7 @@ class Front extends Common_Controller {
         $this->load->front_render('partnership_document', $this->data, 'inner_script');
     }
 
-    /**
-     * Function Name: user
-     * Description:   To user verification
-     */
-    public function activate($email = "", $activation_code = "") {
-        if ($email && $activation_code) {
-            $email = base64_decode($email);
-            $token = $activation_code;
-            $where = array('email' => $email, 'activation_code' => $token);
-            $result = $this->common_model->getsingle(USERS, $where);
-            if (!empty($result)) {
-                /* Update user status */
-                $Status = $this->common_model->updateFields(USERS, array('activation_code' => NULL, 'email_verify' => 1), array('id' => $result->id));
-                if ($Status) {
-                    $this->session->sess_destroy();
-                    $this->session->set_flashdata('user_verify', "Your email successfully verified");
-                    $this->load->view('verified');
-                } else {
-                    $this->session->set_flashdata('user_verify', GENERAL_ERROR);
-                }
-            } else {
-                $this->session->set_flashdata('user_verify', GENERAL_ERROR);
-                $this->load->view('verified');
-            }
-        } else {
-            $this->session->set_flashdata('user_verify', GENERAL_ERROR);
-            $this->load->view('verified');
-        }
-    }
+
 
     public function about_us() {
         $this->data['title'] = 'About Us';
