@@ -10,7 +10,7 @@
                             <div class="home_banner_section">
                                 <h1><?php if(!empty($cmsContent)){echo $cmsContent->title;}?> </h1>
                                 <h4><?php if(!empty($cmsContent)){echo $cmsContent->description;}?> </h4>
-                                <button type="button" class="btn  banner_btn">Become Partner</button>
+                                <a href="<?php echo base_url().'front/becomePartner';?>"><button type="button" class="btn  banner_btn">Become Partner</button></a>
                             </div>
                         </div>
                         <div class="col-md-6">

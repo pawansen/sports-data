@@ -4,6 +4,9 @@
                   <div class="row mobile_row">
                      <div class="main_register_form">
                         <ul class="nav nav-tabs">
+                        <?php if(isset($_GET['q'])){
+                           $active = ($_GET['q'] == 'c') ? 2 : 3;
+                        }?>
                            <li class="<?php echo ($active == 3) ? 'active' : '';?>"><a data-toggle="tab" href="#Vendor"  <?php echo ($active == 2) ? 'aria-hidden="true"' : '';?> <?php echo ($active == 3) ? 'aria-expanded="true"' : '';?>><i class="fa fa-user-o icon-tab" ></i></i> Vendor</a></li>
                            <li class="<?php echo ($active == 2) ? 'active' : '';?>"><a data-toggle="tab" href="#Client" <?php echo ($active == 3) ? 'aria-hidden="true"' : '';?> <?php echo ($active == 2) ? 'aria-expanded="true"' : '';?>><i class="fa fa-user-o icon-tab"  ></i> Client</a></li>
                         </ul>

@@ -28,7 +28,7 @@ class Front extends Common_Controller {
             'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,
             UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
             'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
-            'where' => array("UG.group_id" => 3,'UP.country'=>$this->session->userdata('country')),
+            'where' => array("UG.group_id" => 3,'UP.country'=>$this->session->userdata('country'),'U.vendor_profile_activate'=>"Yes"),
         );
         $this->data['vendors'] = $this->common_model->customGet($option);
         //echo $this->db->last_query();exit;
@@ -47,7 +47,7 @@ class Front extends Common_Controller {
             'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,
             UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
             'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
-            'where' => array("UG.group_id" => 3),
+            'where' => array("UG.group_id" => 3,'U.vendor_profile_activate'=>"Yes"),
                 //'like'=> array("UP.company_name"=>$keyword)
         );
         if (!empty($keyword)) {
@@ -98,6 +98,24 @@ class Front extends Common_Controller {
         );
         $this->data['testimonial'] = $this->common_model->customGet($option);
         $this->load->front_render('home', $this->data, 'inner_script');
+    }
+
+
+    public function becomePartner() {
+        $this->data['title'] = "Become Partner";
+        $this->load->front_render('becomePartner', $this->data, 'inner_script');
+    }
+
+    public function our_partners(){
+        $this->data['title'] = "Our Partners";
+        $option = array('table' => "users U",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,
+            UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
+            'where' => array("UG.group_id" => 3,'U.vendor_profile_activate'=>"Yes"),
+        );
+        $this->data['vendors'] = $this->common_model->customGet($option);
+        $this->load->front_render('our_partners', $this->data, 'inner_script');  
     }
 
     public function login() {

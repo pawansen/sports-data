@@ -57,7 +57,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-12 bootom_text_footer">
-            <p>Copyright 2019 | All rights reserved. <b>Terms & Conditions</b> | <b>Privacy Policy</b></p>
+            <p>Copyright 2019 | All rights reserved. <b><a href="<?php echo site_url('front/terms_condition');?>">Terms & Conditions</a></b> | <b><a href="<?php echo site_url('front/privacy_policy');?>">Privacy Policy</a></b></p>
           </div>
         </div>
       </div>
