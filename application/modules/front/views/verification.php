@@ -3,19 +3,20 @@
                 <div class="row">
                   <div class="col-md-12">
                       <div class="email_verification_box">
-                          <div class="stacks_title">
-                              <h4>Stacks</h4>
-                         </div>
+                         <!-- <div class="stacks_title">-->
+                         <!--     <h4>Stacks</h4>-->
+                         <!--</div>-->
                          <div class="email_verification_box2">
-                             <div class="email_verification_sub"><p>You're nearly there!</p></div>
-                             <div class="email_verification_description"><p>We just need to verify your email address to complete your Vendor Signed</p></div>
+                             <div class="email_verification_sub"><p>Email Confirmation</p></div>
+                             <div class="email_verification_description"><p>We have sent email to confirm the validity of our email address. After receiving the email follow the link provided to complete you registration.
+If you not got any mail</p></div>
                              <div class="email_verification_btn">
-                                 <button id="verificationemail" class="email_verification_btn_btn" onclick="resendEmailVerification()">Verify email address</button>
+                                 <button id="verificationemail" class="email_verification_btn_btn" onclick="resendEmailVerification()">Resend confirmation mail</button>
                              </div>
                              <div class="email_verification_please">
                                  <p>Please note that this link will expire in 1 days.</p>
 <br>
-<p>If you have not signed up to Vendor, please ignore this email.</p>
+<!--<p>If you have not signed up to Vendor, please ignore this email.</p>-->
 <br>
 <p>Thanks</p>
                              </div>
@@ -23,10 +24,10 @@
                          </div>
                          
                          
-                         <div class="email_verification_footer">
-                              <h5>The team at Vendor</h5>
-                              <p>Pixel Perfect Networking</p>
-                         </div>
+                         <!--<div class="email_verification_footer">-->
+                         <!--     <h5>The team at Vendor</h5>-->
+                         <!--     <p>Pixel Perfect Networking</p>-->
+                         <!--</div>-->
                          
                       </div>
                       <div class="email_verifacation_bottom_footer">
@@ -53,7 +54,7 @@
     margin-bottom: 0em;
 }
 .stacks_title {
-    background-color: #2196F3;
+    background-color: #3759D1;
     color: #fff;
     padding: 18px 23px;
 }
@@ -70,7 +71,7 @@
 }
 button.email_verification_btn_btn {
     padding: 14px 23px;
-    background-color: #2196F3;
+    background-color: #3759D1;
     color: #fff;
     border: 0;
     border-radius: 5px;

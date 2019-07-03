@@ -3,17 +3,17 @@
                 <div class="row">
                   <div class="col-md-12">
                       <div class="email_verification_box">
-                          <div class="stacks_title">
-                              <h4>Stacks</h4>
-                         </div>
+                         <!-- <div class="stacks_title">-->
+                         <!--     <h4>Stacks</h4>-->
+                         <!--</div>-->
                          <div class="email_verification_box2">
-                             <div class="email_verification_sub"><p>You're nearly there!</p></div>
+                             <div class="email_verification_sub"><p>Email Confirmation</p></div>
                              <div class="email_verification_description"><p><?php echo $this->session->flashdata('user_verify'); ?></p></div>
                              <div class="email_verification_btn">
                                  <a href="<?php echo base_url().'front/login';?>" id="verificationemail" class="btn btn-success email_verification_btn_btn">Login</a>
                              </div>
                              <div class="email_verification_please">
-                                 <!-- <p>Please note that this link will expire in 1 days.</p> -->
+                                  <!--<p>Please note that this link will expire in 1 days.</p> -->
 <br>
 <p>If you have not signed up to Vendor, please ignore this email.</p>
 <br>
@@ -23,10 +23,10 @@
                          </div>
                          
                          
-                         <div class="email_verification_footer">
-                              <h5>The team at Vendor</h5>
-                              <p>Pixel Perfect Networking</p>
-                         </div>
+                         <!--<div class="email_verification_footer">-->
+                         <!--     <h5>The team at Vendor</h5>-->
+                         <!--     <p>Pixel Perfect Networking</p>-->
+                         <!--</div>-->
                          
                       </div>
                       <div class="email_verifacation_bottom_footer">
@@ -53,7 +53,7 @@
     margin-bottom: 0em;
 }
 .stacks_title {
-    background-color: #2196F3;
+    background-color: #3759D1;
     color: #fff;
     padding: 18px 23px;
 }
@@ -71,7 +71,7 @@
 }
 a.email_verification_btn_btn {
     padding: 14px 23px;
-    background-color: #2196F3;
+    background-color: #3759D1;
     color: #fff;
     border: 0;
     border-radius: 5px;

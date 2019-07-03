@@ -25,11 +25,13 @@ class Front extends Common_Controller {
         $this->data['countries'] = $this->common_model->customGet($option);
 
         $option = array('table' => "users U",
-            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,
+            UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
             'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
-            'where' => array("UG.group_id" => 3),
+            'where' => array("UG.group_id" => 3,'UP.country'=>$this->session->userdata('country')),
         );
         $this->data['vendors'] = $this->common_model->customGet($option);
+        //echo $this->db->last_query();exit;
         $this->load->front_render('client_search', $this->data, 'inner_script');
     }
 
@@ -38,8 +40,12 @@ class Front extends Common_Controller {
         $keyword = $this->input->post("keyword");
         $country = $this->input->post("country");
         $software = $this->input->post("software");
+        if(empty($country)){
+            $country = $this->session->userdata('country');
+        }
         $option = array('table' => "users U",
-            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,
+            UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
             'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
             'where' => array("UG.group_id" => 3),
                 //'like'=> array("UP.company_name"=>$keyword)
@@ -51,7 +57,7 @@ class Front extends Common_Controller {
             $option['like']['UP.country'] = $country;
         }
         if (!empty($software)) {
-            $option['like']['UP.category_id'] = $software;
+            $option['find_in_set']['UP.category_id'] = $software;
         }
         $this->data['vendors'] = $this->common_model->customGet($option);
         $this->load->front_render('vendors_list', $this->data, 'inner_script');
@@ -642,6 +648,7 @@ class Front extends Common_Controller {
                 $this->session->set_userdata("first_name", $isLogin->first_name);
                 $this->session->set_userdata("last_name", $isLogin->last_name);
                 $this->session->set_userdata("email", $isLogin->email);
+                $this->session->set_userdata("country", $country);
                 $this->session->set_userdata("email_verify", $isLogin->email_verify);
                 $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
                 $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
@@ -740,13 +747,16 @@ class Front extends Common_Controller {
                     ),
                 );
                 $this->common_model->customInsert($option);
-
+                $dataArr = array();
+                $dataArr['user_id'] = $isLogin->id;
+                $isProfile = $this->common_model->getsingle('user_profile', $dataArr);
                 $this->session->set_userdata("login_session_key", $login_session_key);
                 $this->session->set_userdata("login_user_id", $isLogin->id);
                 $this->session->set_userdata("first_name", $isLogin->first_name);
                 $this->session->set_userdata("last_name", $isLogin->last_name);
                 $this->session->set_userdata("email", $isLogin->email);
                 $this->session->set_userdata("email_verify", $isLogin->email_verify);
+                $this->session->set_userdata("country", $isProfile->country);
                 $this->session->set_userdata("created_on", date('M d Y', $isLogin->created_on));
                 $user_image = ($isLogin->profile_pic) ? base_url() . $isLogin->profile_pic : base_url() . 'backend_asset/images/default-1481.png';
                 $this->session->set_userdata("image", $user_image);
@@ -818,12 +828,12 @@ class Front extends Common_Controller {
         $dataArrUsers['company_name'] = $this->input->post('company_name');
         $dataArrUsers['description'] = $this->input->post('description');
         $dataArrUsers['website'] = $this->input->post('website');
-        $dataArrUsers['category_id'] = $this->input->post('category');
+        $categoryid = implode(",",$this->input->post('category'));
+        $dataArrUsers['category_id'] = $categoryid;
         $dataArrUsers['address1'] = $this->input->post('address');
         $dataArrUsers['city'] = $this->input->post('city');
         $dataArrUsers['country'] = $this->input->post('country');
         $dataArrUsers['state'] = $this->input->post('state');
-
         if ($_FILES['logo']['name']) {
             $image = fileUpload('logo', 'users', 'png|jpg|jpeg|gif');
             if (isset($image['error'])) {
@@ -831,6 +841,7 @@ class Front extends Common_Controller {
                 redirect("front/vendor_dashbaord");
             }
             $dataArrUsers['profile_pic'] = 'uploads/users/' . $image['upload_data']['file_name'];
+            $this->session->set_userdata('image',base_url().$dataArrUsers['profile_pic']);
         }
         $status = $this->common_model->updateFields('user_profile', $dataArrUsers, array('user_id' => $this->session->userdata('login_user_id')));
         $this->session->set_flashdata("message", "Business profile successfully updated");
@@ -844,8 +855,22 @@ class Front extends Common_Controller {
         $dataArrUsers['last_name'] = $this->input->post('last_name');
         $dataArrUsers['phone'] = $this->input->post('phone');
         //$dataArrUsers['email'] = $this->input->post('category');
-
+        $dataArrUsers1 = array();
+        if ($_FILES['image']['name']) {
+            $image = fileUpload('image', 'users', 'png|jpg|jpeg|gif');
+            if (isset($image['error'])) {
+                $this->session->set_flashdata("error", $image['error']);
+                redirect("front/user_dashbaord");
+            }
+            $dataArrUsers['profile_pic'] = 'uploads/users/' . $image['upload_data']['file_name'];
+            $dataArrUsers1['profile_pic'] = 'uploads/users/' . $image['upload_data']['file_name'];
+        }
+        $this->session->set_userdata('image',base_url().$dataArrUsers['profile_pic']);
         $status = $this->common_model->updateFields('users', $dataArrUsers, array('id' => $this->session->userdata('login_user_id')));
+        if(!empty($dataArrUsers1)){
+            $status = $this->common_model->updateFields('user_profile', $dataArrUsers1, array('user_id' => $this->session->userdata('login_user_id')));
+        }
+        
         $this->session->set_flashdata("message", "Profile successfully updated");
         redirect("front/user_dashbaord");
     }
@@ -990,7 +1015,9 @@ class Front extends Common_Controller {
         $this->data['title'] = 'Client Enquiries';
 
         $option = array('table' => "client_inquiry CU",
-            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,
+            CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
+            CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
             'join' => array("users U" => "U.id=CU.vendor_id",
                 "item_category C" => "C.id=CU.rq_software_categories",
                 "user_profile P" => "P.user_id=U.id"),
@@ -1004,8 +1031,11 @@ class Front extends Common_Controller {
     function get_enquiries_detail() {
         $id = $this->input->post('id');
         $option = array('table' => "client_inquiry CU",
-            'select' => "CU.id as inq_id,U.*,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            'select' => "CU.id as inq_id,U.*,CU.email as clinet_email,CU.rq_licenses,
+            CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
+            CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name,UC.first_name as c_name,UC.last_name as c_lname",
             'join' => array("users U" => "U.id=CU.vendor_id",
+                            "users UC" => "UC.id=CU.user_id",
                 "item_category C" => "C.id=CU.rq_software_categories",
                 "user_profile P" => "P.user_id=U.id"),
             'where' => array("CU.id" => $id),
@@ -1061,7 +1091,70 @@ class Front extends Common_Controller {
     public function clientAdminRequest() {
         $this->userAuth();
         $this->data['title'] = 'Request Admin';
+        $option = array('table' => "item_category",
+            );
+        $this->data['category'] = $this->common_model->customGet($option);
         $this->load->front_render('client_admin_request', $this->data, 'inner_script');
+    }
+
+    public function client_request_submit() {
+        $this->userAuth();
+        $this->data['title'] = 'Request Admin';
+        $this->form_validation->set_rules('rq_email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('rq_licenses', 'No. of licenses', 'trim|required');
+        $this->form_validation->set_rules('rq_software_categories', 'Software categories', 'trim|required');
+        $this->form_validation->set_rules('rq_expected_live', 'Expected go live', 'trim|required');
+        $this->form_validation->set_rules('rq_solution_offering', 'Expected contract term', 'trim|required');
+        $this->form_validation->set_rules('description', 'description', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $this->data['name'] = $this->input->post('vendor_name');
+            $option = array('table' => "item_category",
+            );
+            $this->data['category'] = $this->common_model->customGet($option);
+            $this->load->front_render('request_admin', $this->data, 'inner_script');
+        } else {
+            $addArray = array();
+            $addArray['user_id'] = $this->session->userdata('login_user_id');
+            $addArray['email'] = $this->input->post('rq_email');
+            $addArray['rq_licenses'] = $this->input->post('rq_licenses');
+            $addArray['rq_software_categories'] = $this->input->post('rq_software_categories');
+            $addArray['rq_expected_live'] = $this->input->post('rq_expected_live');
+            $addArray['rq_solution_offering'] = $this->input->post('rq_solution_offering');
+            $addArray['description'] = $this->input->post('description');
+            $addArray['datetime'] = date('Y-m-d H:i:s');
+            $option = array('table' => 'client_request',
+                'data' => $addArray,
+            );
+            $this->common_model->customInsert($option);
+   
+            $this->session->set_flashdata("message","Your request successfully submitted,We will contact you soon");
+       
+
+                /** welcome email * */
+                // $EmailTemplate = getEmailTemplate("vendor_inquiry");
+                // if (!empty($EmailTemplate)) {
+
+                //     $option = array('table' => "users U",
+                //         'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+                //         'join' => array("user_profile UP" => "UP.user_id=U.id"),
+                //         'where' => array("U.id" => $this->input->post('vendor_id')),
+                //         'single' => true
+                //     );
+                //     $client = $this->common_model->customGet($option);
+                //     $html = array();
+                //     $html['logo'] = base_url() . getConfig('site_logo');
+                //     $html['site'] = getConfig('site_name');
+                //     $html['site_meta_title'] = getConfig('site_meta_title');
+                //     $html['user'] = $this->session->userdata('first_name') . "(" . $this->session->userdata('email') . ")";
+                //     $html['client'] = $client->company_name . "(" . $client->email . ")";
+                //     $html['content'] = $EmailTemplate->description;
+                //     $email_template = $this->load->view('email-template/client_enquiry', $html, true);
+                //     $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
+                //     send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                // }
+                redirect("front/clientAdminRequest");
+            
+        }
     }
 
     public function client_inquiry() {
@@ -1217,15 +1310,19 @@ class Front extends Common_Controller {
         $this->userAuth();
         $this->data['title'] = 'Vendor Details';
         $option = array('table' => "users U",
-            'select' => "CT.name as country_name,ST.name as state_name,U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website,C.category_name",
+            'select' => "CT.name as country_name,ST.name as state_name,U.*,
+            UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,
+            UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,
+            UP.website,GROUP_CONCAT(C.category_name SEPARATOR ',') as category_name",
             'join' => array(array("user_profile UP", "UP.user_id=U.id", "inner"),
-                array("item_category C", "C.id=UP.category_id", "left"),
+                array("item_category C", "find_in_set(C.id,UP.category_id)<> 0 ", "left"),
                 array("countries CT", "CT.id=UP.country", "left"),
                 array("states ST", "ST.id=UP.state", "left")),
             'where' => array("U.id" => $id),
             'single' => true
         );
         $this->data['vendor'] = $this->common_model->customGet($option);
+        //dump( $this->data['vendor']);
         $this->load->front_render('vendor_details', $this->data, 'inner_script');
     }
 

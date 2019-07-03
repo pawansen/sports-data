@@ -6,7 +6,7 @@
                        <div class="content_vendore_details">
                          <div class="row details_left_right">
                           
-                            <div class="col-md-2 border_right">
+                            <div class="col-md-2 border_right  vendor_details_img">
                                <img src="<?php echo (!empty($vendor->logo)) ? base_url().$vendor->logo : base_url()."front_assets/images/our-service-icon-2.png";?>">
                             </div>
                             <div class="col-md-10 title_details">

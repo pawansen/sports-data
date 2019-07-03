@@ -57,6 +57,12 @@
                          <div class="row">
                          <form action="<?php echo site_url('front/vendor_password_change');?>" id="editFormAjaxPasswprd"  name="editFormAjaxPasswprd" method="POST" enctype='multipart/form-data'>
                            <div class="col-md-12 business_profile">
+                               <div class="row">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Account Settings    </h4>
+                             </div>
+                             </div>
+                             
                               <div class="row register_feild">
                                     <div class="col-md-12">
                                        <div class="input-container">

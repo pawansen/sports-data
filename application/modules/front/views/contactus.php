@@ -1,5 +1,5 @@
             <!--  *** banner container *** -->
-            <section class="login_section">
+            <section class="login_section contact_us_bg">
                <div class="container">
                <?php $cmsContenttrusted = commonGetHelper(array('table' => "cms",
         'where' => array('delete_status'=> 0,"is_active"=>1,'page_id' => "contact"),'single'=>true));

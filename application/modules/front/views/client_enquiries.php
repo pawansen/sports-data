@@ -30,13 +30,13 @@
 
 
                                                 <ul id="accordion" class="accordion">
-                                                    <li><a class="active" href="<?php echo base_url() . 'front/user_dashbaord'; ?>"><i class="fa fa-user-o icon_menu"></i>Personal details</a></li>
+                                                    <li><a  href="<?php echo base_url() . 'front/user_dashbaord'; ?>"><i class="fa fa-user-o icon_menu"></i>Personal details</a></li>
                                                       <!--<li><a href="client-enquiries.html"><i class="fa fa-cog icon_menu"></i>Enquiries</a></li>-->
                                                     <li>
                                                         <div class="link"><i class="fa fa-users icon_menu"></i>Enquiries<i class="fa fa-sort-desc"></i></div>
                                                         <ul class="submenu">
                                                             <li><a href="<?php echo base_url() . 'front/client_enquiries_draft'; ?>"><i class="fa fa-pencil-square-o icon_menu"></i>Draft</a></li>
-                                                            <li><a href="<?php echo base_url() . 'front/client_enquiries'; ?>"> <i class="fa fa-paper-plane icon_menu"></i>Submitted</a></li>
+                                                            <li><a class="active" href="<?php echo base_url() . 'front/client_enquiries'; ?>"> <i class="fa fa-paper-plane icon_menu"></i>Submitted</a></li>
                                                         </ul>
                                                     </li>
                                                     <li><a  href="<?php echo base_url() . 'front/user_account_setting'; ?>"><i class="fa fa-cog icon_menu"></i> Account settings</a></li>
@@ -57,6 +57,12 @@
                                             <div class="content_desboard">
                                                 <div class="row">
                                                     <div class="col-md-12 business_profile">
+                                                        
+                                                        <div class="row">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Submitted Enquiries </h4>
+                             </div>
+                             </div>
 
                                                         <!-- table -->
                                                         <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"

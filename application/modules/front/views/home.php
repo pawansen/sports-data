@@ -5,7 +5,7 @@
         <section id="bannerCntr">
             <article class="bannerBox">
                 <div class="container">
-                    <div class="row">
+                    <div class="row pt-30">
                         <div class="col-md-6">
                             <div class="home_banner_section">
                                 <h1><?php if(!empty($cmsContent)){echo $cmsContent->title;}?> </h1>
@@ -19,7 +19,7 @@
                                 <!-- <iframe width="570" height="315"
                                 src="<?php //if(!empty($cmsContent)){ echo preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","<iframe width=\"570\" height=\"315\" src=\"//www.youtube.com/embed/$1\" frameborder=\"0\" allowfullscreen></iframe>",$cmsContent->video_url);}?>" allowfullscreen>
                                 </iframe> -->
-                                <a href="<?php echo $cmsContent->video_url;?>" class="html5lightbox" data-width="580" data-height="420" title="Big Buck Bunny"><img src="<?php echo base_url(); ?>front_assets/images/banner-home.png"></a>
+                                <a href="<?php echo $cmsContent->video_url;?>" class="html5lightbox" data-width="580" data-height="420" title=""><img src="<?php echo base_url(); ?>front_assets/images/banner-home.png"></a>
                                 
                                 <!--<?php //if(!empty($cmsContent)){ echo preg_replace("/\s*[a-zA-Z\/\/:\.]*youtube.com\/watch\?v=([a-zA-Z0-9\-_]+)([a-zA-Z0-9\/\*\-\_\?\&\;\%\=\.]*)/i","<iframe width=\"570\" height=\"315\" src=\"//www.youtube.com/embed/$1\" frameborder=\"0\" allowfullscreen></iframe>",$cmsContent->video_url);}?>-->
                             </div>

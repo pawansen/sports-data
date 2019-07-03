@@ -57,6 +57,13 @@
                          <div class="row">
                          <form action="<?php echo site_url('front/vendor_profile_update');?>" id="editFormAjaxProfile"  name="editFormAjaxProfile" method="POST" enctype='multipart/form-data'>
                            <div class="col-md-12 business_profile Profile_col_6_space">
+                               
+                               <div class="row">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Update Personal Details  </h4>
+                             </div>
+                             </div>
+                             
                               <div class="row register_feild">
                                     <div class="col-md-6 left_col6">
                                        <div class="input-container">

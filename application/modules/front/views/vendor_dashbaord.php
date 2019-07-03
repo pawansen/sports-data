@@ -52,11 +52,48 @@
                      <div class="col-md-9">
                        <div class="content_desboard">
                          <div class="row">
-                           <div class="col-md-3">
-                             <div class="image_upload">
-                                <img src="<?php echo (!empty($profile->logo)) ? base_url().$profile->logo : base_url()."backend_asset/images/noimagefound.jpg";?>">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Update Business Profile </h4>
                              </div>
-                             <input type="file" name="logo" />
+                             </div>
+                             
+                             <div class="row">
+                           <div class="col-md-3">
+                               
+                               
+                               
+                                <div class="group_filed">
+        <div class="img_back_prieview_Academic">
+            <div class="images_box_upload_ven">
+          <div id="image-preview-academic">
+             <input type="file" name="logo" id="image-upload-academic" />
+          </div>
+          </div>
+
+         <div id="image-preview2">
+             <label for="image-upload-academic" id="image-label-academic"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Upload Logo</label>
+          </div>
+        </div>
+    </div>
+                               
+    <!--                           <div class="group_filed">-->
+    <!--    <div class="img_back_prieview">-->
+    <!--        <div class="images_box_upload">-->
+    <!--      <div id="image-preview">-->
+    <!--         <input type="file" name="image" id="image-upload" />-->
+    <!--      </div>-->
+    <!--      </div>-->
+
+    <!--     <div id="image-preview1">-->
+    <!--         <label for="image-upload" id="image-label"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;Upload Photo</label>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <!--</div>-->
+                               
+                             <!--<div class="image_upload img_btn_upolad">-->
+                             <!--   <img src="<?php echo (!empty($profile->logo)) ? base_url().$profile->logo : base_url()."backend_asset/images/noimagefound.jpg";?>">-->
+                             <!--</div>-->
+                             <!--<input type="file" name="logo" value="Uploadfile"/>-->
                            </div>
                            <div class="col-md-9 business_profile">
                               <div class="row register_feild">
@@ -89,7 +126,7 @@
 
                                     <div class="col-md-6 right_col6">
                                        <div class="input-container_select">
-                                        <select class="input-container" name="category">
+                                        <select class="input-container select2" name="category[]" multiple>
                                     <option value="">Software categories </option>
                                        <?php foreach($category as $rows){?>
                                           <option value="<?php echo $rows->id;?>" <?php echo ($profile->category_id == $rows->id) ? "selected" : ""; ?>><?php echo $rows->category_name;?></option>
@@ -123,10 +160,10 @@
 
 
 
-                                   <div class="col-md-6 right_col6">
+                                   <div class="col-md-6 left_col6">
                                        <div class="input-container">
                                           <i class="fa fa-flag-o icon"></i>
-                                          <select class="input-container" name="country">
+                                          <select class="input-container country_name_in" name="country">
                                       <option value="">Select Country</option>
                                        <?php foreach($countries as $rows){?>
                                           <option value="<?php echo $rows->id;?>" <?php echo ($profile->country == $rows->id) ? "selected" : ""; ?>><?php echo $rows->name;?></option>
@@ -135,7 +172,7 @@
                                        </div>
                                     </div>
 
-                                    <div class="col-md-6 left_col6">
+                                    <div class="col-md-6 right_col6">
                                        <div class="input-container_select">
                                         <select class="input-container" name="state">
                                       <option value="">State / Province selection</option>
@@ -153,11 +190,11 @@
                                   <div class="col-md-6 left_col6">
                                     <div class="register_btn">
 
-                                     <?php if( $this->session->userdata('email_verify') == 1){?>     
-                                    <?php if($profile->vendor_profile_activate == "No"){?>
-                                       <?php if(empty($profile->company_name)){?>
+                                     <?php if($this->session->userdata('email_verify') == 1){?>     
+                                    <?php if($profile->vendor_profile_activate == "No" || $profile->vendor_profile_activate == "Yes"){?>
+                                       <?php //if(empty($profile->company_name)){?>
                                        <button type="submit" id="submit" class="btn save_btn_profile">Save</button>
-                                       <?php }?>
+                                       <?php //}?>
                                     <?php }else{?>
                                        <div class="col-md-12 text-success">Your business profile verified</div>
                                     <?php }}else{?>

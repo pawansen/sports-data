@@ -17,3 +17,81 @@ ALTER TABLE `vendor_sale_email_subscription`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `vendor_sale_client_inquiry` ADD `is_active` INT(11) NOT NULL DEFAULT '0' AFTER `is_request_draft`;
 ALTER TABLE `vendor_sale_client_inquiry` CHANGE `is_active` `is_active` ENUM('No','Yes') NOT NULL DEFAULT 'No';
+
+
+
+
+ALTER TABLE `vendor_sale_user_profile` CHANGE `category_id` `category_id` VARCHAR(255) NULL DEFAULT NULL;
+
+-- phpMyAdmin SQL Dump
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Jul 04, 2019 at 12:13 AM
+-- Server version: 5.7.19-0ubuntu0.16.04.1
+-- PHP Version: 7.0.22-0ubuntu0.16.04.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `sale-sports`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vendor_sale_client_request`
+--
+
+CREATE TABLE `vendor_sale_client_request` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `rq_licenses` varchar(255) DEFAULT NULL,
+  `rq_software_categories` int(11) NOT NULL,
+  `rq_expected_live` varchar(255) DEFAULT NULL,
+  `rq_solution_offering` varchar(255) DEFAULT NULL,
+  `description` text,
+  `datetime` datetime NOT NULL,
+  `is_active` enum('No','Yes') NOT NULL DEFAULT 'No'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `vendor_sale_client_request`
+--
+
+INSERT INTO `vendor_sale_client_request` (`id`, `user_id`, `email`, `rq_licenses`, `rq_software_categories`, `rq_expected_live`, `rq_solution_offering`, `description`, `datetime`, `is_active`) VALUES
+(10, 57, 'pawansen9770@gmail.com', '1', 10, 'Within 15 days', '3 years', 'gdfgdfg', '2019-07-03 23:37:29', 'No'),
+(11, 57, 'pawansen9770@gmail.com', '3', 11, 'Within 15 days', '3 years', 'dgdg', '2019-07-03 23:38:07', 'No'),
+(12, 57, 'pawansen9770gfhf@gmail.com', '5', 10, 'Within 15 days', '3 years', 'fhfghhfghfgh', '2019-07-03 23:38:23', 'No');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `vendor_sale_client_request`
+--
+ALTER TABLE `vendor_sale_client_request`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `vendor_sale_client_request`
+--
+ALTER TABLE `vendor_sale_client_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -89,6 +89,7 @@ class My_model extends CI_Model {
         $where_in = false;
         $where_not_in = false;
         $between = false;
+        $find_in_set = false;
 
         extract($options);
 
@@ -110,6 +111,12 @@ class My_model extends CI_Model {
         if ($where_in != false) {
             foreach ($where_in as $key => $win) {
                 $this->db->where_in($key, $win);
+            }
+        }
+
+        if ($find_in_set != false) {
+            foreach ($find_in_set as $key => $win) {
+                $this->db->where("find_in_set($win,$key)", false);
             }
         }
         

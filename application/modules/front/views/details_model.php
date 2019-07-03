@@ -10,7 +10,7 @@
                      <div class="popup_header_title">
                          <div class="mail_form">
                            <p>Form</p>
-                           <h5>Arrett jugal Winters</h5>
+                           <h5><?php echo $enquiries->c_name.' '.$enquiries->c_lname;?></h5>
                          </div>
                          <div class="mail_to">
                           <p>To</p>

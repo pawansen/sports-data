@@ -6,7 +6,7 @@
        
         <section id="our_service" class=" pb-80 pt-150">
             <div class="container">
-                <div class="row">
+                <div class="row pt-20">
                     <div class="col-md-12 heading_title pb-60">
                         <h2>Our Service</h2>
                         <h5>It is a long established fact that a reader will be distracted by the</h5>

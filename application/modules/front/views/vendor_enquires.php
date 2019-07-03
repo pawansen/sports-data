@@ -48,6 +48,12 @@
                        <div class="content_desboard">
                          <div class="row">
                            <div class="col-md-12 business_profile">
+                               
+                              <div class="row">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Upcoming Enquires  </h4>
+                             </div>
+                             </div>
 
                             <!-- table -->
                             <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"

@@ -1,6 +1,6 @@
 <section id="works" class=" pb-80 pt-150">
             <div class="container">
-                <div class="row">
+                <div class="row pt-20">
                   <div class="col-md-12">
                     <div class="heading_title pb-60">
                         <h2>How it works</h2>

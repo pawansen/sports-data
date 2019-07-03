@@ -68,6 +68,40 @@
                          <div class="row">
                          <form action="<?php echo site_url('front/user_profile_update');?>" id="editFormAjaxProfile"  name="editFormAjaxProfile" method="POST" enctype='multipart/form-data'>
                            <div class="col-md-12 business_profile Profile_col_6_space">
+                               <div class="row">
+                             <div class="col-md-12">
+                             <h4 class="heading_form">Update Personal Details     </h4>
+                             </div>
+                             </div> 
+                               <div class="row business_profile Profile_col_6_space">
+                                    <div class="col-md-6 left_col6">
+                                       <!--<div class="input-container_upload upolad_pro">-->
+                                       <!--    <img id="blah" src="http://placehold.it/180" alt="your image" /><br>-->
+                                       <!--  <input type='file' onchange="readURL(this);"  class="btn-file-upload" value="Uploadfile" /><br>-->
+                                         
+                                       <!--</div>-->
+                                       
+                                       
+                                        <div class="group_filed">
+        <div class="img_back_prieview">
+            <div class="images_box_upload">
+          <div id="image-preview">
+             <input type="file" name="image" id="image-upload" />
+          </div>
+          </div>
+
+         <div id="image-preview1">
+             <label for="image-upload" id="image-label"><i class="fa fa-plus-circle" aria-hidden="true">
+             </i>&nbsp;Upload Photo</label>
+          </div>
+        </div>
+    </div>
+                                    </div>
+                                    <div class="col-md-6 right_col6">
+                                       
+                                    </div>
+                                    
+                                  </div>
                               <div class="row register_feild">
                                     <div class="col-md-6 left_col6">
                                        <div class="input-container">
@@ -101,9 +135,8 @@
                                     </div>
                                     
                                   </div>
-
-                                 
-
+                                  
+                                  
                                   <div class="row business_profile ">
                                   <div class="col-md-6 ">
                                     <div class="register_btn">
