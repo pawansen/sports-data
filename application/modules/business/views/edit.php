@@ -22,7 +22,7 @@
                                         <h2><i class="fa fa-file-o"></i> <strong>Vendor</strong> Profile</h2>
                                     </div>
                                     <!-- END Customer Info Title -->
-
+                                    <?php $cat_id = ($results->category_id) ? explode(",",$results->category_id) : array(); ?>
                                     <!-- Customer Info -->
                                     <div class="block-section text-center">
                                         <a href="javascript:void(0)">
@@ -51,7 +51,7 @@
                                                 <td class="text-right"><strong>Software Category</strong></td>
                                                 <td><?php foreach($categorys as $category){?>
                                                             
-                                                           <?php echo ($results->category_id == $category->id) ? $category->category_name: "";?>
+                                                           <?php echo (in_array($category->id,$cat_id)) ? $category->category_name.",": "";?>
                                                                     
                                                             <?php }?></td>
                                             </tr>
@@ -181,16 +181,16 @@
                             </div>
                         </div> -->
 
-                    
+                        
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Software Category</label>
                                     <div class="col-md-9">
-                                          <select id="category_id" name="category_id" class="form-control select2" size="1">
-                                              <option value="" disabled selected>Please select</option>
+                                          <select id="category_id" name="category_id[]" class="form-control select-chosen" multiple size="1">
+                                              <option value="">Please select</option>
                                                 <?php foreach($categorys as $category){?>
                                                             
-                                                <option value="<?php echo $category->id;?>" <?php echo ($results->category_id == $category->id) ? "selected": "";?>><?php echo $category->category_name;?></option>
+                                                <option value="<?php echo $category->id;?>" <?php echo (in_array($category->id,$cat_id)) ? "selected": "";?>><?php echo $category->category_name;?></option>
                                                         
                                                 <?php }?>
                                             </select>
@@ -270,7 +270,21 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Company Logo</label>
                                 <div class="col-md-9">
-                                        <div class="profile_content edit_img">
+                                     
+                                    <div class="group_filed">
+                                            <div class="img_back_prieview_Academic">
+                                                <div class="images_box_upload_ven_business_vendore">
+                                                    <div id="image-preview-business-vendore">
+                                                         <input type="file" name="user_image" id="image-upload-business-vendore" />
+                                                    </div>
+                                                </div>
+                                                    <div id="image-preview-business">
+                                                         <label for="image-upload-business-vendore" id="image-label-business-vendore">Upload Logo</label>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    
+                                        <!--<div class="profile_content edit_img">
                                         <div class="file_btn file_btn_logo">
                                           <input type="file"  class="input_img2" id="user_image" name="user_image" style="display: inline-block;">
                                           <span class="glyphicon input_img2 logo_btn" style="display: block;">
@@ -289,12 +303,15 @@
                                                <?php }?>
                                                 
                                             </span>
-                                            <!-- <i class="fa fa-camera"></i> -->
+                                            
                                           </span>
                                           <img class="show_company_img2" style="display:none" alt="img" src="<?php echo base_url() ?>/backend_asset/images/logo.png">
                                           <span style="display:none" class="fa fa-close remove_img"></span>
                                         </div>
-                                      </div>
+                                      </div> -->
+                                      
+                                      
+                                      
                                       <div class="ceo_file_error file_error text-danger"></div>
                                 </div>
                             </div>

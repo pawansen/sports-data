@@ -22,29 +22,29 @@
                                     <!-- Customer Info -->
                                     <div class="block-section text-center">
                                         <a href="javascript:void(0)">
-                                           <img src="<?php echo base_url().'backend_asset/images/default.jpg';?>" alt="avatar" class="img-circle" style=" width: 100px; height: 100px;">
+                                           <img src="<?php echo ($results->profile_pic) ? base_url().$results->profile_pic : base_url().'backend_asset/images/default.jpg';?>" alt="avatar" class="img-circle" style=" width: 100px; height: 100px;">
                                         </a>
                                         <h3>
-                                            <strong>Jonathan Taylor</strong><br><small></small>
+                                            <strong><?php echo $results->first_name." ".$results->last_name;?></strong><br><small></small>
                                         </h3>
                                     </div>
                                     <table class="table table-borderless table-striped table-vcenter">
                                         <tbody>
                                             <tr>
                                                 <td class="text-right" style="width: 50%;"><strong> First Name</strong></td>
-                                                <td>Honda</td>
+                                                <td><?php echo $results->first_name;?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Last Name</strong></td>
-                                                <td>Honda</td>
+                                                <td><?php echo $results->last_name;?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Email</strong></td>
-                                                <td>aymanjain007@gmail.com</td>
+                                                <td><?php echo $results->email;?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>Phone No</strong></td>
-                                                <td>0123456789</td>
+                                                <td><?php echo $results->phone;?></td>
                                             </tr>
                                            
                                            
@@ -132,7 +132,23 @@
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>
                                     <div class="col-md-9">
-                                            <div class="profile_content edit_img">
+                                        
+                                        
+                                        <div class="group_filed">
+                                            <div class="img_back_prieview_Academic">
+                                                <div class="images_box_upload_ven_user_vendore">
+                                                    <div id="image-preview-user-vendore">
+                                                         <input type="file" name="user_image" id="image-upload-user-vendore" />
+                                                    </div>
+                                                </div>
+                                                    <div id="image-preview-user">
+                                                         <label for="image-upload-user-vendore" id="image-label-user-vendore">Upload Logo</label>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                        
+                                        
+                                            <!--<div class="profile_content edit_img">
                                             <div class="file_btn file_btn_logo">
                                               <input type="file"  class="input_img2" id="user_image" name="user_image" style="display: inline-block;">
                                               <span class="glyphicon input_img2 logo_btn" style="display: block;">
@@ -155,12 +171,15 @@
                                                    <?php }?>
                                                     
                                                 </span>
-                                                <!-- <i class="fa fa-camera"></i> -->
+                                                
                                               </span>
                                               <img class="show_company_img2" style="display:none" alt="img" src="<?php echo base_url() ?>/backend_asset/images/logo.png">
                                               <span style="display:none" class="fa fa-close remove_img"></span>
                                             </div>
-                                          </div>
+                                          </div>-->
+                                          
+                                          
+                                          
                                           <div class="ceo_file_error file_error text-danger"></div>
                                     </div>
                                 </div>

@@ -49,8 +49,10 @@
                             <div class="clearfix"></div>
                             <div class="form-group">
                                <label class="col-md-3 control-label">Image</label>
-                                  <div class="col-md-9">
-                                       <input type="file" name="files" class="form-control">
+                                  <div class="col-md-9 ">
+                                      <div class="border_banner_box_news">
+                                       <input type="file" name="files" class="form-control ">
+                                       </div>
                                   </div>
                               </div>
                               <div class="form-group"><div class="col-md-12 col-md-offset-10">
@@ -77,7 +79,9 @@
                             <div class="form-group">
                                <label class="col-md-3 control-label">Image</label>
                                   <div class="col-md-9">
+                                      <div class="border_banner_box_news">
                                        <input type="file" name="files1" class="form-control">
+                                       </div>
                                   </div>
                               </div>
                               <!-- <div class="form-group"><div class="col-md-12 col-md-offset-10">
@@ -105,7 +109,9 @@
                             <div class="form-group">
                                <label class="col-md-3 control-label">Image</label>
                                   <div class="col-md-9">
+                                      <div class="border_banner_box_news">
                                        <input type="file" name="files2" class="form-control">
+                                       </div>
                                   </div>
                               </div>
                               <!-- <div class="form-group"><div class="col-md-12 col-md-offset-10">

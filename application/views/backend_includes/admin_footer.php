@@ -92,9 +92,11 @@
 
 <!-- jQuery, Bootstrap.js, jQuery plugins and Custom JS code -->
 <script src="<?php echo base_url(); ?>backend_asset/admin/js/vendor/jquery.min.js"></script>
+ <script src="<?php echo base_url(); ?>backend_asset/admin/js/vendor/jquery.uploadPreview.min.js"></script>  
 <script src="<?php echo base_url(); ?>backend_asset/admin/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>backend_asset/admin/js/plugins.js"></script>
 <script src="<?php echo base_url(); ?>backend_asset/admin/js/app.js"></script>
+ 
 
 <!-- Google Maps API Key (you will have to obtain a Google Maps API key to use Google Maps) -->
 <!-- For more info please have a look at https://developers.google.com/maps/documentation/javascript/get-api-key#key -->
@@ -105,8 +107,93 @@
 <script src="<?php echo base_url(); ?>backend_asset/admin/js/pages/index.js"></script>
 <script src="<?php echo base_url(); ?>backend_asset/plugins/toastr/toastr.min.js"></script>
 <script src="<?php echo base_url(); ?>backend_asset/js/admin.js"></script>
-<script>$(function () {
+
+                         
+ <script type="text/javascript">
+$(document).ready(function() {
+  $.uploadPreview3({
+    input_field: "#image-upload-admin-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-admin-vendore",  // Default: .image-preview
+    label_field: "#image-label-admin-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+ 
+$(document).ready(function() {
+  $.uploadPreview4({
+    input_field: "#image-upload-business-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-business-vendore",  // Default: .image-preview
+    label_field: "#image-label-business-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+
+$(document).ready(function() {
+  $.uploadPreview5({
+    input_field: "#image-upload-user-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-user-vendore",  // Default: .image-preview
+    label_field: "#image-label-user-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+
+
+$(document).ready(function() {
+  $.uploadPreview6({
+    input_field: "#image-upload-adduser-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-adduser-vendore",  // Default: .image-preview
+    label_field: "#image-label-adduser-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+}); 
+
+
+$(document).ready(function() {
+  $.uploadPreview7({
+    input_field: "#image-upload-addvendore-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-addvendore-vendore",  // Default: .image-preview
+    label_field: "#image-label-addvendore-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+}); 
+
+
+$(document).ready(function() {
+  $.uploadPreview8({
+    input_field: "#image-upload-sitelogo-vendore",   // Default: .image-upload
+    preview_box: "#image-preview-sitelogo-vendore",  // Default: .image-preview
+    label_field: "#image-label-sitelogo-vendore",    // Default: .image-label
+    label_default: "Upload Logo",   // Default: Choose File
+    label_selected: "Change logo",  // Default: Change File
+    no_label: false                 // Default: false
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+ 
+  </script>     
+  <script>$(function () {
                                 Index.init();
                             });</script>
+                            
 </body>
 </html>

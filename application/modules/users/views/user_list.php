@@ -79,6 +79,7 @@
                                                
 
                               <td class="actions">
+                                  <div class="btn-group btn-group-xs">
                                 <a href="javascript:void(0)" class="on-default edit-row" onclick="editFn('<?php echo USERS;?>','user_edit','<?php echo encoding($rows->id); ?>');"><img width="20" src="<?php echo base_url().EDIT_ICON;?>" /></a>
                             
                             <?php if($rows->id != 1){if($rows->active == 1) {?>
@@ -115,7 +116,7 @@
                               <a href="<?php echo base_url().'ipl/prediction/'.encoding($rows->id);?>" class="btn btn-warning btn-sm"><img width="18" src="<?php echo base_url().CRICKET_ICON;?>" />Prediction <?php echo '('. $totalPrediction . '/100' .')' ?></a>  
                               <a href="<?php echo base_url().'referrals/index/'.$rows->id;?>" class="btn btn-primary btn-sm"><i class="fa fa-user"></i> My Referrals</a>
 
-
+</div>
                             </td>
                               </tr>
     <?php }endforeach;

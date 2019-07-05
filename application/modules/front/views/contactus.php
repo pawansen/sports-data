@@ -4,6 +4,16 @@
                <?php $cmsContenttrusted = commonGetHelper(array('table' => "cms",
         'where' => array('delete_status'=> 0,"is_active"=>1,'page_id' => "contact"),'single'=>true));
         ?> 
+        
+        
+         <div class="row pt-20">
+                    <div class="col-md-12 heading_title pb-60">
+                        <h2>Get in Touch </h2>
+                        
+                    </div>
+                  </div>
+                   
+                   
                    <div class="row">
                   
                       <div class="col-md-4">

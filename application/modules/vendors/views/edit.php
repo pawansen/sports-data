@@ -12,7 +12,7 @@
     </ul>
     <!-- END Datatables Header -->
     
-    
+    <?php $cat_id = ($results->category_id) ? explode(",",$results->category_id) : array(); ?>
      <div class="row">
       <div class="col-md-4" >
           
@@ -46,17 +46,14 @@
                                                 <td class="text-right"><strong>Phone No</strong></td>
                                                 <td><?php echo $results->phone;?></td>
                                             </tr>
-                                            <tr>
-                                                <td class="text-right"><strong>Description</strong></td>
-                                                <td><?php echo $results->description;?></td>
-                                            </tr>
+                                            
                                             <tr>
                                                 <td class="text-right"><strong>Designation</strong></td>
                                                 <td><?php echo $results->designation;?></td>
                                             </tr>
                                             
                                           
-                                            <tr>
+                                            <!--<tr>
                                                 <td class="text-right"><strong>Company Name</strong></td>
                                                 <td><?php echo $results->phone_code;?></td>
                                             </tr>
@@ -69,17 +66,22 @@
                                                 <td class="text-right"><strong>Software Category</strong></td>
                                                 <td><?php foreach($categorys as $category){?>
                                                             
-                                                            <?php echo ($results->category_id == $category->id) ? $category->category_name: "";?>
+                                                    <?php echo (in_array($category->id,$cat_id)) ? $category->category_name.",": "";?>
                                                                      
                                                              <?php }?></td>
                                             </tr>
                                             <tr>
-                                                <td class="text-right"><strong> Country</strong></td>
-                                                <td><?php foreach($countries as $country){?>
-                                                            
-                                                            <?php echo ($results->country == $country->id) ? $country->name: "";?>
-                                                                    
-                                                            <?php }?></td>
+                                                <td class="text-right"><strong>Description</strong></td>
+                                                <td><?php echo $results->description;?></td>
+                                            </tr>-->
+                                            
+                                            <tr>
+                                                <td class="text-right"><strong>Address </strong></td>
+                                                <td><?php echo $results->address1;?></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-right"><strong>City</strong></td>
+                                                <td><?php echo $results->city;?></td>
                                             </tr>
                                             <tr>
                                                 <td class="text-right"><strong>State </strong></td>
@@ -89,15 +91,19 @@
                                                                     
                                                             <?php }?></td>
                                             </tr>
+                                            
                                             <tr>
-                                                <td class="text-right"><strong>City</strong></td>
-                                                <td><?php echo $results->city;?></td>
+                                                <td class="text-right"><strong> Country</strong></td>
+                                                <td><?php foreach($countries as $country){?>
+                                                            
+                                                            <?php echo ($results->country == $country->id) ? $country->name: "";?>
+                                                                    
+                                                            <?php }?></td>
                                             </tr>
                                             
-                                             <tr>
-                                                <td class="text-right"><strong>Address </strong></td>
-                                                <td><?php echo $results->address1;?></td>
-                                            </tr>
+                                            
+                                            
+                                             
                                             
                                             <!--<tr>-->
                                             <!--    <td class="text-right"><strong>Status</strong></td>-->
@@ -124,6 +130,14 @@
                 <div class="alert alert-danger" id="error-box" style="display: none"></div>
                 <div class="form-body">
                     <div class="row">
+                        
+                        
+                        <div class="col-md-12" >
+                            <div class="vender_title_admin">
+                               <h3>Personal Details </h3>
+                            </div>
+                        </div>
+                        
                              <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label">First Name</label>
@@ -174,14 +188,7 @@
                                 <!-- <span class="help-block m-b-none col-md-offset-3"><i class="fa fa-arrow-circle-o-up"></i> <?php echo lang('english_note');?></span> -->
                             </div>
                         </div>
-                        <div class="col-md-12" >
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Description</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="description" id="description" value="<?php echo $results->description; ?>"/>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="col-md-12" >
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Designation</label>
@@ -190,25 +197,16 @@
                                 </div>
                             </div>
                         </div>
-
-                    
-                            <div class="col-md-12" >
-                                <div class="form-group">
-                                    <label class="col-md-3 control-label">Software Category</label>
-                                    <div class="col-md-9">
-                                          <select id="category_id" name="category_id" class="form-control select2" size="1">
-                                              <option value="" disabled selected>Please select</option>
-                                                <?php foreach($categorys as $category){?>
-                                                            
-                                                <option value="<?php echo $category->id;?>" <?php echo ($results->category_id == $category->id) ? "selected": "";?>><?php echo $category->category_name;?></option>
-                                                        
-                                                <?php }?>
-                                            </select>
-<!--                                        <input type="text" class="form-control" name="state" placeholder="State" value="<?php //echo $results->state; ?>"/>-->
-                                    </div>
-                                </div>
+                        
+                        
+                        <div class="modal-header text-center"></div>
+                        <div class="col-md-12" >
+                            <div class="vender_title_admin">
+                               <h3>Company Profile  </h3>
                             </div>
-                             <div class="col-md-12" >
+                        </div>
+                        
+                        <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Company Name</label>
                                     <div class="col-md-9">
@@ -216,6 +214,7 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Company Website</label>
@@ -224,6 +223,43 @@
                                     </div>
                                 </div>
                             </div>
+
+                        <?php $cat_id = ($results->category_id) ? explode(",",$results->category_id) : array(); ?>
+                            <div class="col-md-12" >
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Software Category</label>
+                                    <div class="col-md-9">
+                                          <select id="category_id" name="category_id[]" class="form-control select-chosen" multiple size="1">
+                                              <option value=""Please select</option>
+                                                <?php foreach($categorys as $category){?>
+                                                            
+                                                <option value="<?php echo $category->id;?>" <?php echo (in_array($category->id,$cat_id)) ? "selected": "";?>><?php echo $category->category_name;?></option>
+                                                        
+                                                <?php }?>
+                                            </select>
+<!--                                        <input type="text" class="form-control" name="state" placeholder="State" value="<?php //echo $results->state; ?>"/>-->
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            
+                            
+                            <div class="col-md-12" >
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Description</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="description" id="description" value="<?php echo $results->description; ?>"/>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="modal-header text-center"></div>
+                        <div class="col-md-12" >
+                            <div class="vender_title_admin">
+                               <h3>Address </h3>
+                            </div>
+                        </div> 
+                        
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label">Country</label>
@@ -274,6 +310,15 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            
+                            <div class="modal-header text-center"></div>
+                        <div class="col-md-12" >
+                            <div class="vender_title_admin">
+                               <h3>Change Security </h3>
+                            </div>
+                        </div> 
+                        
                             <div class="col-md-12" >
                                 <div class="form-group">
                                     <label class="col-md-3 control-label"><?php echo "Current Password";?></label>
@@ -291,11 +336,37 @@
                                   </div>
                               </div>
                           </div>
+                          
+                          
+                          
+                           <div class="modal-header text-center"></div>
+                        <div class="col-md-12" >
+                            <div class="vender_title_admin">
+                               <h3>Upload Logo</h3>
+                            </div>
+                        </div> 
                             <div class="col-md-12" >
                             <div class="form-group">
-                                <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>
+                                <label class="col-md-3 control-label"><?php // echo lang('profile_image'); ?></label>
                                 <div class="col-md-9">
-                                        <div class="profile_content edit_img">
+                                    
+                                    <div class="group_filed">
+                                            <div class="img_back_prieview_Academic">
+                                                <div class="images_box_upload_ven_admin_vendore">
+                                                    <div id="image-preview-admin-vendore">
+                                                         <input type="file" name="user_image" id="image-upload-admin-vendore" />
+                                                    </div>
+                                                </div>
+                                                    <div id="image-preview-admin">
+                                                         <label for="image-upload-admin-vendore" id="image-label-admin-vendore">Upload Logo</label>
+                                                    </div>
+                                            </div>
+                                    </div>
+                                    
+                                   
+                                    
+                                    
+                                       <!-- <div class="profile_content edit_img">
                                         <div class="file_btn file_btn_logo">
                                           <input type="file"  class="input_img2" id="user_image" name="user_image" style="display: inline-block;">
                                           <span class="glyphicon input_img2 logo_btn" style="display: block;">
@@ -314,12 +385,15 @@
                                                <?php }?>
                                                 
                                             </span>
-                                            <!-- <i class="fa fa-camera"></i> -->
+                                           
                                           </span>
                                           <img class="show_company_img2" style="display:none" alt="img" src="<?php echo base_url() ?>/backend_asset/images/logo.png">
                                           <span style="display:none" class="fa fa-close remove_img"></span>
                                         </div>
-                                      </div>
+                                      </div> -->
+                                      
+                                      
+                                      
                                       <div class="ceo_file_error file_error text-danger"></div>
                                 </div>
                             </div>

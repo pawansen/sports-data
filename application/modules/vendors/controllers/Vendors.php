@@ -221,8 +221,9 @@ class Vendors extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
-                        'category_id' => $this->input->post('category_id'),
+                        'category_id' => implode(",",$this->input->post('category_id')),
                         'company_name' => $this->input->post('company_name'),
+                        'profile_pic' => $image,
                         'update_date' => date('Y-m-d H:i:s')
                     );
                     $this->db->insert('vendor_sale_user_profile', $additional_data_profile);
@@ -252,8 +253,9 @@ class Vendors extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
-                        'category_id' => $this->input->post('category_id'),
+                        'category_id' =>  implode(",",$this->input->post('category_id')),
                         'company_name' => $this->input->post('company_name'),
+                        'profile_pic' => $image,
                         'update_date' => date('Y-m-d H:i:s')
                     );
                     $this->db->where("user_id", $where_id);
@@ -396,7 +398,7 @@ class Vendors extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
-                        'category_id' => $this->input->post('category_id'),
+                        'category_id' => implode(",",$this->input->post('category_id')),
                         'company_name' => $this->input->post('company_name'),
                         'profile_pic' => $image,
                         'update_date' => date('Y-m-d H:i:s')

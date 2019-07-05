@@ -1176,7 +1176,7 @@ div#testimonial-slider-page2 .owl-next{
     background-color: #FFFFFF;
     box-shadow: 0 5px 27px rgba(0,0,0,0.05);
     /*padding: 21px 16px;*/
-        height: 600px;
+        height: 640px;
 }
 .content_desboard {
     background-color: #FFFFFF;
@@ -1184,7 +1184,7 @@ div#testimonial-slider-page2 .owl-next{
  
         padding: 34px 16px;
    
-        height: 600px;
+        height: 640px;
 }
 .frofile_images {
     text-align: center;
@@ -1242,6 +1242,7 @@ button.btn.edit_profile_btn a {
     border-bottom: 1px solid #f0f0f0;
     font-family: 'mulilight';
     border-radius: 4px;
+        text-transform: capitalize;
 }
 
 .menu_sidbar ul li a.active {
@@ -1342,6 +1343,12 @@ button.save_btn_profile {
     margin: 0 auto;
     /* border-radius: 50%; */
     /* padding: 24px; */
+}
+.business_profile select.country_name_in {
+    height: 46px;
+    line-height: 46px;
+    border: 0px solid #D0D0D0;
+    padding-left: 4px;
 }
 .Profile_col_6_space .col-md-6.left_col6 {
     padding-right: 8px;
@@ -1786,7 +1793,7 @@ button.save_btn_enquiries_form {
     padding-left: 8px;
 }
 h4.heading_form {
-    margin-bottom: 15px;
+    margin-bottom: 22px;
 }
 
 
@@ -2138,6 +2145,7 @@ hr.hr_line_popup {
     color: #5a5a5a;
     font-weight: 300;
     line-height: 22px;
+      padding-bottom: 20px;
 }
 .deshbord_menu_width_icon .btn-default {
     background-color: white;
@@ -2262,6 +2270,11 @@ div#image-preview1 label {
   position: absolute;
   opacity: 0;
   z-index: 10;
+}
+
+.html5-image {
+    padding: 0!important;
+    z-index: 1;
 }
 
 

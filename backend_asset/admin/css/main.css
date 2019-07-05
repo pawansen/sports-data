@@ -4206,6 +4206,312 @@ only screen and (min-device-pixel-ratio: 1.5) {
     padding-top: 25%;
 }
 
+.vender_title_admin {
+    padding-top: 16px;
+}
 
+
+/*-----------one images End admin Vendor ----------------*/
+
+
+div#image-preview-admin label {
+    margin-top: 10px;
+    /* position: absolute; */
+    /* padding-left: 27px; */
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    margin-bottom: 22px;
+    /* border: 1px solid #3759d1; */
+    padding: 16px 15px;
+    /* font-family: 'mulilight'; */
+    /* border-radius: 5px; */
+    width: 100%;
+    text-align: center;
+    background-color: #352b4e;
+}
+
+  .images_box_upload_ven_admin_vendore {
+    height: 220px;
+    
+    border: 3px dashed #D0D0D0;
+    padding: 24px;
+    /* margin: 0 auto; */
+    border-radius: 5px;
+}
+#image-preview-admin-vendore {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    /* background-color: #ffffff; */
+    color: #ecf0f1;
+    background-image: url(../img/img-upload.png);
+       background-size: cover;
+    background-position: center center;
+    /* border-radius: 50%; */
+    /*float: left;*/
+    background-repeat: no-repeat;
+        margin: 0 auto;
+}
+#image-preview-admin-vendore input {
+  line-height: 200px;
+  font-size: 200px;
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+}
+
+
+
+/*-----------one images End business Vendor ----------------*/
+
+div#image-preview-business label {
+    margin-top: 10px;
+    /* position: absolute; */
+    /* padding-left: 27px; */
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    margin-bottom: 22px;
+    /* border: 1px solid #3759d1; */
+    padding: 16px 15px;
+    /* font-family: 'mulilight'; */
+    /* border-radius: 5px; */
+    width: 100%;
+    text-align: center;
+    background-color: #352b4e;
+}
+
+  .images_box_upload_ven_business_vendore {
+    height: 220px;
+    
+    border: 3px dashed #D0D0D0;
+    padding: 24px;
+    /* margin: 0 auto; */
+    border-radius: 5px;
+}
+#image-preview-business-vendore {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    /* background-color: #ffffff; */
+    color: #ecf0f1;
+    background-image: url(../img/img-upload.png);
+       background-size: cover;
+    background-position: center center;
+    /* border-radius: 50%; */
+    /*float: left;*/
+    background-repeat: no-repeat;
+        margin: 0 auto;
+}
+#image-preview-business-vendore input {
+  line-height: 200px;
+  font-size: 200px;
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+} 
+
+
+
+/*-----------one images End business Vendor ----------------*/
+
+div#image-preview-user label {
+    margin-top: 10px;
+    /* position: absolute; */
+    /* padding-left: 27px; */
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    margin-bottom: 22px;
+    /* border: 1px solid #3759d1; */
+    padding: 16px 15px;
+    /* font-family: 'mulilight'; */
+    /* border-radius: 5px; */
+    width: 100%;
+    text-align: center;
+    background-color: #352b4e;
+}
+
+  .images_box_upload_ven_user_vendore {
+    height: 220px;
+    
+    border: 3px dashed #D0D0D0;
+    padding: 24px;
+    /* margin: 0 auto; */
+    border-radius: 5px;
+}
+#image-preview-user-vendore {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    /* background-color: #ffffff; */
+    color: #ecf0f1;
+    background-image: url(../img/img-upload.png);
+       background-size: cover;
+    background-position: center center;
+    /* border-radius: 50%; */
+    /*float: left;*/
+    background-repeat: no-repeat;
+        margin: 0 auto;
+}
+#image-preview-user-vendore input {
+  line-height: 200px;
+  font-size: 200px;
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+} 
+
+
+
+/*-----------one images End add user Vendor ----------------*/
+
+div#image-preview-adduser label {
+    margin-top: 10px;
+    /* position: absolute; */
+    /* padding-left: 27px; */
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    margin-bottom: 22px;
+    /* border: 1px solid #3759d1; */
+    padding: 16px 15px;
+    /* font-family: 'mulilight'; */
+    /* border-radius: 5px; */
+    width: 100%;
+    text-align: center;
+    background-color: #352b4e;
+}
+
+  .images_box_upload_ven_adduser_vendore {
+    height: 220px;
+    
+    border: 3px dashed #D0D0D0;
+    padding: 24px;
+    /* margin: 0 auto; */
+    border-radius: 5px;
+}
+#image-preview-adduser-vendore {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    /* background-color: #ffffff; */
+    color: #ecf0f1;
+    background-image: url(../img/img-upload.png);
+       background-size: cover;
+    background-position: center center;
+    /* border-radius: 50%; */
+    /*float: left;*/
+    background-repeat: no-repeat;
+        margin: 0 auto;
+}
+#image-preview-adduser-vendore input {
+  line-height: 200px;
+  font-size: 200px;
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+} 
+
+
+
+
+
+
+
+
+
+/*-----------one images End addvendore Vendor ----------------*/
+
+div#image-preview-addvendore label {
+    margin-top: 10px;
+    /* position: absolute; */
+    /* padding-left: 27px; */
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #ffffff;
+    margin-bottom: 22px;
+    /* border: 1px solid #3759d1; */
+    padding: 16px 15px;
+    /* font-family: 'mulilight'; */
+    /* border-radius: 5px; */
+    width: 100%;
+    text-align: center;
+    background-color: #352b4e;
+}
+
+  .images_box_upload_ven_addvendore_vendore {
+    height: 220px;
+    
+    border: 3px dashed #D0D0D0;
+    padding: 24px;
+    /* margin: 0 auto; */
+    border-radius: 5px;
+}
+#image-preview-addvendore-vendore {
+    width: 150px;
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    /* background-color: #ffffff; */
+    color: #ecf0f1;
+    background-image: url(../img/img-upload.png);
+       background-size: cover;
+    background-position: center center;
+    /* border-radius: 50%; */
+    /*float: left;*/
+    background-repeat: no-repeat;
+        margin: 0 auto;
+}
+#image-preview-addvendore-vendore input {
+  line-height: 200px;
+  font-size: 200px;
+  position: absolute;
+  opacity: 0;
+  z-index: 10;
+} 
+
+
+img.show_company_img2 {
+    width: 160px;
+}
+span.ceo_logo img {
+    width: 175px;
+}
+
+ input.input_img2 {
+    padding-bottom: 13px;
+}
+.border_banner_box {
+    border: 3px dashed #D0D0D0;
+    padding: 20px;
+}
+.border_banner_box_news {
+    border: 3px dashed #D0D0D0;
+    padding: 10px;
+        margin-bottom: 32px;
+}
+.border_banner_box_testimonail {
+    border: 3px dashed #D0D0D0;
+    padding: 20px;
+    /* clear: both; */
+    display: inline-block;
+    width: 100%;
+}
 
 

@@ -3,13 +3,13 @@
                  <div class="row client_search">
                    <div class="form-group col-lg-4 search_box_client">
                       <div class="form-group has-feedback">
-                         <input type="text" class="form-control" id="inputValidation" onchange="getVendorListKeyword(this.value)" placeholder="Keyword search"/>
+                         <input type="text" class="form-control" id="keywordsearch" onchange="getVendorListKeyword(this.value)" placeholder="Keyword search"/>
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </div>
                   <div class="form-group col-lg-4 search_box_client">
                       <div class="form-group ">
-                         <select class="input-container" name="software_categories" onchange="getVendorListSoftware(this.value)">
+                         <select id="software_categories" class="input-container" name="software_categories" onchange="getVendorListSoftware(this.value)">
                          <option value="" disabled selected>Software categories </option>
                          <?php foreach($category as $rows){?>
                              <option value="<?php echo $rows->id;?>"><?php echo ucwords($rows->category_name);?></option>
@@ -23,7 +23,7 @@
                       <div class="form-group ">
 
                         
-                        <select class="input-container" onchange="getVendorListCountry(this.value)">
+                        <select id="country" class="input-container" onchange="getVendorListCountry(this.value)">
                                     <option value="" disabled selected>Select country</option>
                                     <?php foreach($countries as $rows){?>
                              <option value="<?php echo $rows->id;?>"><?php echo ucwords($rows->name);?></option>

@@ -27,14 +27,14 @@
                                     <label class="col-md-3 control-label">Logo</label>
                                     <div class="col-md-9">
                                             <div class="profile_content edit_img">
-                                            <div class="file_btn file_btn_logo">
-                                              <input type="file" class="form-control input_img2" id="image" name="image" style="display: inline-block;">
+                                            <div class="file_btn file_btn_logo border_banner_box">
+                                              <input type="file" class="form-control_none input_img2" id="image" name="image" style="display: inline-block;">
                                               <span class="glyphicon input_img2 logo_btn" style="display: block;">
                                                 <div id="show_company_img"></div>
                                                 <span class="ceo_logo">
                                                   <img src="<?php echo base_url().'backend_asset/images/default.jpg';?>">
                                                 </span>
-                                                <i class="fa fa-camera"></i>
+                                                <!--<i class="fa fa-camera"></i>-->
                                               </span>
                                               <img class="show_company_img2" style="display:none" alt="img" src="<?php echo base_url() ?>/backend_asset/images/logo.png">
                                               <span style="display:none" class="fa fa-close remove_img"></span>

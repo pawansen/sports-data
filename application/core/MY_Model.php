@@ -116,7 +116,7 @@ class My_model extends CI_Model {
 
         if ($find_in_set != false) {
             foreach ($find_in_set as $key => $win) {
-                $this->db->where("find_in_set($win,$key)", false);
+                $this->db->where("find_in_set($win,$key)", true);
             }
         }
         

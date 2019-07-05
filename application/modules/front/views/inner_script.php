@@ -154,10 +154,12 @@ function getDetails(id){
 }
 
 function getVendorListKeyword(keyword){
+    var country = $("#country").val();
+    var software = $("#software_categories").val();
     $.ajax({
             url: '<?php echo base_url(); ?>' + "front/vendors_list",
             type: "post",
-            data: {keyword: keyword},
+            data: {keyword: keyword,country: country,software: software},
             success: function (data, textStatus, jqXHR) {
                 $('#client_box_all').html(data);
             }
@@ -165,10 +167,12 @@ function getVendorListKeyword(keyword){
 }
 
 function getVendorListCountry(keyword){
+    var keywordsearch = $("#keywordsearch").val();
+    var software = $("#software_categories").val();
     $.ajax({
             url: '<?php echo base_url(); ?>' + "front/vendors_list",
             type: "post",
-            data: {country: keyword},
+            data: {country: keyword,software: software,keyword: keywordsearch},
             success: function (data, textStatus, jqXHR) {
                 $('#client_box_all').html(data);
             }
@@ -176,10 +180,12 @@ function getVendorListCountry(keyword){
 }
 
 function getVendorListSoftware(keyword){
+    var country = $("#country").val();
+    var keywordsearch = $("#keywordsearch").val();
     $.ajax({
             url: '<?php echo base_url(); ?>' + "front/vendors_list",
             type: "post",
-            data: {software: keyword},
+            data: {software: keyword,country: country,keyword: keywordsearch},
             success: function (data, textStatus, jqXHR) {
                 $('#client_box_all').html(data);
             }

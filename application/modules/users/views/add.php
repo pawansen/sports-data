@@ -71,8 +71,25 @@
                <div class="col-md-12" >
                     <div class="form-group">
                         <label class="col-md-3 control-label"><?php echo lang('profile_image'); ?></label>
-                        <div class="col-md-9">
-                                <div class="profile_content edit_img">
+                        <div class="col-md-9"> 
+                        
+                        <div class="group_filed">
+                                            <div class="img_back_prieview_Academic">
+                                                <div class="images_box_upload_ven_adduser_vendore">
+                                                    <div id="image-preview-adduser-vendore">
+                                                         <input type="file" name="user_image" id="image-upload-adduser-vendore" />
+                                                    </div>
+                                                </div>
+                                                    <div id="image-preview-adduser">
+                                                         <label for="image-upload-adduser-vendore" id="image-label-adduser-vendore">Upload Logo</label>
+                                                    </div>
+                                            </div>
+                           </div>
+                                    
+                                    
+                                   
+                        
+                                <!--<div class="profile_content edit_img">
                                 <div class="file_btn file_btn_logo">
                                   <input type="file"  class="input_img2" id="user_image" name="user_image" style="display: inline-block;"><br><br>s
                                   <span class="glyphicon input_img2 logo_btn" style="display: block;">
@@ -84,7 +101,10 @@
                                   <img class="show_company_img2" style="display:none" alt="img" src="<?php echo base_url() ?>/backend_asset/images/logo.png">
                                   <span style="display:none" class="fa fa-close remove_img"></span>
                                 </div>
-                              </div>
+                              </div>-->
+                              
+                              
+                              
                               <div class="ceo_file_error file_error text-danger"></div>
                         </div>
                     </div>

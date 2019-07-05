@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-md-12" >
                              <div class="form-group">
-                               <label class="col-md-3 control-label">Title</label>
+                               <label class="col-md-3 control-label">Title hjhj</label>
                                   <div class="col-md-9">
                                        <input type="text" name="title" class="form-control">
                                   </div>

@@ -390,7 +390,7 @@ class Business extends Common_Controller {
                         'state' => $this->input->post('state'),
                         'city' => $this->input->post('city'),
                         'address1' => $this->input->post('address1'),
-                        'category_id' => $this->input->post('category_id'),
+                        'category_id' => implode(",",$this->input->post('category_id')),
                         'company_name' => $this->input->post('company_name'),
                         'profile_pic' => $image,
                         'update_date' => date('Y-m-d H:i:s')

@@ -1,0 +1,4 @@
+[01-Jul-2019 11:14:43 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function getConfig() in /home/plminfotech/public_html/vendor-live/application/views/email/email_verification_web.php:5
+Stack trace:
+#0 {main}
+  thrown in /home/plminfotech/public_html/vendor-live/application/views/email/email_verification_web.php on line 5

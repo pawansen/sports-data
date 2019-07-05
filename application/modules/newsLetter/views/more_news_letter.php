@@ -15,8 +15,8 @@
                                 </div>    
                             <div class="clearfix"></div>
                             <div class="form-group">
-                               <label class="col-md-3 control-label">Image</label>
-                                  <div class="col-md-9">
+                               <label class="col-md-3 control-label">Image vhjhj</label>
+                                  <div class="col-md-9 border_banner_box ">
                                        <input type="file" name="files[]" class="form-control">
                                   </div>
                               </div>
