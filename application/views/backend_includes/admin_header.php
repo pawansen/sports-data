@@ -152,6 +152,12 @@
                                 <li title="Testimonials">
                                     <a href="<?php echo site_url('testimonial'); ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "testimonial") ? "active" : "" ?>"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Testimonials</span></a>
                                 </li>
+                                <li title="Contact Us">
+                                    <a href="<?php echo site_url('contestUs'); ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "contestUs") ? "active" : "" ?>"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Contact Us</span></a>
+                                </li>
+                                <li title="Client Request">
+                                    <a href="<?php echo site_url('clientRequest'); ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "clientRequest") ? "active" : "" ?>"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Client Request</span></a>
+                                </li>
                                  <li title="setting">
                                     <a href="<?php echo site_url('setting'); ?>" class=" <?php echo (strtolower($this->router->fetch_class()) == "setting") ? "active" : "" ?>"><i class="gi gi-charts sidebar-nav-icon"></i><span class="sidebar-nav-mini-hide">Setting</span></a>
                                 </li>
