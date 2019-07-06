@@ -60,7 +60,7 @@ class Front extends Common_Controller {
             $option['find_in_set']['UP.category_id'] = $software;
         }
         $this->data['vendors'] = $this->common_model->customGet($option);
-        $this->load->front_render('vendors_list', $this->data, 'inner_script');
+        $this->load->view('vendors_list', $this->data);
     }
 
     public function vendorAuth() {
@@ -703,13 +703,14 @@ class Front extends Common_Controller {
 
     public function resendEmailVerification() {
         $this->data['title'] = 'Verification';
+        $dataArr['id'] = $this->session->userdata('login_user_id');
+        $isLogin = $this->common_model->getsingle(USERS, $dataArr);
+        if($isLogin->email_verify != 1){
         /** Verification email * */
         $EmailTemplate = getEmailTemplate("verification");
         if (!empty($EmailTemplate)) {
             $dataArrUsers['activation_code'] = rand() . time();
             $status = $this->common_model->updateFields('users', $dataArrUsers, array('id' => $this->session->userdata('login_user_id')));
-            $dataArr['id'] = $this->session->userdata('login_user_id');
-            $isLogin = $this->common_model->getsingle(USERS, $dataArr);
             $html = array();
             $html['active_url'] = base_url() . 'front/activate/' . base64_encode($isLogin->email) . '/' . $isLogin->activation_code;
             $html['logo'] = base_url() . getConfig('site_logo');
@@ -720,8 +721,11 @@ class Front extends Common_Controller {
             $email_template = $this->load->view('email-template/verify_email', $html, true);
             $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
             send_mail($email_template, $title, $this->session->userdata('email'), getConfig('admin_email'));
-            //echo $this->session->userdata('email');exit;
+            echo 1;
         }
+    }else{
+        echo 0;
+    }
     }
 
     public function auth() {
@@ -1035,9 +1039,9 @@ class Front extends Common_Controller {
         $option = array('table' => "client_inquiry CU",
             'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,
             CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
-            CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            CU.description,CU.datetime as enquiry_date,P.company_name",
             'join' => array("users U" => "U.id=CU.vendor_id",
-                "item_category C" => "C.id=CU.rq_software_categories",
+                //"item_category C" => "C.id=CU.rq_software_categories",
                 "user_profile P" => "P.user_id=U.id"),
             'where' => array("CU.user_id" => $this->session->userdata('login_user_id'), "CU.is_request_draft" => 'no')
         );
@@ -1051,10 +1055,10 @@ class Front extends Common_Controller {
         $option = array('table' => "client_inquiry CU",
             'select' => "CU.id as inq_id,U.*,CU.email as clinet_email,CU.rq_licenses,
             CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
-            CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name,UC.first_name as c_name,UC.last_name as c_lname",
+            CU.description,CU.datetime as enquiry_date,P.company_name,UC.first_name as c_name,UC.last_name as c_lname",
             'join' => array("users U" => "U.id=CU.vendor_id",
                             "users UC" => "UC.id=CU.user_id",
-                "item_category C" => "C.id=CU.rq_software_categories",
+                //"item_category C" => "C.id=CU.rq_software_categories",
                 "user_profile P" => "P.user_id=U.id"),
             'where' => array("CU.id" => $id),
             'single' => true
@@ -1067,9 +1071,11 @@ class Front extends Common_Controller {
         $this->userAuth();
         $this->data['title'] = 'Client Enquiries';
         $option = array('table' => "client_inquiry CU",
-            'select' => "CU.id as inq_id,U.*,CU.vendor_id,CU.email as client_email,CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            'select' => "CU.id as inq_id,U.*,CU.vendor_id,CU.email as client_email,
+            CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
+            CU.description,CU.datetime as enquiry_date,P.company_name",
             'join' => array("users U" => "U.id=CU.vendor_id",
-                "item_category C" => "C.id=CU.rq_software_categories",
+               // "item_category C" => "C.id=CU.rq_software_categories",
                 "user_profile P" => "P.user_id=U.id"),
             'where' => array("CU.id" => $id),
             'single' => true
@@ -1085,11 +1091,15 @@ class Front extends Common_Controller {
         $this->userAuth();
         $this->data['title'] = 'Client Enquiries Draft';
         $option = array('table' => "client_inquiry CU",
-            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,
+            CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,
+             P.company_name",
             'join' => array("users U" => "U.id=CU.vendor_id",
-                "item_category C" => "C.id=CU.rq_software_categories",
+                //"item_category C" => "find_in_set(C.id,CU.rq_software_categories)<> 0",
                 "user_profile P" => "P.user_id=U.id"),
-            'where' => array("CU.user_id" => $this->session->userdata('login_user_id'), "CU.is_request_draft" => 'yes')
+            'where' => array("CU.user_id" => $this->session->userdata('login_user_id'), "CU.is_request_draft" => 'yes'),
+         
+           
         );
         $this->data['enquiries'] = $this->common_model->customGet($option);
         $this->load->front_render('client_enquiries_draft', $this->data, 'inner_script');
@@ -1181,7 +1191,7 @@ class Front extends Common_Controller {
         $this->form_validation->set_rules('vendor_id', 'Vendor id', 'trim|required');
         $this->form_validation->set_rules('rq_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('rq_licenses', 'No. of licenses', 'trim|required');
-        $this->form_validation->set_rules('rq_software_categories', 'Software categories', 'trim|required');
+        $this->form_validation->set_rules('rq_software_categories[]', 'Software categories', 'trim|required');
         $this->form_validation->set_rules('rq_expected_live', 'Expected go live', 'trim|required');
         $this->form_validation->set_rules('rq_solution_offering', 'Expected contract term', 'trim|required');
         $this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -1198,7 +1208,7 @@ class Front extends Common_Controller {
             $addArray['user_id'] = $this->session->userdata('login_user_id');
             $addArray['email'] = $this->input->post('rq_email');
             $addArray['rq_licenses'] = $this->input->post('rq_licenses');
-            $addArray['rq_software_categories'] = $this->input->post('rq_software_categories');
+            $addArray['rq_software_categories'] = implode(",",$this->input->post('rq_software_categories'));
             $addArray['rq_expected_live'] = $this->input->post('rq_expected_live');
             $addArray['rq_solution_offering'] = $this->input->post('rq_solution_offering');
             $addArray['description'] = $this->input->post('description');
@@ -1245,7 +1255,7 @@ class Front extends Common_Controller {
         $this->form_validation->set_rules('vendor_id', 'Vendor id', 'trim|required');
         $this->form_validation->set_rules('rq_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('rq_licenses', 'No. of licenses', 'trim|required');
-        $this->form_validation->set_rules('rq_software_categories', 'Software categories', 'trim|required');
+        $this->form_validation->set_rules('rq_software_categories[]', 'Software categories', 'trim|required');
         $this->form_validation->set_rules('rq_expected_live', 'Expected go live', 'trim|required');
         $this->form_validation->set_rules('rq_solution_offering', 'Expected contract term', 'trim|required');
         $this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -1263,7 +1273,7 @@ class Front extends Common_Controller {
             $addArray['user_id'] = $this->session->userdata('login_user_id');
             $addArray['email'] = $this->input->post('rq_email');
             $addArray['rq_licenses'] = $this->input->post('rq_licenses');
-            $addArray['rq_software_categories'] = $this->input->post('rq_software_categories');
+            $addArray['rq_software_categories'] = implode(",",$this->input->post('rq_software_categories'));
             $addArray['rq_expected_live'] = $this->input->post('rq_expected_live');
             $addArray['rq_solution_offering'] = $this->input->post('rq_solution_offering');
             $addArray['description'] = $this->input->post('description');
@@ -1374,11 +1384,15 @@ class Front extends Common_Controller {
         $this->vendorAuth();
         $this->data['title'] = 'Vendor Enquiries';
         $option = array('table' => "client_inquiry CU",
-            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,C.category_name,P.company_name",
+            'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,
+            CU.rq_software_categories,CU.rq_expected_live,CU.rq_solution_offering,
+            CU.description,CU.datetime as enquiry_date,P.company_name",
             'join' => array("users U" => "U.id=CU.vendor_id",
-                "item_category C" => "C.id=CU.rq_software_categories",
+                //"item_category C" =>  "find_in_set(C.id,CU.rq_software_categories)<> 0",
                 "user_profile P" => "P.user_id=U.id"),
-            'where' => array("CU.vendor_id" => $this->session->userdata('login_user_id'), "CU.is_request_draft" => 'no')
+            'where' => array("CU.vendor_id" => $this->session->userdata('login_user_id'),
+             "CU.is_request_draft" => 'no',
+             "CU.is_active" => "Yes")
         );
         $this->data['enquiries'] = $this->common_model->customGet($option);
         $this->load->front_render('vendor_enquires', $this->data, 'inner_script');

@@ -33,7 +33,9 @@
                         <p>-</p>
                       </div>
                        <div class="popup_contant_right">
-                        <p><?php echo $enquiries->category_name;?></p>
+                        <p><?php
+                                                                            $category = commonGetHelper(array('select'=>"GROUP_CONCAT(category_name SEPARATOR ',') as category_name",'table'=>"item_category","where_in" => array('id'=>explode(",",$enquiries->rq_software_categories))));
+                                                                            echo $category[0]->category_name;;?></p>
                       </div>
                     </div>
 

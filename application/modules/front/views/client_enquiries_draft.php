@@ -77,7 +77,9 @@
 
                                                                         <tr onclick="getDetails('<?php echo $rows->inq_id;?>')">
                                                                             <td><?php echo ucwords($rows->company_name);?></td>
-                                                                            <td><?php echo ucwords($rows->category_name);?></td>
+                                                                            <td><?php
+                                                                            $category = commonGetHelper(array('select'=>"GROUP_CONCAT(category_name SEPARATOR ',') as category_name",'table'=>"item_category","where_in" => array('id'=>explode(",",$rows->rq_software_categories))));
+                                                                            echo $category[0]->category_name;;?></td>
                                                                             <td><?php echo date('d M Y - h:iA',strtotime($rows->enquiry_date));?></td>
                                                                             <td><a href="<?php echo site_url("front/draft_details/".$rows->inq_id."/".str_replace(" ","-",$rows->company_name));?>"><button class="Interested_right_sidbar">Submit</button></a></td>
                                                                         </tr>

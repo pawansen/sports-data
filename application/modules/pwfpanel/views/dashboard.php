@@ -12,16 +12,16 @@
                                         <a href="javascript:void(0)" onclick="getCharts('currentYear')" class="btn btn-alt btn-sm btn-default dropdown-toggle" data-toggle="dropdown">Current Year <span class="caret"></span></a>
                                         <ul class="dropdown-menu dropdown-menu-right">
                                             <li>
-                                                <a href="javascript:void(0)" onclick="getCharts('currentYear')">Current Year</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('currentYear');getTables('currentYear');">Current Year</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" onclick="getCharts('lastYear')">Last Year</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('lastYear');getTables('lastYear');">Last Year</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" onclick="getCharts('lastMonth')">Last Month</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('lastMonth');getTables('lastMonth');">Last Month</a>
                                             </li>
                                             <li>
-                                                <a href="javascript:void(0)" onclick="getCharts('currentMonth')">Current Month</a>
+                                                <a href="javascript:void(0)" onclick="getCharts('currentMonth');getTables('currentMonth');">Current Month</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -74,7 +74,7 @@
                                     <!-- END Latest Orders Title -->
 
                                     <!-- Latest Orders Content -->
-                                    
+                                    <div id="getTablesEnquiries">
                                     <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm table-borderless table-vcenter table_fonts_size" cellspacing="0"
                                         width="100%">
                                         <thead>
@@ -96,7 +96,9 @@
                                             <td class="hidden-xs text-center" style="width: 100px;">
                                             <a href="javascript:void(0)"><strong><?php echo $i;?></strong></a></td>
                                             <td class=""><a href="javascript:void(0)"><?php echo $rows->c_first_name.' '.$rows->c_last_name;?></a></td>
-                                            <td><?php echo $rows->company_name?></td>
+                                            <td><?php
+                                                                            $category = commonGetHelper(array('select'=>"GROUP_CONCAT(category_name SEPARATOR ',') as category_name",'table'=>"item_category","where_in" => array('id'=>explode(",",$rows->rq_software_categories))));
+                                                                            echo $category[0]->category_name;;?></td>
                                             <td><?php echo $rows->company_name;?></td>
                                             </tr>
                                         <?php $i++;}?>
@@ -104,7 +106,7 @@
                                         
                                     </table>
                                     
-                                    
+                                    </div>
                                 
                                     <!-- END Latest Orders Content -->
                                 </div>
@@ -124,6 +126,7 @@
                                     <!-- END Top Products Title -->
 
                                     <!-- Top Products Content -->
+                                    <div id="getTablesVendor">
                                     <table id="dtVerticalScrollExample2" class="table table-striped table-bordered table-sm table-borderless table-vcenter table_fonts_size" cellspacing="0"
                                         width="100%">
                                         <thead>
@@ -152,6 +155,7 @@
                                         
                                         </table>
                                     <!-- END Top Products Content -->
+                                    </div>
                                 </div>
                                 <!-- END Top Products Block -->
                             </div>
@@ -176,7 +180,7 @@
                                     <!-- END Latest Orders Title -->
 
                                     <!-- Latest Orders Content -->
-                                    
+                                    <div id="getTablesUsers">
                                     
                                                                         <table id="dtVerticalScrollExample3" class="table table-striped table-bordered table-sm12 table-borderless table-vcenter table_fonts_size" cellspacing="0"
                                                                     width="100%">
@@ -205,7 +209,7 @@
                                                                     </tbody>
                                                                     
                                                                     </table>
-                                    
+                                                                    </div>
                                     <!-- END Latest Orders Content -->
                                 </div>
                                 <!-- END Latest Orders Block -->

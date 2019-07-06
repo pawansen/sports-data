@@ -210,8 +210,13 @@ function resendEmailVerification(){
             url: '<?php echo base_url(); ?>' + "front/resendEmailVerification",
             type: "post",
             success: function (data, textStatus, jqXHR) {
-             $("#verificationemail").text("Resend Email Verification");
-              alert("Successfully email verification sent");
+                if(data == 1){
+                    $("#verificationemail").text("Resend Email Verification");
+                    alert("Successfully email verification sent");
+                }else{
+                    $("#verificationemail").text("Resend Email Verification");
+                    alert("Email already verified"); 
+                }
             }
         });  
 }

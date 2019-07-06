@@ -52,10 +52,10 @@ class Pwfpanel extends Common_Controller {
                 $option = array('table' => "client_inquiry CU",
                     'select' => "U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,
                     CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,
-                    C.category_name,P.company_name,UP.first_name as c_first_name,UP.last_name as c_last_name",
+                    P.company_name,UP.first_name as c_first_name,UP.last_name as c_last_name",
                     'join' => array("users U" => "U.id=CU.vendor_id",
                                     "users UP" => "UP.id=CU.user_id",
-                        "item_category C" => "C.id=CU.rq_software_categories",
+                        //"item_category C" => "C.id=CU.rq_software_categories",
                         "user_profile P" => "P.user_id=U.id"),
                     'where' => array("CU.is_request_draft" => 'no'),
                     'limit'=> 20
@@ -187,6 +187,105 @@ class Pwfpanel extends Common_Controller {
         $return['totale'] = $totale;
 
         echo json_encode($return);
+    }
+
+
+    public function getTablesVendor(){
+        $return = array();
+        $return['status'] = 200;
+        $filterval = $this->input->post('filterval');
+        $year = date('Y');
+        $where = " YEAR(U.`created_date`) = $year ";
+        $where1 = " YEAR(U.`datetime`) = $year ";
+        if($filterval == "lastYear"){
+          $year = date("Y",strtotime("-1 year"));
+          $where = " YEAR(U.`created_date`) = $year ";
+          $where1 = " YEAR(U.`datetime`) = $year ";
+        }
+        if($filterval == "lastMonth"){
+            $month = date("m",strtotime("-1 month"));
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        if($filterval == "currentMonth"){
+            $month = date("m");
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        
+        $Sql = "SELECT MONTH(U.`created_date`) as months,U.*
+        FROM  vendor_sale_users U  INNER JOIN vendor_sale_users_groups UG on UG.user_id=U.id
+        WHERE   $where AND UG.group_id =3 ";
+        $return['vendors'] = $this->common_model->customQuery($Sql);
+        $this->load->view('table_vendor',$return);
+
+    }
+
+    public function getTablesUsers(){
+        $return = array();
+        $return['status'] = 200;
+        $filterval = $this->input->post('filterval');
+        $year = date('Y');
+        $where = " YEAR(U.`created_date`) = $year ";
+        $where1 = " YEAR(U.`datetime`) = $year ";
+        if($filterval == "lastYear"){
+          $year = date("Y",strtotime("-1 year"));
+          $where = " YEAR(U.`created_date`) = $year ";
+          $where1 = " YEAR(U.`datetime`) = $year ";
+        }
+        if($filterval == "lastMonth"){
+            $month = date("m",strtotime("-1 month"));
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        if($filterval == "currentMonth"){
+            $month = date("m");
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(U.`datetime`) = $year AND MONTH(U.`datetime`) = $month ";
+        }
+        
+        $Sql = "SELECT MONTH(U.`created_date`) as months,U.*
+        FROM  vendor_sale_users U  INNER JOIN vendor_sale_users_groups UG on UG.user_id=U.id
+        WHERE   $where AND UG.group_id =2 ";
+        $return['users'] = $this->common_model->customQuery($Sql);
+        $this->load->view('table_user',$return);
+
+    }
+
+    public function getTablesEnquiries(){
+        $return = array();
+        $return['status'] = 200;
+        $filterval = $this->input->post('filterval');
+        $year = date('Y');
+        $where = " YEAR(U.`created_date`) = $year ";
+        $where1 = " YEAR(CU.`datetime`) = $year ";
+        if($filterval == "lastYear"){
+          $year = date("Y",strtotime("-1 year"));
+          $where = " YEAR(U.`created_date`) = $year ";
+          $where1 = " YEAR(CU.`datetime`) = $year ";
+        }
+        if($filterval == "lastMonth"){
+            $month = date("m",strtotime("-1 month"));
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(CU.`datetime`) = $year AND MONTH(CU.`datetime`) = $month ";
+        }
+        if($filterval == "currentMonth"){
+            $month = date("m");
+            $where = " YEAR(U.`created_date`) = $year AND MONTH(U.`created_date`) = $month ";
+            $where1 = " YEAR(CU.`datetime`) = $year AND MONTH(CU.`datetime`) = $month ";
+        }
+        
+        $Sql = "SELECT U.*,CU.id as inq_id,CU.email as clinet_email,CU.rq_licenses,CU.rq_software_categories,
+        CU.rq_expected_live,CU.rq_solution_offering,CU.description,CU.datetime as enquiry_date,
+        P.company_name,UP.first_name as c_first_name,UP.last_name as c_last_name
+        FROM  vendor_sale_client_inquiry CU INNER JOIN  vendor_sale_users U ON U.id=CU.vendor_id
+        INNER JOIN vendor_sale_users UP ON UP.id=CU.user_id 
+        INNER JOIN vendor_sale_user_profile P ON P.user_id=U.id
+        WHERE  $where1 AND CU.is_request_draft = 'no'
+        ";
+        $return['enquiries'] = $this->common_model->customQuery($Sql);
+        $this->load->view('table_enquiries',$return);
+
     }
 
     public function logAuth() {

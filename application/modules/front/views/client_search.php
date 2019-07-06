@@ -56,7 +56,9 @@
                         </div>
                       </div>
                   </div>
-                    <?php }}?>
+                  <?php }}else{ ?>
+                      <div class="alert alert-danger">No result found</div>
+                    <?php }?>
 
                  </div>
 <!-- 

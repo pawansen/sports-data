@@ -120,4 +120,35 @@
     }
 
     getCharts();
+
+    function getTables(filterval){
+
+                    var url = "<?php echo base_url() ?>pwfpanel/getTablesVendor";
+                    $.ajax({
+                        method: "POST",
+                        url: url,
+                        data: {filterval: filterval},
+                        success: function (response) {
+                            $("#getTablesVendor").html(response);
+                        }
+                    });
+                    $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url() ?>pwfpanel/getTablesUsers",
+                        data: {filterval: filterval},
+                        success: function (response) {
+                            $("#getTablesUsers").html(response);
+                        }
+                    });
+                    $.ajax({
+                        method: "POST",
+                        url: "<?php echo base_url() ?>pwfpanel/getTablesEnquiries",
+                        data: {filterval: filterval},
+                        success: function (response) {
+                            $("#getTablesEnquiries").html(response);
+                        }
+                    });
+    }
+
+
 </script>
