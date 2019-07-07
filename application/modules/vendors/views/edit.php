@@ -113,6 +113,23 @@
                                     </table>
                                     <!-- END Customer Info -->
                                 </div>
+                                
+                                
+                                <div class="block">
+                                    <!-- Customer Info Title -->
+                                    <div class="block-title">
+                                        <h2><i class="fa fa-file-o"></i> <strong>NDA and Referral </strong>Partner Agreement </h2>
+                                    </div>
+                                    <div class="block-section text-center">
+                                        <!--<img src="<?php echo base_url().'backend_asset/images/Preloader_2.gif';?>" class="loaders-img" class="img-responsive">-->
+                                           <img src="<?php echo base_url().'backend_asset/images/document-management-big.png';?>" alt="avatar" class="img-responsive_document" style=" width: 70px; opacity: 0.5;"><br>
+                                         <p class="documents_p">documents-file.doc</p>
+                                    </div>
+                                    <div class="block-section text-center">
+                                    <button type="submit"  class="btn btn-sm btn-primary dowload_btn ">Download Documents</button>
+                                    </div>
+                                         <!-- END Customer Info -->
+                                    </div>
          
           
       </div>

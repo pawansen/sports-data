@@ -90,10 +90,10 @@
                             $rowCount++;
                             ?>
                             <tr>
-                                <td class="text-center"><?php echo $rowCount; ?></td>        
+                                <td class="text-center text-primary"><strong><?php echo $rowCount; ?></strong></td>        
                                 <!--                            <td><?php echo $rows->team_code; ?></td>-->
-                                <td class="text-center"><a class="text-primary" href="<?php echo site_url("vendors/view"); ?>"><?php echo $rows->first_name . ' ' . $rows->last_name; ?></a></td>
-                                <td class="text-center"><?php echo $rows->email ?></td>
+                                <td class="text-primary"><a class="text-primary21" href="<?php echo site_url("vendors/view"); ?>"><?php echo $rows->first_name . ' ' . $rows->last_name; ?></a></td>
+                                <td><?php echo $rows->email ?></td>
                                 <td class="text-center"><?php echo $rows->phone ?></td>
                                 <!-- <td><?php echo ($rows->date_of_birth != null) ? date('d-m-Y', strtotime($rows->date_of_birth)) : ""; ?></td> -->
                                 <!-- <td><?php echo $rows->is_pass_token; ?></td>-->

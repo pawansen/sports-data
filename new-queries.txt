@@ -64,37 +64,12 @@ CREATE TABLE `vendor_sale_client_request` (
   `is_active` enum('No','Yes') NOT NULL DEFAULT 'No'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `vendor_sale_client_request`
---
 
-INSERT INTO `vendor_sale_client_request` (`id`, `user_id`, `email`, `rq_licenses`, `rq_software_categories`, `rq_expected_live`, `rq_solution_offering`, `description`, `datetime`, `is_active`) VALUES
-(10, 57, 'pawansen9770@gmail.com', '1', 10, 'Within 15 days', '3 years', 'gdfgdfg', '2019-07-03 23:37:29', 'No'),
-(11, 57, 'pawansen9770@gmail.com', '3', 11, 'Within 15 days', '3 years', 'dgdg', '2019-07-03 23:38:07', 'No'),
-(12, 57, 'pawansen9770gfhf@gmail.com', '5', 10, 'Within 15 days', '3 years', 'fhfghhfghfgh', '2019-07-03 23:38:23', 'No');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `vendor_sale_client_request`
---
 ALTER TABLE `vendor_sale_client_request`
   ADD PRIMARY KEY (`id`);
 
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `vendor_sale_client_request`
---
 ALTER TABLE `vendor_sale_client_request`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 
 
 ALTER TABLE `vendor_sale_client_inquiry` CHANGE `rq_software_categories` `rq_software_categories` VARCHAR(255) NOT NULL;

@@ -55,7 +55,7 @@
         <div id="login-container" class="animation-fadeIn">
             <!-- Login Title -->
             <div class="login-title text-center">
-                <h1><small> <strong>Login</strong></small></h1>
+                <h1> <strong>Login</strong></h1>
             </div>
             <!-- END Login Title -->
                 <?php if (isset($message) && $message != "") { ?>
@@ -69,7 +69,7 @@
                     </div>
                 <?php } ?>
             <!-- Login Block -->
-            <div class="block push-bit">
+            <div class="block push-bit bg_color_login">
                 <!-- Login Form -->
                 <form action="<?php echo site_url('pwfpanel/login') ?>" method="post" id="form-login" class="form-horizontal form-bordered form-control-borderless">
                     <div class="form-group">
@@ -83,34 +83,38 @@
                     <div class="form-group">
                         <div class="col-xs-12">
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                                <span class="input-group-addon"><i class="gi gi-lock"></i></span>
                                 <input type="password" id="password" name="password" class="form-control input-lg" placeholder="Password">
                             </div>
                         </div>
                     </div>
                     <div class="form-group form-actions">
-                        <div class="col-xs-12">
+                        <!--<div class="col-xs-12">
                             <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
                                 <input type="checkbox" id="remember" name="remember" value="1" checked>
                                 <span></span>
                             </label>
-                        </div>
+                        </div> -->
                         <div class="col-xs-12 text-right-login_admin">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
                         </div>
+                        
+                        
+                        <div class="col-xs-12">
+                            <div class="forget_pass forgot_text_pass"><a href="javascript:void(0)" id="link-reminder-login">Forgot password?</a></div>
+                        </div> 
+                        
+                        
                        
                     </div>
                     
-                    <!--<div class="form-group form-actions">-->
-                        
-                        
-                    <!--</div>-->
-<!--                    <div class="form-group">
-                        <div class="col-xs-12 text-center">
-                            <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> -
-                            <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>
-                        </div>
-                    </div>-->
+                    
+                  <!--<div class="form-group">-->
+                  <!--      <div class="col-xs-12 text-center">-->
+                  <!--          <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a> --->
+                  <!--          <a href="javascript:void(0)" id="link-register-login"><small>Create a new account</small></a>-->
+                  <!--      </div>-->
+                  <!--  </div>-->
                 </form>
                 <!-- END Login Form -->
 
@@ -124,16 +128,21 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="form-group form-actions">
-                        <div class="col-xs-12 text-right">
+                   <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right-login_admin">
                             <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Reset Password</button>
                         </div>
-                    </div>-->
-                    <div class="form-group">
                         <div class="col-xs-12 text-center">
-                            <small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>
+                            <div class="forget_pass forgot_text_pass">Did you remember your password? &nbsp;<a href="javascript:void(0)" id="link-reminder">Login </a></div>
+                            <!--<small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>-->
                         </div>
                     </div>
+                    <!--<div class="form-group">
+                        <div class="col-xs-12 text-center">
+                            <div class="forget_pass forgot_text_pass">Did you remember your password?<a href="javascript:void(0)" id="link-reminder">Login </a></div>
+                            <!--<small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>-->
+                        </div>
+                    </div>-->
                 </form>
                 <!-- END Reminder Form -->
 

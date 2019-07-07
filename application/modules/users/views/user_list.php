@@ -57,7 +57,7 @@
 <!--                                <th><?php echo lang('profile_image');?></th>-->
                                  <th><?php echo lang('status');?></th>
                                 <th><?php echo lang('user_createdate');?></th>
-                                <th style="width:50%"><?php echo lang('action');?></th>
+                                <th  style="width:50%"><?php echo lang('action');?></th>
                             </tr>
                         </thead>
                          <tbody>
@@ -68,12 +68,12 @@
                                             $rowCount++;
                                             ?>
                                   <tr>
-                                    <td><?php echo $rowCount; ?></td>            
+                                    <td class="text-center"><?php echo $rowCount; ?></td>            
                                     <td><?php echo $rows->team_code; ?></td>
                                     <td><?php echo $rows->first_name; ?></td>
                                     <td><?php echo $rows->email; ?></td>
-                                    <td><?php echo $rows->phone; ?></td>
-                                    <td><?php if($rows->active == 1) echo '<p class="text-success">'.lang('active').'</p>'; else echo '<p  class="text-danger">'.lang('deactive').'</p>';?></td>
+                                    <td class="text-center"><?php echo $rows->phone; ?></td>
+                                    <td class="text-center"><?php if($rows->active == 1) echo '<p class="text-success">'.lang('active').'</p>'; else echo '<p  class="text-danger">'.lang('deactive').'</p>';?></td>
                                       <td><?php echo date('d-m-Y H:i', strtotime($rows->created_date));?></td>
                                                 
                                                

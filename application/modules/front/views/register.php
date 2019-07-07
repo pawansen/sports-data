@@ -41,31 +41,7 @@
                                        </div>
                                        <?php echo form_error('email'); ?>
                                     </div>
-                                    <div class="col-md-6">
-                                       <div class="input-container_number">
-                                           <input id="phone" name="mobile" type="Number" class="input_field_number" placeholder="Phone Number" value="<?php echo set_value('mobile'); ?>">
                                          
-                                          <!--<i class="fa fa-phone icon"></i>-->
-                                          <!--<input class="input-field" type="Number" placeholder="Number" name="number">-->
-                                       </div>
-                                       <?php echo form_error('mobile'); ?>
-                                    </div>
-                                 </div>
-                                  <div class="row register_feild">
-                                    <div class="col-md-6">
-                                       <div class="input-container_select">
-                                        <select class="input-container" name='country' value="<?php echo set_value('country'); ?>">
-                                      <option value="" disabled selected>Select Country</option>
-                                      <?php foreach($countries as $row){?>
-                                      <option value="<?php echo $row->id;?>" <?php echo set_select('country', $row->id); ?>><?php echo $row->name;?></option>
-                                      <?php } ?>
-                                    </select>
-                                   
-                                       </div>
-                                       <?php echo form_error('country'); ?>
-                                    </div>
-
-                                    
                                     <div class="col-md-6">
                                        <div class="input-container">
                                          <!-- <i class="fas fa-layer-group"></i>
@@ -75,6 +51,44 @@
                                        </div>
                                        <?php echo form_error('designation'); ?>
                                     </div>
+                                 
+                                 </div>
+                                  <div class="row register_feild">
+                                    <div class="col-md-6">
+                                       <div class="input-container_select">
+                                        <select class="input-container" name='country' value="<?php echo set_value('country'); ?>">
+                                             <option value="" disabled selected>Select Country</option>
+                                             <?php foreach($countries as $row){?>
+                                             <option value="<?php echo $row->id;?>" <?php echo set_select('country', $row->id); ?>><?php echo $row->name;?></option>
+                                             <?php } ?>
+                                        </select>
+                                   
+                                       </div>
+                                       <?php echo form_error('country'); ?>
+                                    </div>
+
+                                    <!-- <div class="col-md-2">
+                                       <div class="input-container_select">
+                                        <select class="input-container" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
+                                             <option value="" disabled selected>Select PhoneCode</option>
+                                             <?php foreach($countries as $row){?>
+                                             <option value="<?php echo $row->phonecode;?>" <?php echo set_select('phone_code', $row->phonecode); ?>><?php echo $row->sortname."(".$row->phonecode.")";?></option>
+                                             <?php } ?>
+                                        </select>
+                                   
+                                       </div>
+                                       <?php echo form_error('phone_code'); ?>
+                                    </div> -->
+                                    <div class="col-md-6">
+                                       <div class="input-container_number">
+                                           <input id="phone" name="mobile" type="tel" class="input_field_number" value="<?php echo set_value('mobile'); ?>">
+                                         
+                                          <!--<i class="fa fa-phone icon"></i>-->
+                                          <!--<input class="input-field" type="Number" placeholder="Number" name="number">-->
+                                       </div>
+                                       <?php echo form_error('mobile'); ?>
+                                    </div>
+                               
                                  </div>
                                   <div class="row register_feild">
                                     <div class="col-md-6">
@@ -160,7 +174,7 @@
                                     </div>
                                     <div class="col-md-6">
                                        <div class="input-container_number">
-                                           <input id="phone1" name="c_mobile" type="Number" class="input_field_number" placeholder="Phone Number" value="<?php echo set_value('c_mobile'); ?>">
+                                           <input id="phone1" name="c_mobile" type="tel" class="input_field_number" value="<?php echo set_value('c_mobile'); ?>">
                                          
                                           <!--<i class="fa fa-phone icon"></i>-->
                                           <!--<input class="input-field" type="Number" placeholder="Number" name="number">-->

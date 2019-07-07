@@ -491,11 +491,18 @@ class Front extends Common_Controller {
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
 
+                
+
+                $dataArrUsers['activation_code'] = rand() . time();
+                $this->common_model->updateFields('users', $dataArrUsers, array('id' => $lid));
+                $isLoginAuth = $this->ion_auth->login($isLogin->email, $password, FALSE);
+
+
                 /** Verification email * */
                 $EmailTemplate = getEmailTemplate("verification");
                 if (!empty($EmailTemplate)) {
                     $html = array();
-                    $html['active_url'] = base_url() . 'front/activate/' . base64_encode($isLogin->email) . '/' . $isLogin->activation_code;
+                    $html['active_url'] = base_url() . 'front/activate/' . base64_encode($isLogin->email) . '/' . $dataArrUsers['activation_code'];
                     $html['logo'] = base_url() . getConfig('site_logo');
                     $html['site'] = getConfig('site_name');
                     $html['site_meta_title'] = getConfig('site_meta_title');
@@ -505,7 +512,10 @@ class Front extends Common_Controller {
                     $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
-                $isLoginAuth = $this->ion_auth->login($isLogin->email, $password, FALSE);
+
+
+
+
                 $this->session->set_userdata("login_session_key", $login_session_key);
                 $this->session->set_userdata("login_user_id", $isLogin->id);
                 $this->session->set_userdata("first_name", $isLogin->first_name);
@@ -645,11 +655,16 @@ class Front extends Common_Controller {
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
 
+                
+
+                $dataArrUsers['activation_code'] = rand() . time();
+                $this->common_model->updateFields('users', $dataArrUsers, array('id' => $lid));
+
                 /** Verification email * */
                 $EmailTemplate = getEmailTemplate("verification");
                 if (!empty($EmailTemplate)) {
                     $html = array();
-                    $html['active_url'] = base_url() . 'front/activate/' . base64_encode($isLogin->email) . '/' . $isLogin->activation_code;
+                    $html['active_url'] = base_url() . 'front/activate/' . base64_encode($isLogin->email) . '/' . $dataArrUsers['activation_code'];
                     $html['logo'] = base_url() . getConfig('site_logo');
                     $html['site'] = getConfig('site_name');
                     $html['site_meta_title'] = getConfig('site_meta_title');
@@ -827,12 +842,13 @@ class Front extends Common_Controller {
                 'where' => array("U.id" => $this->session->userdata('login_user_id')),
                 'single' => true
             );
-            $this->data['profile'] = $this->common_model->customGet($option);
+            $this->data['profile'] = $profile = $this->common_model->customGet($option);
             //dump($this->data['profile']);exit;
             $option = array('table' => "countries",
             );
             $this->data['countries'] = $this->common_model->customGet($option);
             $option = array('table' => "states",
+            'where'=> array("country_id"=>$profile->country)
             );
             $this->data['states'] = $this->common_model->customGet($option);
             $option = array('table' => "item_category",
@@ -842,6 +858,15 @@ class Front extends Common_Controller {
         } else {
             redirect("front/logout");
         }
+    }
+
+    function getStates(){
+        $id = $this->input->post("id");
+        $option = array('table' => "states",
+            'where'=> array("country_id"=>$id)
+        );
+        $this->data['states'] = $this->common_model->customGet($option);
+        $this->load->view('states',$this->data);
     }
 
     public function vendor_business_profile() {
@@ -917,7 +942,13 @@ class Front extends Common_Controller {
         $this->form_validation->set_rules('new_password', 'New Password', 'trim|required|min_length[6]|max_length[14]');
         $this->form_validation->set_rules('c_password', 'Confirm Password', 'trim|required|min_length[6]|max_length[14]|matches[new_password]');
         if ($this->form_validation->run() == FALSE) {
-
+            $option = array('table' => "users U",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'join' => array("user_profile UP" => "UP.user_id=U.id"),
+            'where' => array("U.id" => $this->session->userdata('login_user_id')),
+            'single' => true
+        );
+        $this->data['profile'] = $this->common_model->customGet($option);
             $this->load->front_render('account_setting', $this->data, 'inner_script');
         } else {
             $current_password = $this->input->post('old_password');
@@ -954,7 +985,13 @@ class Front extends Common_Controller {
         $this->form_validation->set_rules('new_password', 'New Password', 'trim|required|min_length[6]|max_length[14]');
         $this->form_validation->set_rules('c_password', 'Confirm Password', 'trim|required|min_length[6]|max_length[14]|matches[new_password]');
         if ($this->form_validation->run() == FALSE) {
-
+            $option = array('table' => "users U",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'join' => array("user_profile UP" => "UP.user_id=U.id"),
+                'where' => array("U.id" => $this->session->userdata('login_user_id')),
+                'single' => true
+            );
+            $this->data['profile'] = $this->common_model->customGet($option);
             $this->load->front_render('user_account_setting', $this->data, 'inner_script');
         } else {
             $current_password = $this->input->post('old_password');

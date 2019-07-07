@@ -109,7 +109,7 @@
 
                                     <div class="switch_business"><span>Subscribe for newsletter (Off / On)</span>
                                     <label class="switch">
-                                          <input type="checkbox" <?php echo ($profile->newsletter_sub == "Yes") ? "checked": ""?>  name="newsletter_sub">
+                                          <input type="checkbox" id="check_id" onclick="subscribe(this)" <?php echo ($profile->newsletter_sub == "Yes") ? "checked": ""?>  name="newsletter_sub">
                                           <span class="slider round"></span>
                                             </label>
                                             </div>

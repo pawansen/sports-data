@@ -1,7 +1,18 @@
 
 <script src="<?php echo base_url(); ?>backend_asset/js/jquery.validate.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>backend_asset/js/select2.js"></script>
+<script src="<?php echo base_url(); ?>front_assets/js/intlTelInput.js"></script>
+<link href="<?php echo base_url(); ?>backend_asset/css/select2.css" rel="stylesheet"/>
+<link rel="stylesheet" href="<?php echo base_url(); ?>front_assets/css/intlTelInput.css">
 <script>
+
+$('.select2-list').select2();
+var input = document.querySelector("#phone");
+window.intlTelInput(input);
+
+var input1 = document.querySelector("#phone1");
+window.intlTelInput(input1);
 
 jQuery('body').on('click', '#submit', function () {
 
@@ -152,6 +163,18 @@ function getDetails(id){
             }
         });
 }
+
+function getStates(id){
+    $.ajax({
+            url: '<?php echo base_url(); ?>' + "front/getStates",
+            type: "post",
+            data: {id: id},
+            success: function (data, textStatus, jqXHR) {
+                $('#stats').html(data);
+            }
+        });  
+}
+
 
 function getVendorListKeyword(keyword){
     var country = $("#country").val();

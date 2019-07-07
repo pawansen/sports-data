@@ -163,7 +163,7 @@
                                    <div class="col-md-6 left_col6">
                                        <div class="input-container">
                                           <i class="fa fa-flag-o icon"></i>
-                                          <select class="input-container country_name_in" name="country">
+                                          <select class="input-container country_name_in" name="country" onchange="getStates(this.value)">
                                       <option value="">Select Country</option>
                                        <?php foreach($countries as $rows){?>
                                           <option value="<?php echo $rows->id;?>" <?php echo ($profile->country == $rows->id) ? "selected" : ""; ?>><?php echo $rows->name;?></option>
@@ -174,7 +174,7 @@
 
                                     <div class="col-md-6 right_col6">
                                        <div class="input-container_select">
-                                        <select class="input-container" name="state">
+                                        <select class="input-container" name="state" id="stats">
                                       <option value="">State / Province selection</option>
                                        <?php foreach($states as $rows){?>
                                           <option value="<?php echo $rows->id;?>" <?php echo ($profile->state == $rows->id) ? "selected" : ""; ?>><?php echo $rows->name;?></option>
