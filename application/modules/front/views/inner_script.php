@@ -1,74 +1,31 @@
 
 <script src="<?php echo base_url(); ?>backend_asset/js/jquery.validate.min.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo base_url(); ?>backend_asset/js/select2.js"></script>
-<script src="<?php echo base_url(); ?>front_assets/js/intlTelInput.js"></script>
-<link href="<?php echo base_url(); ?>backend_asset/css/select2.css" rel="stylesheet"/>
-<link rel="stylesheet" href="<?php echo base_url(); ?>front_assets/css/intlTelInput.css">
 <script>
-
-$('.select2-list').select2();
-var input = document.querySelector("#phone");
-window.intlTelInput(input);
-
-var input1 = document.querySelector("#phone1");
-window.intlTelInput(input1);
-
 jQuery('body').on('click', '#submit', function () {
-
-        var form_name = this.form.id;
-        if (form_name == '[object HTMLInputElement]')
-            form_name = 'editFormAjax';
-        $("#editFormAjax").validate({
-            rules: {
-                description: "required",
-                website: "required",
-                category: "required",
-                address: "required",
-                city: "required",
-                country: "required",
-                state: "required",
-                company_name:"required"
-            },
-            messages: {
-                company_name: "Company Name field is required",
-                description: "description field is required",
-                website: "Company website field is required",
-                category: "Software category field is required",
-                address: "Company address field is required",
-                city: "city field is required",
-                country: "country field is required",
-                state: "state field is required"
-            },
-            submitHandler: function (form) {
-                jQuery(form).ajaxSubmit({
-                });
-            }
-        });
-});
-
-jQuery('body').on('click', '#profile_submit', function () {
 
 var form_name = this.form.id;
 if (form_name == '[object HTMLInputElement]')
-    form_name = 'editFormAjaxProfile';
-$("#editFormAjaxProfile").validate({
+    form_name = 'editFormAjax';
+$("#editFormAjax").validate({
     rules: {
-        first_name: "required",
-        last_name: "required",
-        phone: {
-                   required: true,
-                   minlength: 10,
-                   maxlength: 20,
-                   number: true
-                },
-        email: "required"
+        description: "required",
+        website: "required",
+        category: "required",
+        address: "required",
+        city: "required",
+        country: "required",
+        state: "required",
+        company_name:"required"
     },
     messages: {
-        first_name: "First Name field is required",
-        last_name: "Last name field is required",
-        phone: "phone field is required",
-        email: "Email field is required",
+        company_name: "Company Name field is required",
+        description: "description field is required",
+        website: "Company website field is required",
+        category: "Software category field is required",
+        address: "Company address field is required",
+        city: "city field is required",
+        country: "country field is required",
+        state: "state field is required"
     },
     submitHandler: function (form) {
         jQuery(form).ajaxSubmit({
@@ -77,6 +34,72 @@ $("#editFormAjaxProfile").validate({
 });
 });
 
+jQuery('body').on('click', '#profile_submit', function () {
+
+            var form_name = this.form.id;
+            if (form_name == '[object HTMLInputElement]')
+            form_name = 'editFormAjaxProfile';
+            $("#editFormAjaxProfile").validate({
+            rules: {
+            first_name: "required",
+            last_name: "required",
+            phone: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 20,
+                    number: true
+                    },
+            email: "required",
+            phone_code: "required"
+            },
+            messages: {
+            first_name: "First Name field is required",
+            last_name: "Last name field is required",
+            phone: "phone field is required",
+            email: "Email field is required",
+            phone_code: "Phonecode field is required",
+            },
+            submitHandler: function (form) {
+            jQuery(form).ajaxSubmit({
+            });
+            }
+            });
+});
+
+
+
+jQuery('body').on('click', '.save_btn_enquiries_form', function () {
+
+var form_name = this.form.id;
+if (form_name == '[object HTMLInputElement]')
+form_name = 'editFormAjaxinquiry';
+$("#editFormAjaxinquiry").validate({
+rules: {
+rq_email:{
+            required: true,
+            email: true
+        },
+rq_licenses: "required",
+rq_software_categories: "required",
+rq_expected_live: "required",
+rq_solution_offering: "required",
+description: "required"
+},
+messages: {
+rq_email: "Email field is required",
+rq_licenses: "No. of licenses field is required",
+rq_software_categories: "Software category field is required",
+rq_expected_live: "Expected go live field is required",
+rq_solution_offering: "Expected contract term field is required",
+description: "Description field is required",
+rq_email: "Email field is required"
+},
+submitHandler: function (form) {
+jQuery(form).ajaxSubmit({
+});
+}
+});
+});
 jQuery('body').on('click', '#change_password', function () {
 
 var form_name = this.form.id;
@@ -92,11 +115,10 @@ $("#editFormAjaxPasswprd").validate({
                 },
     },
     messages: {
-        old_password: "Old password field is required",
-        new_password: "New password field is required",
+        old_password: "Field required",
+        new_password: "Field required",
         c_password: {
-                    required: '<?php echo lang('confirm_password_required_validation'); ?>',
-                    equalTo: '<?php echo lang('confirm_password_equalto_validation'); ?>'
+                    required: 'Field required'
                 },
     },
     submitHandler: function (form) {
@@ -105,39 +127,25 @@ $("#editFormAjaxPasswprd").validate({
     }
 });
 });
+</script>
+<script type="text/javascript" src="<?php echo base_url(); ?>front_assets/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo base_url(); ?>backend_asset/js/select2.js"></script>
+<!-- <script src="<?php echo base_url(); ?>front_assets/js/intlTelInput.js"></script> -->
+<link href="<?php echo base_url(); ?>backend_asset/css/select2.css" rel="stylesheet"/>
+<!-- <link rel="stylesheet" href="<?php echo base_url(); ?>front_assets/css/intlTelInput.css"> -->
+<script>
 
-jQuery('body').on('click', '.save_btn_enquiries_form', function () {
+$('.select2-list').select2({
+    placeholder: "Software Category",
+    allowClear: true
+});
+// var input = document.querySelector("#phone");
+// window.intlTelInput(input);
 
-var form_name = this.form.id;
-if (form_name == '[object HTMLInputElement]')
-    form_name = 'editFormAjaxinquiry';
-$("#editFormAjaxinquiry").validate({
-    rules: {
-        rq_email:{
-                    required: true,
-                    email: true
-                },
-        rq_licenses: "required",
-        rq_software_categories: "required",
-        rq_expected_live: "required",
-        rq_solution_offering: "required",
-        description: "required"
-    },
-    messages: {
-        rq_email: "Email field is required",
-        rq_licenses: "No. of licenses field is required",
-        rq_software_categories: "Software category field is required",
-        rq_expected_live: "Expected go live field is required",
-        rq_solution_offering: "Expected contract term field is required",
-        description: "Description field is required",
-        rq_email: "Email field is required"
-    },
-    submitHandler: function (form) {
-        jQuery(form).ajaxSubmit({
-        });
-    }
-});
-});
+// var input1 = document.querySelector("#phone1");
+// window.intlTelInput(input1);
+
+
 
 function setValueName(name){
     $("#is_request_draft").val(name);
@@ -240,6 +248,28 @@ function resendEmailVerification(){
                     $("#verificationemail").text("Resend Email Verification");
                     alert("Email already verified"); 
                 }
+            }
+        });  
+}
+
+function subscribe(){
+    var email = $("#check_id").val();
+    var isChecked=document.getElementById("check_id").checked;
+    var status = "No";
+    if(isChecked){
+        status = "Yes";
+    }
+    $.ajax({
+            url: '<?php echo base_url(); ?>' + "front/news_subscribe",
+            type: "post",
+            data: {status: status},
+            success: function (data, textStatus, jqXHR) {
+                if(status == "Yes"){
+                    alert("Successfully Subscribed.");
+                }else{
+                    alert("Successfully UnSubscribed.");
+                }
+              
             }
         });  
 }

@@ -123,13 +123,13 @@
                                           <input class="input-field" type="text" placeholder="Company website" name="website" value="<?php echo $profile->website;?>">
                                        </div>
                                     </div>
-
+                                    <?php $categories = explode(",",$profile->category_id);?>
                                     <div class="col-md-6 right_col6">
                                        <div class="input-container_select">
-                                        <select class="input-container select2" name="category[]" multiple>
-                                    <option value="">Software categories </option>
+                                        <select class="input-container select2-list" name="category[]" multiple>
+                                    <!-- <option value="">Software categories </option> -->
                                        <?php foreach($category as $rows){?>
-                                          <option value="<?php echo $rows->id;?>" <?php echo ($profile->category_id == $rows->id) ? "selected" : ""; ?>><?php echo $rows->category_name;?></option>
+                                          <option value="<?php echo $rows->id;?>" <?php echo (in_array($rows->id,$categories)) ? "selected" : ""; ?>><?php echo $rows->category_name;?></option>
                                        <?php }?>
                                     </select>
                                        </div>

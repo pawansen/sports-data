@@ -67,10 +67,10 @@
                                        <?php echo form_error('country'); ?>
                                     </div>
 
-                                    <!-- <div class="col-md-2">
+                                    <div class="col-md-6">
                                        <div class="input-container_select">
                                         <select class="input-container" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
-                                             <option value="" disabled selected>Select PhoneCode</option>
+                                             <option value="" disabled selected>Select Code</option>
                                              <?php foreach($countries as $row){?>
                                              <option value="<?php echo $row->phonecode;?>" <?php echo set_select('phone_code', $row->phonecode); ?>><?php echo $row->sortname."(".$row->phonecode.")";?></option>
                                              <?php } ?>
@@ -78,10 +78,10 @@
                                    
                                        </div>
                                        <?php echo form_error('phone_code'); ?>
-                                    </div> -->
+                                    </div>
                                     <div class="col-md-6">
                                        <div class="input-container_number">
-                                           <input id="phone" name="mobile" type="tel" class="input_field_number" value="<?php echo set_value('mobile'); ?>">
+                                           <input id="phone" name="mobile" type="Number" placeholder="Phone Number" class="input_field_number" value="<?php echo set_value('mobile'); ?>">
                                          
                                           <!--<i class="fa fa-phone icon"></i>-->
                                           <!--<input class="input-field" type="Number" placeholder="Number" name="number">-->
@@ -173,8 +173,20 @@
                                        <?php echo form_error('c_email'); ?>
                                     </div>
                                     <div class="col-md-6">
+                                       <div class="input-container_select">
+                                        <select class="input-container" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
+                                             <option value="" disabled selected>Select Code</option>
+                                             <?php foreach($countries as $row){?>
+                                             <option value="<?php echo $row->phonecode;?>" <?php echo set_select('phone_code', $row->phonecode); ?>><?php echo $row->sortname."(".$row->phonecode.")";?></option>
+                                             <?php } ?>
+                                        </select>
+                                   
+                                       </div>
+                                       <?php echo form_error('phone_code'); ?>
+                                    </div>
+                                    <div class="col-md-6">
                                        <div class="input-container_number">
-                                           <input id="phone1" name="c_mobile" type="tel" class="input_field_number" value="<?php echo set_value('c_mobile'); ?>">
+                                           <input id="phone1" name="c_mobile" type="Number" placeholder="Phone Number" class="input_field_number" value="<?php echo set_value('c_mobile'); ?>">
                                          
                                           <!--<i class="fa fa-phone icon"></i>-->
                                           <!--<input class="input-field" type="Number" placeholder="Number" name="number">-->

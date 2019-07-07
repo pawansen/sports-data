@@ -80,13 +80,25 @@
                                     </div>
                                     
                                  </div>
-
+                                  
 
                                    <div class="row business_profile Profile_col_6_space">
+                                   <div class="col-md-6 left_col6">
+                                       <div class="input-container_select">
+                                        <select class="input-container" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
+                                             <option value="">Select Code</option>
+                                             <?php foreach($countries as $row){?>
+                                             <option value="<?php echo $row->phonecode;?>" <?php echo ($profile->phone_code == $row->phonecode) ? "selected":"";?> <?php echo set_select('phone_code', $row->phonecode); ?>><?php echo $row->name." (+".$row->phonecode.")";?></option>
+                                             <?php } ?>
+                                        </select>
+                                   
+                                       </div>
+                                       <?php echo form_error('phone_code'); ?>
+                                    </div>
                                     <div class="col-md-6 left_col6">
                                        <div class="input-container">
-                                          <i class="fa fa-phone icon"></i>
-                                          <input class="input-field" type="Number" placeholder="Number" name="phone" value="<?php echo $profile->phone;?>">
+                                          <!-- <i class="fa fa-phone icon"></i> -->
+                                          <input id="phone" class="input-field" type="tel" placeholder="Number" name="phone" value="<?php echo $profile->phone;?>">
                                        </div>
                                     </div>
                                     <div class="col-md-6 right_col6">
