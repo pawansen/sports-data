@@ -16,16 +16,19 @@ $("#editFormAjax").validate({
         country: "required",
         state: "required",
         company_name:"required"
-    },
+    }, errorPlacement: function (error, element) {
+            var name = $(element).attr("name");
+            error.appendTo($("#" + name + "_validate"));
+        },
     messages: {
-        company_name: "Company Name field is required",
-        description: "description field is required",
-        website: "Company website field is required",
-        category: "Software category field is required",
-        address: "Company address field is required",
-        city: "city field is required",
-        country: "country field is required",
-        state: "state field is required"
+        company_name: "This field is required",
+        description: "This field is required",
+        website: "This field is required",
+        category: "This field is required",
+        address: "This field is required",
+        city: "This field is required",
+        country: "This field is required",
+        state: "This field is required"
     },
     submitHandler: function (form) {
         jQuery(form).ajaxSubmit({
@@ -51,13 +54,16 @@ jQuery('body').on('click', '#profile_submit', function () {
                     },
             email: "required",
             phone_code: "required"
-            },
+            }, errorPlacement: function (error, element) {
+            var name = $(element).attr("name");
+            error.appendTo($("#" + name + "_validate"));
+        },
             messages: {
-            first_name: "First Name field is required",
-            last_name: "Last name field is required",
-            phone: "phone field is required",
-            email: "Email field is required",
-            phone_code: "Phonecode field is required",
+            first_name: "This field is required",
+            last_name: "This field is required",
+            phone: "This field is required",
+            email: "This field is required",
+            phone_code: "This field is required",
             },
             submitHandler: function (form) {
             jQuery(form).ajaxSubmit({
@@ -74,31 +80,34 @@ var form_name = this.form.id;
 if (form_name == '[object HTMLInputElement]')
 form_name = 'editFormAjaxinquiry';
 $("#editFormAjaxinquiry").validate({
-rules: {
-rq_email:{
-            required: true,
-            email: true
+        rules: {
+        rq_email:{
+                    required: true,
+                    email: true
+                },
+        rq_licenses: "required",
+        rq_software_categories: "required",
+        rq_expected_live: "required",
+        rq_solution_offering: "required",
+        description: "required"
+        }, errorPlacement: function (error, element) {
+            var name = $(element).attr("name");
+            error.appendTo($("#" + name + "_validate"));
         },
-rq_licenses: "required",
-rq_software_categories: "required",
-rq_expected_live: "required",
-rq_solution_offering: "required",
-description: "required"
-},
-messages: {
-rq_email: "Email field is required",
-rq_licenses: "No. of licenses field is required",
-rq_software_categories: "Software category field is required",
-rq_expected_live: "Expected go live field is required",
-rq_solution_offering: "Expected contract term field is required",
-description: "Description field is required",
-rq_email: "Email field is required"
-},
-submitHandler: function (form) {
-jQuery(form).ajaxSubmit({
-});
-}
-});
+        messages: {
+        rq_email: "This field is required",
+        rq_licenses: "This field is required",
+        rq_software_categories: "This field is required",
+        rq_expected_live: "This field is required",
+        rq_solution_offering: "This field is required",
+        description: "This field is required",
+        rq_email: "This field is required"
+        },
+        submitHandler: function (form) {
+        jQuery(form).ajaxSubmit({
+        });
+        }
+        });
 });
 jQuery('body').on('click', '#change_password', function () {
 
@@ -113,12 +122,15 @@ $("#editFormAjaxPasswprd").validate({
                     required: true,
                     equalTo: "#new_password"
                 },
-    },
+    }, errorPlacement: function (error, element) {
+            var name = $(element).attr("name");
+            error.appendTo($("#" + name + "_validate"));
+        },
     messages: {
-        old_password: "Field required",
-        new_password: "Field required",
+        old_password: "This field is required",
+        new_password: "This field is required",
         c_password: {
-                    required: 'Field required'
+                    required: 'This field is required'
                 },
     },
     submitHandler: function (form) {

@@ -25,7 +25,11 @@
                                           <option value="forgot_password">Forgot Password</option>
                                           <option value="vendor_verify">Admin Vendor Verify</option>
                                           <option value="vendor_inquiry">Client Send Inquiry</option>
-                                          <option value="welcome_mail">Weclome Email</option>
+                                          <option value="registration">Registration</option>
+                                          <option value="business">Business Profile Submit</option>
+                                          <option value="admin_request">Admin Request</option>
+                                          <option value="contactUS">Contact Us</option>
+                                          <option value="subscribe">Subscriber</option>
                                       </select>
                                   </div>
                                  

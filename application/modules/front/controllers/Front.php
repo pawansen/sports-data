@@ -489,7 +489,7 @@ class Front extends Common_Controller {
                     $html['user'] = ucwords($isLogin->first_name);
                     $html['content'] = $EmailTemplate->description;
                     $email_template = $this->load->view('email-template/welcome', $html, true);
-                    $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
+                    $title = $EmailTemplate->title;
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
 
@@ -511,11 +511,23 @@ class Front extends Common_Controller {
                     $html['user'] = ucwords($isLogin->first_name);
                     $html['content'] = $EmailTemplate->description;
                     $email_template = $this->load->view('email-template/verify_email', $html, true);
-                    $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
+                    $title = $EmailTemplate->title;
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
 
-
+                /** Verification email * */
+                $EmailTemplate = getEmailTemplate("registration");
+                if (!empty($EmailTemplate)) {
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = ucwords($isLogin->first_name);
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/registration', $html, true);
+                    $title = $EmailTemplate->title;
+                    send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                }
 
 
                 $this->session->set_userdata("login_session_key", $login_session_key);
@@ -678,6 +690,20 @@ class Front extends Common_Controller {
                     $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
                     send_mail($email_template, $title, $isLogin->email, getConfig('admin_email'));
                 }
+
+                /** Verification email * */
+                $EmailTemplate = getEmailTemplate("registration");
+                if (!empty($EmailTemplate)) {
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = ucwords($isLogin->first_name);
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/registration', $html, true);
+                    $title = $EmailTemplate->title;
+                    send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                }                  
 
                 $isLoginAuth = $this->ion_auth->login($isLogin->email, $password, FALSE);
                 $this->session->set_userdata("login_session_key", $login_session_key);
@@ -897,6 +923,25 @@ class Front extends Common_Controller {
             $this->session->set_userdata('image',base_url().$dataArrUsers['profile_pic']);
         }
         $status = $this->common_model->updateFields('user_profile', $dataArrUsers, array('user_id' => $this->session->userdata('login_user_id')));
+        
+          /** Verification email * */
+          $EmailTemplate = getEmailTemplate("business");
+          if (!empty($EmailTemplate)) {
+              $html = array();
+              $html['logo'] = base_url() . getConfig('site_logo');
+              $html['site'] = getConfig('site_name');
+              $html['site_meta_title'] = getConfig('site_meta_title');
+              $html['company_name'] = $this->input->post('company_name');
+              $html['website'] = $this->input->post('website');
+              $html['first_name'] = $this->session->userdata("first_name");
+              $html['last_name'] = $this->session->userdata("last_name");
+              $html['content'] = $EmailTemplate->description;
+              $email_template = $this->load->view('email-template/business_email', $html, true);
+              $title = $EmailTemplate->title;
+              send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+          }
+
+        
         $this->session->set_flashdata("message", "Business profile successfully updated");
         redirect("front/vendor_dashbaord");
     }
@@ -1181,7 +1226,7 @@ class Front extends Common_Controller {
         $this->data['title'] = 'Request Admin';
         $this->form_validation->set_rules('rq_email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('rq_licenses', 'No. of licenses', 'trim|required');
-        $this->form_validation->set_rules('rq_software_categories', 'Software categories', 'trim|required');
+        $this->form_validation->set_rules('rq_software_categories[]', 'Software categories', 'trim|required');
         $this->form_validation->set_rules('rq_expected_live', 'Expected go live', 'trim|required');
         $this->form_validation->set_rules('rq_solution_offering', 'Expected contract term', 'trim|required');
         $this->form_validation->set_rules('description', 'description', 'trim|required');
@@ -1190,13 +1235,13 @@ class Front extends Common_Controller {
             $option = array('table' => "item_category",
             );
             $this->data['category'] = $this->common_model->customGet($option);
-            $this->load->front_render('request_admin', $this->data, 'inner_script');
+            $this->load->front_render('client_admin_request', $this->data, 'inner_script');
         } else {
             $addArray = array();
             $addArray['user_id'] = $this->session->userdata('login_user_id');
             $addArray['email'] = $this->input->post('rq_email');
             $addArray['rq_licenses'] = $this->input->post('rq_licenses');
-            $addArray['rq_software_categories'] = $this->input->post('rq_software_categories');
+            $addArray['rq_software_categories'] = implode(",",$this->input->post('rq_software_categories'));
             $addArray['rq_expected_live'] = $this->input->post('rq_expected_live');
             $addArray['rq_solution_offering'] = $this->input->post('rq_solution_offering');
             $addArray['description'] = $this->input->post('description');
@@ -1388,8 +1433,8 @@ class Front extends Common_Controller {
         $this->load->front_render('vendor_profile', $this->data, 'inner_script');
     }
 
-    public function vendor_details($id) {
-        $this->userAuth();
+    public function vendor_details($id,$view="") {
+        //$this->userAuth();
         $this->data['title'] = 'Vendor Details';
         $option = array('table' => "users U",
             'select' => "CT.name as country_name,ST.name as state_name,U.*,
@@ -1404,6 +1449,7 @@ class Front extends Common_Controller {
             'single' => true
         );
         $this->data['vendor'] = $this->common_model->customGet($option);
+        $this->data['view'] = $view;
         //dump( $this->data['vendor']);
         $this->load->front_render('vendor_details', $this->data, 'inner_script');
     }

@@ -79,6 +79,7 @@
                                           <i class="fa fa-envelope-o icon"></i>
                                           <input class="input-field" type="password" placeholder="Old Password" name="old_password">
                                        </div>
+                                       <div id="old_password_validate" class="error_validation_text"></div>
                                     </div>
 
                                  </div>
@@ -90,6 +91,7 @@
                                           <i class="fa fa-lock icon"></i>
                                           <input class="input-field" type="password" placeholder="New Password" id="new_password" name="new_password">
                                        </div>
+                                       <div id="new_password_validate" class="error_validation_text"></div>
                                        <?php echo form_error('new_password'); ?>
                                     </div>
 
@@ -98,6 +100,7 @@
                                           <i class="fa fa-lock icon"></i>
                                           <input class="input-field" type="password" placeholder="Confirm New Password" name="c_password">
                                        </div>
+                                       <div id="c_password_validate" class="error_validation_text"></div>
                                        <?php echo form_error('c_password'); ?>
                                     </div>
                                     

@@ -62,9 +62,11 @@
                     
                 </td>
             </tr>
-              <tr>
-                <td align="left"  style="padding: 5px 45px 5px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px;">
-                    <b>It's time to confirm your email address.</b>
+            <tr>
+                <td align="left"  style="padding: 15px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 14px; line-height: 26px;">
+                    <strong>Vendor Name:</strong><p><?php echo $first_name;?></p>
+                    <strong>Company Name:</strong><p>><?php echo $company_name;?></p>
+                    <strong>Website:</strong><p>><?php echo $website;?></p>
                     
                 </td>
             </tr>
@@ -74,18 +76,6 @@
                     
                 </td>
             </tr>
-            <tr>
-                <td align="left"  style="padding: 15px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px;">
-                    <button class="button_confirm_email" href="<?php echo $active_url;?>" >Confirm my email address</button>
-                </td>
-            </tr>
-
-            <tr>
-                <td align="left"  style="padding: 40px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 14px; line-height: 26px;">
-                If you don't know why you got this email, please tell us straight away so we can fix this for you.
-                </td>
-            </tr>
-
 
 
             <tr>

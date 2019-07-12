@@ -108,6 +108,7 @@
                                           <i class="fa fa-user-o  icon"></i>
                                           <input class="input-field" type="text" placeholder="Frist Name" name="first_name" value="<?php echo $profile->first_name;?>">
                                        </div>
+                                       <div id="first_name_validate" class="error_validation_text"></div>
                                     </div>
 
                                     <div class="col-md-6 right_col6">
@@ -115,6 +116,7 @@
                                           <i class="fa fa-user-o  icon"></i>
                                           <input class="input-field" type="text" placeholder="Last Name" name="last_name" value="<?php echo $profile->last_name;?>">
                                        </div>
+                                       <div id="last_name_validate" class="error_validation_text"></div>
                                     </div>
                                     
                                  </div>
@@ -122,8 +124,9 @@
 
                                    <div class="row business_profile Profile_col_6_space">
                                    <div class="col-md-6 left_col6">
+                                       <div class="code_phone_country">
                                        <div class="input-container_select">
-                                        <select class="input-container" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
+                                        <select class="input-container code_phone" name='phone_code' value="<?php echo set_value('phone_code'); ?>">
                                              <option value="">Select Code</option>
                                              <?php foreach($countries as $row){?>
                                              <option value="<?php echo $row->phonecode;?>" <?php echo ($profile->phone_code == $row->phonecode) ? "selected":"";?> <?php echo set_select('phone_code', $row->phonecode); ?>><?php echo $row->name." (+".$row->phonecode.")";?></option>
@@ -131,14 +134,20 @@
                                         </select>
                                    
                                        </div>
+                                       <div id="phone_code_validate" class="error_validation_text"></div>
                                        <?php echo form_error('phone_code'); ?>
-                                    </div>
-                                    <div class="col-md-6 left_col6">
+                                       </div>
+                                       
+                                       <div class="code_phone_mobile">
                                        <div class="input-container">
                                           <i class="fa fa-phone icon"></i>
-                                          <input class="input-field" type="Number" placeholder="Number" name="phone" value="<?php echo $profile->phone;?>">
+                                          <input class="input-field height_mob" type="Number" placeholder="Number" name="phone" value="<?php echo $profile->phone;?>">
                                        </div>
+                                       <div id="phone_validate" class="error_validation_text"></div>
+                                       </div>
+                                       
                                     </div>
+                                   
                                     <div class="col-md-6 right_col6">
                                        <div class="input-container">
                                           <i class="fa fa-envelope-o icon"></i>

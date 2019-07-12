@@ -102,6 +102,8 @@
                                           <i class="fa fa-building  icon"></i>
                                           <input class="input-field" type="text" placeholder="Company name" name="company_name" value="<?php echo $profile->company_name;?>">
                                        </div>
+                                       <div id="company_name_validate" class="error_validation_text"></div>
+                                       <?php echo form_error('company_name'); ?>
                                     </div>
                                  </div>
 
@@ -111,6 +113,7 @@
                                           <i class="fa fa-pencil-square-o icon"></i>
                                           <textarea class="input-field_de" rows="4" cols="50" placeholder="Description" name="description"><?php echo $profile->description;?></textarea>
                                        </div>
+                                       <div id="description_validate" class="error_validation_text"></div>
                                     </div>
                                  </div>
                                  <input type="hidden" name="old_logo" value="<?php echo $profile->logo;?>"/>
@@ -122,10 +125,15 @@
                                           <i class="fa fa-globe icon"></i>
                                           <input class="input-field" type="text" placeholder="Company website" name="website" value="<?php echo $profile->website;?>">
                                        </div>
+                                       <div id="website_validate" class="error_validation_text"></div>
                                     </div>
                                     <?php $categories = explode(",",$profile->category_id);?>
-                                    <div class="col-md-6 right_col6">
-                                       <div class="input-container_select">
+                                    
+                                    
+                                    <div class="col-md-6 right_col6 soft_cat_option">
+
+                                    
+                                       <div class="input-container_select ">
                                         <select class="input-container select2-list" name="category[]" multiple>
                                     <!-- <option value="">Software categories </option> -->
                                        <?php foreach($category as $rows){?>
@@ -133,6 +141,9 @@
                                        <?php }?>
                                     </select>
                                        </div>
+                                       
+                                       <div id="category_validate" class="error_validation_text"></div>
+                                       
                                     </div>
 
 
@@ -143,6 +154,7 @@
                                           <i class="fa fa-map-marker icon"></i>
                                           <input class="input-field" type="text" placeholder="Address" name="address" value="<?php echo $profile->address1;?>">
                                        </div>
+                                       <div id="address_validate" class="error_validation_text"></div>
                                     </div>
 
                                     <div class="col-md-6 right_col6">
@@ -150,6 +162,7 @@
                                           <i class="fa fa-globe icon"></i>
                                           <input class="input-field" type="text" placeholder="City" name="city" value="<?php echo $profile->city;?>">
                                        </div>
+                                       <div id="city_validate" class="error_validation_text"></div>
                                     </div>
                                     
                                   </div>
@@ -170,6 +183,7 @@
                                        <?php }?>
                                     </select>
                                        </div>
+                                       <div id="country_validate" class="error_validation_text"></div>
                                     </div>
 
                                     <div class="col-md-6 right_col6">
@@ -181,6 +195,7 @@
                                        <?php }?>
                                     </select>
                                        </div>
+                                       <div id="state_validate" class="error_validation_text"></div>
                                     </div>
 
                                     
@@ -192,7 +207,7 @@
 
                                      <?php if($this->session->userdata('email_verify') == 1){?>     
                                     <?php if($profile->vendor_profile_activate == "No" || $profile->vendor_profile_activate == "Yes"){?>
-                                       <?php //if(empty($profile->company_name)){?>
+                                       <?php //if(empty($profile->company_name)){?> <br>
                                        <button type="submit" id="submit" class="btn save_btn_profile">Save</button>
                                        <?php //}?>
                                     <?php }else{?>
@@ -205,7 +220,12 @@
 
                                    
                                      </div>
-                                     <div class="col-md-6"></div>
+                                     <div class="col-md-6">
+                                         <div class="register_btn"> <br>
+                                             <a href="<?php echo site_url("front/vendor_details/".$this->session->userdata('login_user_id')."/view");?>" class="btn save_btn_profile">View Profile</a>
+                                             
+                                         </div> 
+                                     </div>
                                  </div>
 
                            </div>

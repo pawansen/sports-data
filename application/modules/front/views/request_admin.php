@@ -25,6 +25,7 @@
                                           <i class="fa fa-envelope-o  icon"></i>
                                           <input class="input-field" type="email" placeholder="Email Address" name="rq_email" value="<?php echo $this->session->userdata('email');?>">
                                        </div>
+                                       <div id="rq_email_validate"></div>
                                     </div>
                                   </div>
 
@@ -35,6 +36,7 @@
                                           <i class="fa fa-building icon"></i>
                                           <input class="input-field" type="text" placeholder=" No. of licenses" name="rq_licenses">
                                        </div>
+                                       <div id="rq_licenses_validate"></div>
                                     </div>
 
                                     <div class="col-md-6 right_col6">
@@ -45,6 +47,7 @@
                          <?php }?>
                         </select>
                                     </div>
+                                    <div id="rq_software_categories_validate"></div>
                                     <?php echo form_error("rq_software_categories[]");?>
                                   </div>
 
@@ -59,6 +62,7 @@
                                        <option value="Within 1 month">Within 1 month</option>
                                        <option value="After  1 month ">After  1 month </option>
                                      </select>
+                                     <div id="rq_expected_live_validate"></div>
                                     </div>
                                     
                              <div class="col-md-6 right_col6">
@@ -72,7 +76,7 @@
                                   <option value="more than 5 years">more than 5 years</option>
                                </select>
                                     </div>
-
+                                    <div id="rq_solution_offering_validate"></div>
                                  </div>
 
                                   <div class="row enquiries_form">
@@ -81,6 +85,7 @@
                                           <i class="fa fa-pencil-square-o icon"></i>
                                           <textarea class="input-field_de" rows="4" cols="50" placeholder="Description" name="description"></textarea>
                                        </div>
+                                       <div id="description_validate"></div>
                                     </div>
                                  </div>
                                  <input type="hidden" name="is_request_draft" id="is_request_draft" value="no"/>

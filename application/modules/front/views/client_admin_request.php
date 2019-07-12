@@ -39,8 +39,8 @@
                                     </div>
 
                                     <div class="col-md-6 right_col6">
-                                    <select class="input-container" name="rq_software_categories">
-                                      <option value="" disabled selected>Software categories </option>
+                                    <select class="input-container select2-list" name="rq_software_categories[]" multiple>
+                                      <option value="">Software categories </option>
                          <?php foreach($category as $rows){?>
                              <option value="<?php echo $rows->id;?>"><?php echo ucwords($rows->category_name);?></option>
                          <?php }?>
