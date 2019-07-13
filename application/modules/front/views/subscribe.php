@@ -64,13 +64,12 @@
 
             <tr>
                 <td align="left"  style="padding: 15px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 14px; line-height: 26px;">
-                <b> Enquiry By <?php echo ucwords($user); ?></b><br/>
+                <b> Subscriber :  <?php echo ucwords($user); ?></b><br/>
                     
                 </td>
             </tr>
             <tr>
                 <td align="left"  style="padding: 15px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 14px; line-height: 26px;">
-                <b>Enquiry To <?php echo ucwords($client); ?></b><br/>
                     <?php echo $content;?>
                     
                 </td>

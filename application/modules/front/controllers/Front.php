@@ -35,12 +35,49 @@ class Front extends Common_Controller {
         $this->load->front_render('client_search', $this->data, 'inner_script');
     }
 
+    public function vendor_search() {
+        $this->data['title'] = "Client Search";
+        $keyword = $this->input->get("keyword");
+        $country = $this->input->get("country");
+        $this->data['category_select'] = $software = $this->input->get("software_categories");
+        if(empty($keyword) && empty($software)){
+            $country = $this->session->userdata('country');
+        }
+        $option = array('table' => "users U",
+            'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,
+            UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+            'join' => array("user_profile UP" => "UP.user_id=U.id", "users_groups UG" => "UG.user_id=U.id"),
+            'where' => array("UG.group_id" => 3,'U.vendor_profile_activate'=>"Yes"),
+                //'like'=> array("UP.company_name"=>$keyword)
+        );
+        if (!empty($keyword)) {
+            $option['like']['UP.company_name'] = $keyword;
+        }
+        if (!empty($country)) {
+            $option['like']['UP.country'] = $country;
+        }
+        if (!empty($software)) {
+            $option['find_in_set']['UP.category_id'] = $software;
+        }
+        $this->data['vendors'] = $this->common_model->customGet($option);
+
+        $option = array('table' => "item_category",
+        );
+        $this->data['category'] = $this->common_model->customGet($option);
+        $option = array('table' => "countries",
+        );
+        $this->data['countries'] = $this->common_model->customGet($option);
+        $this->load->front_render('client_search', $this->data, 'inner_script');
+    }
+
+    
+
     public function vendors_list() {
         $this->data['title'] = "Client Search";
         $keyword = $this->input->post("keyword");
         $country = $this->input->post("country");
         $software = $this->input->post("software");
-        if(empty($country)){
+        if(empty($country) && empty($keyword) && empty($software)){
             $country = $this->session->userdata('country');
         }
         $option = array('table' => "users U",
@@ -1079,15 +1116,21 @@ class Front extends Common_Controller {
 
     public function upload_document() {
         $this->vendorAuth();
+        $doc_type = $this->input->post('doc_type');
         $image = fileUpload('file_pic', 'invoice', 'pdf');
         if (isset($image['error'])) {
             $this->session->set_flashdata("error", $image['error']);
             redirect("front/partnership_document");
         }
-        $dataArrUsers['doc_file'] = 'uploads/invoice/' . $image['upload_data']['file_name'];
-
+        if($doc_type == "NDA"){
+            $dataArrUsers['doc_file'] = 'uploads/invoice/' . $image['upload_data']['file_name'];
+        }
+        if($doc_type == "REFERRAL"){
+            $dataArrUsers['doc_file_referral'] = 'uploads/invoice/' . $image['upload_data']['file_name'];
+        }
+       
         $status = $this->common_model->updateFields('user_profile', $dataArrUsers, array('user_id' => $this->session->userdata('login_user_id')));
-        $this->session->set_flashdata("message", "vendor document successfully uploaded");
+        $this->session->set_flashdata("message", "$doc_type document successfully uploaded");
         redirect("front/partnership_document");
     }
 
@@ -1255,27 +1298,24 @@ class Front extends Common_Controller {
        
 
                 /** welcome email * */
-                // $EmailTemplate = getEmailTemplate("vendor_inquiry");
-                // if (!empty($EmailTemplate)) {
-
-                //     $option = array('table' => "users U",
-                //         'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
-                //         'join' => array("user_profile UP" => "UP.user_id=U.id"),
-                //         'where' => array("U.id" => $this->input->post('vendor_id')),
-                //         'single' => true
-                //     );
-                //     $client = $this->common_model->customGet($option);
-                //     $html = array();
-                //     $html['logo'] = base_url() . getConfig('site_logo');
-                //     $html['site'] = getConfig('site_name');
-                //     $html['site_meta_title'] = getConfig('site_meta_title');
-                //     $html['user'] = $this->session->userdata('first_name') . "(" . $this->session->userdata('email') . ")";
-                //     $html['client'] = $client->company_name . "(" . $client->email . ")";
-                //     $html['content'] = $EmailTemplate->description;
-                //     $email_template = $this->load->view('email-template/client_enquiry', $html, true);
-                //     $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
-                //     send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
-                // }
+                $EmailTemplate = getEmailTemplate("admin_request");
+                if (!empty($EmailTemplate)) {
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = $this->session->userdata('first_name') . "(" . $this->session->userdata('email') . ")";
+                    $html['email'] = $this->input->post('rq_email');
+                    $html['rq_licenses'] = $this->input->post('rq_licenses');
+                    $html['rq_software_categories'] = implode(",",$this->input->post('rq_software_categories'));
+                    $html['rq_expected_live'] = $this->input->post('rq_expected_live');
+                    $html['rq_solution_offering'] = $this->input->post('rq_solution_offering');
+                    $html['description'] = $this->input->post('description');
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/admin_request', $html, true);
+                    $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
+                    send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                }
                 redirect("front/clientAdminRequest");
             
         }
@@ -1500,6 +1540,13 @@ class Front extends Common_Controller {
 
     public function partnership_document() {
         $this->data['title'] = 'Partnership Documents';
+        $option = array('table' => "users U",
+        'select' => "UP.address1,UP.profile_pic as logo,UP.doc_file,UP.doc_file_referral",
+        'join' => array("user_profile UP" => "UP.user_id=U.id"),
+        'where' => array("U.id" => $this->session->userdata('login_user_id')),
+        'single' => true
+    );
+    $this->data['profile'] = $this->common_model->customGet($option);
         $this->load->front_render('partnership_document', $this->data, 'inner_script');
     }
 
@@ -1635,6 +1682,28 @@ class Front extends Common_Controller {
                 'where'=> array('id'=>$this->session->userdata('login_user_id'))
             );
             $career_data = $this->common_model->customUpdate($option);
+            if($dataArr['newsletter_sub'] == "Yes"){
+                $EmailTemplate = getEmailTemplate("subscribe");
+                if (!empty($EmailTemplate)) {
+
+                    $option = array('table' => "users U",
+                        'select' => "U.*,UP.address1,UP.profile_pic as logo,UP.company_name,UP.city,UP.category_id,UP.country,UP.state,UP.pin_code,UP.description,UP.designation,UP.website",
+                        'join' => array("user_profile UP" => "UP.user_id=U.id"),
+                        'where' => array("U.id" => $this->input->post('vendor_id')),
+                        'single' => true
+                    );
+                    $client = $this->common_model->customGet($option);
+                    $html = array();
+                    $html['logo'] = base_url() . getConfig('site_logo');
+                    $html['site'] = getConfig('site_name');
+                    $html['site_meta_title'] = getConfig('site_meta_title');
+                    $html['user'] = $this->session->userdata('first_name') . "(" . $this->session->userdata('email') . ")";
+                    $html['content'] = $EmailTemplate->description;
+                    $email_template = $this->load->view('email-template/subscribe', $html, true);
+                    $title = '[' . getConfig('site_name') . '] ' . $EmailTemplate->title;
+                    send_mail($email_template, $title, getConfig('admin_email'), getConfig('admin_email'));
+                }
+            }
             $return['status'] = 1;
             if($this->input->post('status')=="Yes"){
                 $return['message'] = 'Successfully Subscribed.';

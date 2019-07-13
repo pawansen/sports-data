@@ -62,9 +62,21 @@
                                     <div class="col-md-12 file_feild_upload">
                                       <h4 class="heading_form">Upload your NDA and Referral Partner Agreement </h4>
                                       
-                                      <p>Select a File to Upload</p>
+                                     
                                      
                                       <form action="<?php echo site_url('front/upload_document');?>" id="editFormAjaxProfile"  name="editFormAjaxProfile" method="POST" enctype='multipart/form-data'>
+                                          
+                                      <div class="col-md-12">
+                                      <p>Select your NDA and Referral Partner Agreement</p>
+                                       <div class="input-containers">
+                                      
+                                          <input type="radio" name="doc_type" value="NDA" checked> NDA
+                                          <input  type="radio" name="doc_type" value="REFERRAL"> Referral
+                                       </div>
+                                    </div>
+                                          <br><hr>
+                                    <div class="col-md-12">
+                                        <p>Select a File to Upload</p>
                                           <input type="file" class="file-field" name="file_pic">
                                           <input class="upload_btn"  type="submit" value="Upload">
                                           </form>
@@ -72,11 +84,24 @@
                                           <div class="alert alert-info">
                                           <strong>Note:</strong> Not be further allowed to edit or re-upload so fresh copies can be uploaded
                                         </div>
-
+                                        </div>
                                     </div>
-
-                                    
-                                    
+                                        <div class="rows">
+                                            <div class="col-md-3">
+                                                <?php if(!empty($profile->doc_file)){?>
+                                                  <a href="<?php echo base_url().$profile->doc_file;?>" Download class="btn btn-success">Download NDA</a>
+                                                <?php }?>
+                                            </div>
+                                        </div>
+                                  
+                                          <div class="col-md-3">
+                                          <?php if(!empty($profile->doc_file_referral)){?>
+                                            <a href="<?php echo base_url().$profile->doc_file_referral;?>" Download class="btn btn-primary">Download Referral</a>
+                                          <?php }?>
+                                        
+                                      </div>
+                                    </div>
+                                    </div>
                                  </div>
 
                                  </div>
