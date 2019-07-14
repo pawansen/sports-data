@@ -1123,10 +1123,10 @@ class Front extends Common_Controller {
             redirect("front/partnership_document");
         }
         if($doc_type == "NDA"){
-            $dataArrUsers['doc_file'] = 'uploads/invoice/' . $image['upload_data']['file_name'];
+            $dataArrUsers['doc_file'] = 'uploads/invoice/' . $doc_type."_".$image['upload_data']['file_name'];
         }
         if($doc_type == "REFERRAL"){
-            $dataArrUsers['doc_file_referral'] = 'uploads/invoice/' . $image['upload_data']['file_name'];
+            $dataArrUsers['doc_file_referral'] = 'uploads/invoice/' .$doc_type."_".$image['upload_data']['file_name'];
         }
        
         $status = $this->common_model->updateFields('user_profile', $dataArrUsers, array('user_id' => $this->session->userdata('login_user_id')));

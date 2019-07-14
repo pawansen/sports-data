@@ -23,7 +23,7 @@
                         <th class="text-center"><?php echo lang('serial_no'); ?></th>
                         <th>Client Name</th>
                         <th class="text-center">Email</th>
-                        <th class="text-center">Category</th>
+                        <th class="text-center">Software Category</th>
                         <th>Expected go live</th>
                         <th>Expected contract term </th>
                         <th>Description</th>
@@ -42,7 +42,9 @@
                                 <td class="text-center"><?php echo $rowCount; ?></td>        
                                 <td class="text-center"><?php echo $rows->first_name." ".$rows->last_name; ?></td>
                                 <td class="text-center"><?php echo $rows->email; ?></td>
-                                <td class="text-center"><?php echo $rows->rq_expected_live; ?></td>
+                                <td class="text-center"><?php
+                                                                            $category = commonGetHelper(array('select'=>"GROUP_CONCAT(category_name SEPARATOR ',') as category_name",'table'=>"item_category","where_in" => array('id'=>explode(",",$rows->rq_software_categories))));
+                                                                            echo $category[0]->category_name;;?></td>
                                 <td class="text-center"><?php echo $rows->rq_expected_live; ?></td>
                                 <td class="text-center"><?php echo $rows->rq_solution_offering; ?></td>
                                 <td class="text-center"><?php echo $rows->description; ?></td>

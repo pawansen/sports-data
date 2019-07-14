@@ -378,12 +378,21 @@ class Common_Controller extends MX_Controller {
         $id_name = $this->input->post('id_name'); // table field name
         $status = $this->input->post('status');
         if (!empty($table) && !empty($id) && !empty($id_name)) {
-            $option = array(
-                'table' => $table,
-                'data' => array('active' => ($status == 1) ? 0 : 1),
-                'where' => array($id_name => $id)
-            );
-            $update = $this->common_model->customUpdate($option);
+            if($table == "users"){
+                $option = array(
+                    'table' => $table,
+                    'data' => array('email_verify' => ($status == 1) ? 0 : 1),
+                    'where' => array($id_name => $id)
+                );
+                $update = $this->common_model->customUpdate($option);
+            }else{
+                $option = array(
+                    'table' => $table,
+                    'data' => array('active' => ($status == 1) ? 0 : 1),
+                    'where' => array($id_name => $id)
+                );
+                $update = $this->common_model->customUpdate($option);
+            }
             if ($update) {
                 $response = 200;
             } else

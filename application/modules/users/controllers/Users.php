@@ -32,7 +32,7 @@ class Users extends Common_Controller {
             array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
             array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
         'order' => array('user.id' => 'DESC'),
-        'where' => array('user.active'=>1),
+        'where' => array('user.email_verify'=>1),
         'where_not_in' => array('group.id' => array(1, 3, 4)
         )
     );
@@ -45,7 +45,7 @@ class Users extends Common_Controller {
             array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
             array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
         'order' => array('user.id' => 'DESC'),
-        'where' => array('user.active'=>0),
+        'where' => array('user.email_verify'=>0),
         'where_not_in' => array('group.id' => array(1, 3, 4)
         )
     );
@@ -103,7 +103,7 @@ class Users extends Common_Controller {
             'to_date' => $to_date
         );
 
-        $where = ' user.active='.$UserStatus.' AND user.id IS NOT NULL';
+        $where = ' user.email_verify='.$UserStatus.' AND user.id IS NOT NULL';
         if (!empty($from_date) || !empty($to_date)) {
             $from_date = date('Y-m-d', strtotime($from_date));
 
@@ -217,12 +217,12 @@ class Users extends Common_Controller {
                     $userData['created_on'] = isset($users->created_on) ? date('d-m-Y H:i', $users->created_on) : '';
 
                     if ($users->id != 1) {
-                        if ($users->active == 1) {
-                            $userActiveUrl = "'" . USERS . "','id','" . encoding($users->id) . "','" . $users->active . "'";
+                        if ($users->email_verify == 1) {
+                            $userActiveUrl = "'" . USERS . "','id','" . encoding($users->id) . "','" . $users->email_verify . "'";
                             $active_buttn = '<a href="javascript:void(0)" class="on-default edit-row" onclick="statusFn(' . $userActiveUrl . ')" title="Inactive Now"><img width="20" src="' . base_url() . ACTIVE_ICON . '" /></a>';
                             $active_buttn = ' <a href="javascript:void(0)" onclick="statusFn(' . $userActiveUrl . ')"  data-toggle="tooltip" title="Inactive Now" class="btn btn-xs btn-success"><i class="fa fa-check"></i></a>';
                         } else {
-                            $userActiveUrl = "'" . USERS . "','id','" . encoding($users->id) . "','" . $users->active . "'";
+                            $userActiveUrl = "'" . USERS . "','id','" . encoding($users->id) . "','" . $users->email_verify . "'";
                             $active_buttn = '<a href="javascript:void(0)" class="on-default edit-row text-danger" onclick="statusFn(' . $userActiveUrl . ')" title="Active Now"><img width="20" src="' . base_url() . INACTIVE_ICON . '" /></a>';
                             $active_buttn = ' <a href="javascript:void(0)" onclick="statusFn(' . $userActiveUrl . ')"  data-toggle="tooltip" title="Active Now" class="btn btn-xs btn-danger"><i class="fa fa-times"></i></a>';
                         }

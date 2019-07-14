@@ -120,15 +120,23 @@
                                     <div class="block-title">
                                         <h2><i class="fa fa-file-o"></i> <strong>NDA and Referral </strong>Partner Agreement </h2>
                                     </div>
-                                    <div class="block-section text-center">
-                                        <!--<img src="<?php echo base_url().'backend_asset/images/Preloader_2.gif';?>" class="loaders-img" class="img-responsive">-->
-                                           <img src="<?php echo base_url().'backend_asset/images/document-management-big.png';?>" alt="avatar" class="img-responsive_document" style=" width: 70px; opacity: 0.5;"><br>
-                                         <p class="documents_p">documents-file.doc</p>
-                                    </div>
-                                    <div class="block-section text-center">
-                                    <button type="submit"  class="btn btn-sm btn-primary dowload_btn ">Download Documents</button>
-                                    </div>
+                                        <div class="block-section text-center">
+                                            <!--<img src="<?php echo base_url().'backend_asset/images/Preloader_2.gif';?>" class="loaders-img" class="img-responsive">-->
+                                            <img src="<?php echo base_url().'backend_asset/images/document-management-big.png';?>" alt="avatar" class="img-responsive_document" style=" width: 70px; opacity: 0.5;"><br>
+                                            <p class="documents_p"><?php if(!empty($results->nda_doc)) {$a= explode("/",$results->nda_doc); echo $a[2];}?></p>
+                                        </div>
+                                        <div class="block-section text-center">
+                                        <a href="<?php echo base_url().$results->nda_doc;?>" Download  class="btn btn-sm btn-primary dowload_btn ">NDA Download Documents</a>
+                                        </div>
                                          <!-- END Customer Info -->
+                                         <div class="block-section text-center">
+                                            <!--<img src="<?php echo base_url().'backend_asset/images/Preloader_2.gif';?>" class="loaders-img" class="img-responsive">-->
+                                            <img src="<?php echo base_url().'backend_asset/images/document-management-big.png';?>" alt="avatar" class="img-responsive_document" style=" width: 70px; opacity: 0.5;"><br>
+                                            <p class="documents_p"><?php if(!empty($results->doc_file_referral)) {$a= explode("/",$results->doc_file_referral); echo $a[2];}?></p>
+                                        </div>
+                                        <div class="block-section text-center">
+                                        <a href="<?php echo base_url().$results->doc_file_referral;?>" Download class="btn btn-sm btn-primary dowload_btn ">Referral Download Documents</a>
+                                        </div>
                                     </div>
          
           
