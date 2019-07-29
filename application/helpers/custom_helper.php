@@ -484,9 +484,9 @@ if (!function_exists('ExecuteCurl')) {
  * @param string $subject
  * @param string $message
  */
-if (!function_exists('send_mail_old_old')) {
+if (!function_exists('send_mail')) {
 
-    function send_mail_old_old($message, $subject, $to_email, $from_email = "", $attach = "") {
+    function send_mail($message, $subject, $to_email, $from_email = "", $attach = "") {
         $ci = &get_instance();
         $config['mailtype'] = 'html';
         $ci->email->initialize($config);
@@ -575,9 +575,9 @@ if (!function_exists('send_mail_live')) {
     }
 
 }
-if (!function_exists('send_mail')) {
+if (!function_exists('send_mail_new')) {
 
-    function send_mail($message, $subject, $to_email, $from_email = "", $attach = "") {
+    function send_mail_new($message, $subject, $to_email, $from_email = "", $attach = "") {
         require APPPATH . "third_party/vendor/autoload.php";
         
         $mail = new PHPMailer();

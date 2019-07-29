@@ -18,7 +18,7 @@
                 .content_email_header { width: 600px !important; }
             }
 
-            button.button_confirm_email {
+            a.button_confirm_email {
     border: 0;
     outline: 0;
     border-radius: 5px;
@@ -31,6 +31,7 @@
     color: #FFFFFF;
     font-size: 16px;
     cursor: pointer;
+    text-decoration:none;
 }
         </style>
     </head>
@@ -76,7 +77,7 @@
             </tr>
             <tr>
                 <td align="left"  style="padding: 15px 45px 15px 45px; color: #555555; font-family: Arial, sans-serif; font-size: 20px; line-height: 30px;">
-                    <button class="button_confirm_email" href="<?php echo $active_url;?>" >Confirm my email address</button>
+                    <a class="button_confirm_email" href="<?php echo $active_url;?>" >Confirm my email address</a>
                 </td>
             </tr>
 

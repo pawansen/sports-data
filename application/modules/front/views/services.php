@@ -104,7 +104,7 @@
 
                     </div>
                     <div class=" center pt-20 pb-10 ">
-                        <button class="btn get_sterted">Get Started Now</button>
+                        <button class="btn get_sterted"><a class="btn-in" href="<?php echo base_url().'front/contact_us';?>">Get Started Now</a></button>
                     </div>
                     </div>
                 </div>

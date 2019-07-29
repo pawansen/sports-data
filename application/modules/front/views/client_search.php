@@ -14,6 +14,7 @@
                       <!-- onchange="getVendorListSoftware(this.value)" -->
                          <select id="software_categories" class="input-container" name="software_categories" >
                          <option value="" disabled selected>Software categories </option>
+                         <option value="All">All Software categories </option>
                          <?php foreach($category as $rows){?>
                              <option value="<?php echo $rows->id;?>" <?php echo (isset($category_select)) ? ($category_select == $rows->id) ? "selected":"":"";?>><?php echo ucwords($rows->category_name);?></option>
                          <?php }?>
@@ -56,7 +57,7 @@
                         <p><?php echo substr(trim($vendor->description),0,150).'...'; ?></p>
                         </div>
                         <div class="View-Details">
-                            <a href="<?php echo site_url("front/vendor_details/".$vendor->id);?>"><button class="view_details_btn">View Details</button></a>
+                            <a class="view_details_btn" href="<?php echo site_url("front/vendor_details/".$vendor->id);?>">View Details</a>
                         </div>
                       </div>
                   </div>

@@ -50,11 +50,36 @@ button.btn.get_sterted {
     padding: 56px 30px;
 }
 .tab-content.main_rigister_tab {
-   
     padding: 38px 25px;
     padding-top: 32px;
-    
 }
+.code_phone_mobile {
+    width: 100%!important;
+    float: none!important;
+    margin-left: 0%!important;
+} 
+.main_register_form .code_phone_country select.input-container {
+    border-bottom-right-radius: 4px!important;
+    border-right: 1px solid #D0D0D0!important;
+    border-top-right-radius: 4px!important;
+}
+.code_phone_mobile input#phone, .code_phone_mobile input#phone1 {
+    border-bottom-left-radius: 4px!important;
+    border-top-left-radius: 4px!important;
+    border-left: 1px solid #D0D0D0!important;
+}
+select.input-container.code_phone {
+    border-bottom-right-radius: 4px!important;
+    border-right: 1px solid #D0D0D0!important;
+    border-top-right-radius: 4px!important;
+} 
+
+.code_phone_country {
+    width: 100%!important;
+    float: none!important;
+}
+
+
 .main_register_form .nav-tabs>li a {
     font-size: 12px;
     

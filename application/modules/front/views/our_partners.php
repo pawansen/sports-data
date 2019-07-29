@@ -77,7 +77,7 @@
     <?php if(!empty($vendors)){?>  
         <?php foreach($vendors as $values){?>  
             <div class="our_partners_logo">
-          <img src="<?php echo base_url().$values->profile_pic;?>">
+          <img src="<?php echo base_url().$values->logo;?>">
           <h5 class=""><?php echo $values->company_name;?></h5>
       </div>
         <?php }?>
@@ -109,7 +109,7 @@
 
                     </div>
                     <div class=" center pt-20 pb-10 ">
-                        <button class="btn get_sterted">Get Started Now</button>
+                        <button class="btn get_sterted"><a class="btn-in" href="<?php echo base_url().'front/contact_us';?>">Get Started Now</a></button>
                     </div>
                     </div>
                 </div>

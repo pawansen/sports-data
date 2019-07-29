@@ -40,13 +40,16 @@
                                     </div>
 
                                     <div class="col-md-6 right_col6">
-                                      <select class="input-container select2-list" name="rq_software_categories[]" multiple>
+                                         <div class="input-container ">
+                                      <select class="select2-list" name="rq_software_categories[]" multiple>
                                       <option value="">Select categories </option>
                          <?php foreach($category as $rows){?>
                              <option value="<?php echo $rows->id;?>"><?php echo ucwords($rows->category_name);?></option>
                          <?php }?>
                         </select>
                                     </div>
+                                        </div>
+                                      
                                     <div id="rq_software_categories_validate"></div>
                                     <?php echo form_error("rq_software_categories[]");?>
                                   </div>

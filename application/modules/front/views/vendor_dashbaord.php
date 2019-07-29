@@ -134,13 +134,15 @@
 
                                     
                                        <div class="input-container_select ">
-                                        <select class="input-container select2-list" name="category[]" multiple>
-                                    <!-- <option value="">Software categories </option> -->
+                                            <div class="input-container">
+                                        <select class="select2-list-inner input-field-multiselect-box" name="category[]" multiple>
+                                     <option value="">Select categories </option> 
                                        <?php foreach($category as $rows){?>
                                           <option value="<?php echo $rows->id;?>" <?php echo (in_array($rows->id,$categories)) ? "selected" : ""; ?>><?php echo $rows->category_name;?></option>
                                        <?php }?>
                                     </select>
                                        </div>
+                                            </div>
                                        
                                        <div id="category_validate" class="error_validation_text"></div>
                                        

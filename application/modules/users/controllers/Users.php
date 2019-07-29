@@ -160,17 +160,16 @@ class Users extends Common_Controller {
 
                 $vendor_user_id = $this->session->userdata('user_id');
 
-                $where .= ' and referral.user_id="' . $vendor_user_id . '"';
-                $options = array(
-                    'table' => 'user_referrals as referral',
-                    'select' => 'user.*,referral.user_id,referral.invite_user_id',
-                    'join' => array(array('users as user' => 'user.id=referral.invite_user_id'),
-                        array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=referral.user_id', 'left'),
-                        array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
-                    'order' => array('referral.id' => 'DESC'),
-                    'limit' => array($limit => $start),
-                    'where' => $where,
-                    'where_not_in' => array('group.id' => array(1, 2, 4)));
+               // $where .= ' and referral.user_id="' . $vendor_user_id . '"';
+                $options = array('table' => USERS . ' as user',
+                'select' => 'user.*,group.name as group_name',
+                'join' => array(
+                    array(USER_GROUPS . ' as ugroup', 'ugroup.user_id=user.id', 'left'),
+                    array(GROUPS . ' as group', 'group.id=ugroup.group_id', 'left')),
+                'order' => array('user.id' => 'DESC'),
+                'limit' => array($limit => $start),
+                'where' => $where,
+                'where_not_in' => array('group.id' => array(1, 3, 4)));
             } else {
                 $options = array('table' => USERS . ' as user',
                     'select' => 'user.*,group.name as group_name',
@@ -695,7 +694,7 @@ class Users extends Common_Controller {
             );
             $userDetails = $this->common_model->customGet($option);
 
-            $options_data = array(
+            /*$options_data = array(
                 'user_id' => $id,
                 'first_name' => $userDetails->first_name,
                 'email' => $userDetails->email,
@@ -703,14 +702,14 @@ class Users extends Common_Controller {
                 'date_of_birth' => $userDetails->date_of_birth,
                 'phone' => $userDetails->phone,
                 'gender' => $userDetails->gender,
-                'team_code' => $userDetails->team_code,
+                'team_code' => 0,
                 'profile_pic' => $userDetails->profile_pic,
                 'created_on' => $userDetails->created_on,
             );
 
             $option = array('table' => 'users_delete_history', 'data' => $options_data);
-            $delete_history = $this->common_model->customInsert($option);
-            if ($delete_history) {
+            $delete_history = $this->common_model->customInsert($option);*/
+            if ($userDetails) {
                 $option = array(
                     'table' => $table,
                     'where' => array($id_name => $id)

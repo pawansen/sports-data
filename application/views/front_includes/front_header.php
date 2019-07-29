@@ -127,10 +127,10 @@
                        <?php }else{?>
                             <ul class="nav navbar-nav navbar-right">
                             <li><a href="<?php echo base_url();?>">Home</a></li>
-                            <li><a href="<?php echo base_url().'front/our_partners';?>">Our Partners</a></li>
                             <li><a href="<?php echo base_url().'front/about_us';?>">About us</a></li>
                             <li><a href="<?php echo base_url().'front/how_to_works';?>">How It Works</a></li>
                             <li><a href="<?php echo base_url().'front/services';?>">Service</a></li>
+                            <li><a href="<?php echo base_url().'front/our_partners';?>">Our Partners</a></li>
                             <li><a href="<?php echo base_url().'front/contact_us';?>">Contact us</a></li>
                             <li><a href="<?php echo base_url().'front/login'?>">Register/Login</a></li>
                         </ul>

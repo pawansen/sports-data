@@ -56,7 +56,7 @@
                              </div>
 
                             <!-- table -->
-                            <table id="dtVerticalScrollExample" class="table table-striped table-bordered table-sm" cellspacing="0"
+                            <table id="dtVerticalScrollExampless" class="table table-striped table-bordered table-sm" 
   width="100%">
   <thead>
     <tr>
