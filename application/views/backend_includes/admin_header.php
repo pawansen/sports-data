@@ -74,9 +74,9 @@
                         <!-- Sidebar Content -->
                         <div class="sidebar-content">
                             <!-- Brand -->
-                            <a href="index.html" class="sidebar-brand">
+<!--                            <a href="index.html" class="sidebar-brand">
                                 <i class="gi gi-flash"></i><span class="sidebar-nav-mini-hide"><strong>Admin </strong><?php echo getConfig('site_name');?></span>
-                            </a>
+                            </a>-->
                             <!-- END Brand -->
 
                             <!-- User Info -->

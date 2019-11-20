@@ -26,28 +26,28 @@
                          <div class="footer_text">
                             <h4>Subscribe </h4>
                             <div class="subscribe_form">
-                            <form action="<?php echo site_url('front/subscribe');?>" class="form_width" method="post">
+                                <p style="font-weight: 600;" id="scbscribe-message"></p>
+<!--                            <form action="<?php //echo site_url('front/subscribe');?>" class="form_width" method="post">-->
                                 <div class="input-container">
-                                          
-                                          <input class="input-field" type="email" placeholder="Email Address" id="email_address" name="email">
+                                   
+                                          <input class="input-field" type="text" placeholder="Email Address" id="email_address" name="email">
                                           <button type="button" onclick="submitFormSubscribe()" class="send_subs"><i class="fa fa-paper-plane-o icon"></i></button>
-                                  </div>
-                              </form>
-
+                                          
+                                         
+                                </div>
+<!--                              </form>-->
                               <div class="footer-social-icons">
-    
-    <ul class="social-icons">
-        <li><a href="" class="social-icon"> <i class="fa fa-facebook"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-twitter"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-pinterest"></i></a></li>
-        <!-- <li><a href="" class="social-icon"> <i class="fa fa-rss"></i></a></li> -->
-        <!-- <li><a href="" class="social-icon"> <i class="fa fa-youtube"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-linkedin"></i></a></li>
-        <li><a href="" class="social-icon"> <i class="fa fa-google-plus"></i></a></li> -->
-    </ul>
-</div>
+                                    <ul class="social-icons">
+                                        <li><a href="" class="social-icon"> <i class="fa fa-facebook"></i></a></li>
+                                        <li><a href="" class="social-icon"> <i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="" class="social-icon"> <i class="fa fa-pinterest"></i></a></li>
+                                        <!-- <li><a href="" class="social-icon"> <i class="fa fa-rss"></i></a></li> -->
+                                        <!-- <li><a href="" class="social-icon"> <i class="fa fa-youtube"></i></a></li>
+                                        <li><a href="" class="social-icon"> <i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="" class="social-icon"> <i class="fa fa-google-plus"></i></a></li> -->
+                                    </ul>
+                                </div>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -89,17 +89,25 @@
 
 </body>
 <script>
-    var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
-      utilsScript: "/front_assets/js/utils.js",
-    });
+    function submitFormSubscribe() {
+       
+        var email = $("#email_address").val();
+        $.ajax({
+            url: '<?php echo base_url(); ?>' + "front/subscribe",
+            type: "post",
+            data: {email: email},
+            success: function (data, textStatus, jqXHR) {
+                $("#scbscribe-message").html(data);
+            }
+        });
+    }
   </script>
   
    <script>
-    var input = document.querySelector("#phone1");
-    window.intlTelInput(input, {
-      utilsScript: "/front_assets/js/utils.js",
-    });
+//    var input = document.querySelector("#phone1");
+//    window.intlTelInput(input, {
+//      utilsScript: "/front_assets/js/utils.js",
+//    });
   </script>
   <script>
        $(document).ready(function() {
